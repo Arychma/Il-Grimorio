@@ -48,4 +48,3 @@ breadcrumb: "Downloads"
 
 ---
 
-*To add a file: drop it in the `src/downloads/` folder, then add a download box here following the same format.*
