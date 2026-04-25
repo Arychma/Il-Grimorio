@@ -393,6 +393,10 @@
       </nav>
 
       <nav class="nav-section">
+        <div class="nav-section">
+          <h3>Search</h3>
+          <div id="search"></div>
+        </div>
         <h3>Quick Links</h3>
         <ul>
           <li><a href="/downloads/#maps">Maps</a></li>
@@ -435,5 +439,67 @@
     </div>
 
   </div>
+
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    new PagefindUI({
+      element: "#search",
+      showSubResults: false,
+      resetStyles: true
+    });
+  });
+</script>
+<style>
+  /* Search box styling to match the site */
+  .pagefind-ui__search-input {
+    width: 100%;
+    padding: 7px 10px;
+    background: #1c1005;
+    border: 1px solid #3a2510;
+    color: #e8b84b;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    outline: none;
+    border-radius: 0;
+  }
+  .pagefind-ui__search-input:focus { border-color: #c8922a; }
+  .pagefind-ui__search-input::placeholder { color: #3a2510; }
+  .pagefind-ui__search-clear { display: none; }
+  .pagefind-ui__results-area {
+    position: absolute;
+    left: 0;
+    width: 340px;
+    background: #1c1005;
+    border: 1px solid #c8922a;
+    z-index: 100;
+    padding: 8px;
+    margin-top: 4px;
+  }
+  .pagefind-ui__result {
+    padding: 8px;
+    border-bottom: 1px solid #2a1a08;
+  }
+  .pagefind-ui__result-link {
+    color: #e8b84b !important;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .pagefind-ui__result-link:hover { color: #c8922a !important; }
+  .pagefind-ui__result-excerpt {
+    color: #4a3728;
+    font-size: 0.75rem;
+    font-family: 'IM Fell English', serif;
+    margin-top: 4px;
+  }
+  .pagefind-ui__message {
+    color: #4a3728;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    padding: 8px;
+  }
+</style>
 </body>
 </html>

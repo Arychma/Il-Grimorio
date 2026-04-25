@@ -4,9 +4,10 @@
   "description": "My TTRPG Campaign Wiki",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy && npx pagefind --site _site"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^2.0.1",
+    "pagefind": "^1.0.4"
   }
 }
