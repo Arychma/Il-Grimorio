@@ -10,11 +10,11 @@ breadcrumb: "Downloads"
 
 ## Maps {#maps}
 
-<a class="download-box" href="/downloads/world-map.pdf" download>
+<a class="download-box" href="downloads\TheNorth.png" download>
   <span class="dl-icon">🗺</span>
   <div class="dl-info">
-    <strong>World Map — The Reaches</strong>
-    <span>PDF · Updated Session 01</span>
+    <strong>Il Nord, Forgotten realms</strong>
+    <span>PNG</span>
   </div>
 </a>
 
