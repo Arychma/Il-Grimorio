@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }} | The Chronicle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* ── VARIABLES ─────────────────────────────────── */
+    :root {
+      --parchment:   #f2e8d5;
+      --parchment-dark: #e0d0b0;
+      --ink:         #1a1209;
+      --ink-faded:   #4a3728;
+      --red:         #8b1a1a;
+      --gold:        #c8922a;
+      --gold-light:  #e8b84b;
+      --shadow:      #0a0705;
+      --sidebar-w:   240px;
+    }
+
+    /* ── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── BODY / BACKGROUND ─────────────────────────── */
+    body {
+      background-color: #12090a;
+      background-image:
+        radial-gradient(ellipse at 20% 50%, #1e0e05 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, #0d1a0a 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%2312090a'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%231a0f08' opacity='0.6'/%3E%3C/svg%3E");
+      color: var(--ink);
+      font-family: 'IM Fell English', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── WRAPPER ───────────────────────────────────── */
+    .wrapper {
+      display: flex;
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 100vh;
+      gap: 0;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      background: linear-gradient(180deg, #1c1005 0%, #110a03 100%);
+      border-right: 2px solid var(--gold);
+      padding: 28px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: var(--gold-light);
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 20px rgba(200,146,42,0.5);
+      line-height: 1.3;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #3a2510;
+    }
+
+    .sidebar-title span {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--ink-faded);
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.2em;
+      margin-bottom: 6px;
+      text-shadow: none;
+    }
+
+    .nav-section h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #2a1a08;
+    }
+
+    .nav-section ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-section ul li a {
+      display: block;
+      padding: 5px 10px;
+      color: #c8b89a;
+      text-decoration: none;
+      font-family: 'IM Fell English', serif;
+      font-size: 0.88rem;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .nav-section ul li a:hover,
+    .nav-section ul li a.active {
+      color: var(--gold-light);
+      border-left-color: var(--gold);
+      background: rgba(200,146,42,0.07);
+      padding-left: 14px;
+    }
+
+    .sidebar-stamp {
+      margin-top: auto;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      color: #3a2a18;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* ── MAIN CONTENT ──────────────────────────────── */
+    .content-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--parchment);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+        linear-gradient(160deg, #f5edd8 0%, #ecddc0 50%, #e8d5b0 100%);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* aged edges */
+    .content-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(26,18,9,0.08) 0%, transparent 40px),
+        linear-gradient(to left,  rgba(26,18,9,0.05) 0%, transparent 30px),
+        linear-gradient(to bottom, rgba(26,18,9,0.06) 0%, transparent 50px);
+      pointer-events: none;
+    }
+
+    /* ── HEADER ────────────────────────────────────── */
+    .site-header {
+      padding: 20px 40px 16px;
+      border-bottom: 3px double var(--gold);
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      background: rgba(26,18,9,0.04);
+    }
+
+    .breadcrumb {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--ink-faded);
+      letter-spacing: 0.05em;
+    }
+
+    .breadcrumb a { color: var(--red); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* ── PAGE CONTENT ──────────────────────────────── */
+    main {
+      padding: 36px 48px 60px;
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+
+    main h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+      text-shadow: 1px 1px 0 rgba(200,146,42,0.2);
+    }
+
+    .page-meta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-faded);
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--parchment-dark);
+    }
+
+    .page-content h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--red);
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--parchment-dark);
+    }
+
+    .page-content h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--ink-faded);
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    .page-content p { margin-bottom: 1rem; }
+
+    .page-content a {
+      color: var(--red);
+      text-decoration: underline;
+      text-decoration-color: rgba(139,26,26,0.4);
+    }
+    .page-content a:hover { color: var(--gold); }
+
+    .page-content ul, .page-content ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .page-content li { margin-bottom: 0.3rem; }
+
+    .page-content blockquote {
+      border-left: 3px solid var(--gold);
+      padding: 12px 20px;
+      margin: 1.5rem 0;
+      background: rgba(200,146,42,0.06);
+      font-style: italic;
+      color: var(--ink-faded);
+    }
+
+    /* ── CARDS / GRIDS ─────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    .card {
+      background: rgba(26,18,9,0.05);
+      border: 1px solid var(--parchment-dark);
+      border-top: 3px solid var(--gold);
+      padding: 16px;
+      text-decoration: none;
+      color: var(--ink);
+      display: block;
+      transition: all 0.15s ease;
+    }
+
+    .card:hover {
+      background: rgba(26,18,9,0.09);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--red);
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.82rem;
+      color: var(--ink-faded);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .card .card-tag {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 2px 6px;
+      margin-top: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── DOWNLOAD BOX ──────────────────────────────── */
+    .download-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(26,18,9,0.06);
+      border: 1px solid var(--parchment-dark);
+      border-left: 4px solid var(--red);
+      padding: 14px 18px;
+      margin: 0.75rem 0;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.15s;
+    }
+    .download-box:hover { background: rgba(139,26,26,0.07); }
+    .download-box .dl-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .download-box .dl-info strong {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--red);
+    }
+    .download-box .dl-info span {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--ink-faded);
+    }
+
+    /* ── SESSION LOG ───────────────────────────────── */
+    .session-list { list-style: none; padding: 0; }
+    .session-list li {
+      border-bottom: 1px solid var(--parchment-dark);
+      padding: 14px 0;
+    }
+    .session-list li a {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .session-list li a:hover { color: var(--red); }
+    .session-list .s-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--ink-faded);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .session-list .s-desc {
+      font-size: 0.85rem;
+      color: var(--ink-faded);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    /* ── DECORATIVE RULE ───────────────────────────── */
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 0.5em;
+      margin: 2rem 0;
+      opacity: 0.6;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 700px) {
+      .wrapper { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; flex-direction: row; flex-wrap: wrap; padding: 16px; gap: 12px; }
+      .sidebar-title { width: 100%; }
+      .sidebar-stamp { display: none; }
+      main { padding: 24px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- SIDEBAR NAV -->
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <span>✦ THE CHRONICLE ✦</span>
+        {{ siteName or "Campaign Wiki" }}
+      </div>
+
+      <nav class="nav-section">
+        <h3>Navigate</h3>
+        <ul>
+          <li><a href="/">⌂ Home</a></li>
+          <li><a href="/sessions/">📜 Session Logs</a></li>
+          <li><a href="/npcs/">👤 NPCs</a></li>
+          <li><a href="/locations/">🗺 Locations</a></li>
+          <li><a href="/downloads/">⬇ Downloads</a></li>
+        </ul>
+      </nav>
+
+      <nav class="nav-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/downloads/#maps">Maps</a></li>
+          <li><a href="/downloads/#sheets">Character Sheets</a></li>
+          <li><a href="/downloads/#handouts">Handouts</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-stamp">
+        ✦ ✦ ✦<br>
+        Last updated:<br>
+        {{ page.date | readableDate }}<br>
+        ✦ ✦ ✦
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="content-wrap">
+      <header class="site-header">
+        <div class="breadcrumb">
+          <a href="/">Chronicle</a>
+          {% if breadcrumb %} › {{ breadcrumb }}{% endif %}
+          {% if title and title != "Home" %} › {{ title }}{% endif %}
+        </div>
+      </header>
+
+      <main>
+        <h1>{{ title }}</h1>
+        {% if date %}
+        <div class="page-meta">
+          SESSION LOG ✦ {{ date | readableDate }}
+          {% if tags %} ✦ {% for tag in tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}
+        </div>
+        {% endif %}
+
+        <div class="page-content">
+          {{ content | safe }}
+        </div>
+      </main>
+    </div>
+
+  </div>
+</body>
+</html>

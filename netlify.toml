@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+# Password protection is set in the Netlify dashboard:
+# Site settings → Access control → Password protection
+# This file handles build config only.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
