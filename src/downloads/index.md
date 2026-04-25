@@ -10,7 +10,7 @@ breadcrumb: "Downloads"
 
 ## Maps {#maps}
 
-<a class="download-box" href="downloads\TheNorth.png" download>
+<a class="download-box" href="/downloads/TheNorth.png" download>
   <span class="dl-icon">🗺</span>
   <div class="dl-info">
     <strong>Il Nord, Forgotten realms</strong>
