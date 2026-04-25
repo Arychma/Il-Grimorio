@@ -440,7 +440,6 @@
 
   </div>
 
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <script src="/pagefind/pagefind-ui.js"></script>
 <script>
   window.addEventListener('DOMContentLoaded', () => {
@@ -452,53 +451,81 @@
   });
 </script>
 <style>
-  /* Search box styling to match the site */
+  .pagefind-ui__form { position: relative; }
+
   .pagefind-ui__search-input {
     width: 100%;
-    padding: 7px 10px;
+    padding: 7px 10px 7px 28px;
     background: #1c1005;
     border: 1px solid #3a2510;
+    border-radius: 0;
     color: #e8b84b;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     outline: none;
-    border-radius: 0;
+    box-shadow: none;
+    -webkit-appearance: none;
   }
   .pagefind-ui__search-input:focus { border-color: #c8922a; }
-  .pagefind-ui__search-input::placeholder { color: #3a2510; }
+  .pagefind-ui__search-input::placeholder { color: #3a2a18; letter-spacing: 0.1em; }
+
   .pagefind-ui__search-clear { display: none; }
+
+  /* Hide the default magnifier and add a tiny one via pseudo-element */
+  .pagefind-ui__search-input[type="search"]::-webkit-search-decoration,
+  .pagefind-ui__search-input[type="search"]::-webkit-search-cancel-button { display: none; }
+
+  .pagefind-ui__form::before {
+    content: '⌕';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3a2a18;
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+
   .pagefind-ui__results-area {
     position: absolute;
     left: 0;
-    width: 340px;
+    width: 300px;
     background: #1c1005;
     border: 1px solid #c8922a;
     z-index: 100;
-    padding: 8px;
     margin-top: 4px;
   }
+
   .pagefind-ui__result {
-    padding: 8px;
+    padding: 10px 12px;
     border-bottom: 1px solid #2a1a08;
   }
+  .pagefind-ui__result:last-child { border-bottom: none; }
+
   .pagefind-ui__result-link {
     color: #e8b84b !important;
     font-family: 'Cinzel', serif;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     text-decoration: none;
+    display: block;
+    margin-bottom: 4px;
   }
   .pagefind-ui__result-link:hover { color: #c8922a !important; }
+
   .pagefind-ui__result-excerpt {
     color: #4a3728;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-family: 'IM Fell English', serif;
-    margin-top: 4px;
+    font-style: italic;
+    line-height: 1.4;
   }
+
   .pagefind-ui__message {
     color: #4a3728;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.7rem;
-    padding: 8px;
+    font-size: 0.68rem;
+    padding: 10px 12px;
   }
 </style>
 </body>
