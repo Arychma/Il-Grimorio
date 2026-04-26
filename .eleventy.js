@@ -1,4 +1,24 @@
+// 1. IMPORTAZIONE DEL PLUGIN (In cima, fuori dal modulo)
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+
 module.exports = function(eleventyConfig) {
+
+  // ─── PLUGINS & SHORTCODES ────────────────────────────────────────────────
+  // Attiva il plugin di navigazione
+  eleventyConfig.addPlugin(eleventyNavigationPlugin);
+
+  // Shortcode personalizzato per linkare i file tramite la "key" del frontmatter
+  eleventyConfig.addShortcode("navLink", function(collections, key) {
+    const allPages = collections.all;
+    const targetPage = allPages.find(item => item.data.eleventyNavigation && item.data.eleventyNavigation.key === key);
+    
+    if (targetPage) {
+      return `<a href="${targetPage.url}">${targetPage.data.eleventyNavigation.title || targetPage.data.title}</a>`;
+    }
+    
+    // Messaggio di errore visibile se sbagli a scrivere la key
+    return `<span style="color:red;">Link Errato: Key "${key}" non trovata</span>`;
+  });
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("src/assets");

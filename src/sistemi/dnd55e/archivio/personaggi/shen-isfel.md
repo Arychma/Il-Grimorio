@@ -7,6 +7,8 @@ breadcrumb2: "D&D 5.5e"
 breadcrumb2url: "/sistemi/dnd55e/"
 role: "Mago"
 status: "Alleato"
+eleventyNavigation:
+    key: shen-isfel
 ---
 
 <h1>Shen Isfel</h1>

@@ -20,10 +20,10 @@ description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D p
 
 <h2>Trama</h2>
 
-<p>Nel paese di Ven Lisk, il mago <a  href="archivio/personaggi/shen-isfel.md">Shen Isfel</a> richiede l'aiuto dei giocatori, ma quando arrivano al ritrovo concordato lui non si presenta.</p>
+<p>Nel paese di Ven Lisk, il mago {% navLink collections, "shen-isfel" %} richiede l'aiuto dei Personaggi, ma quando arrivano al ritrovo concordato lui non si presenta.</p>
 
 <h2>Sessioni</h2>
 
-<a  href="sessioni/sessione-01.md">Sessione 1</a>
+<a  href="src/sistemi/dnd55e/avventure/la-scomparsa-del-mago/sessioni/sessione-01.md">Sessione 1</a>
 
 <a class="card" href="sessioni/">Vedi tutte le sessioni →</a>
