@@ -20,11 +20,10 @@ description: "To Fight Giants, You Must Be Giant."
 
 <h2>Trama</h2>
 
-<p>"Now, the land shudders once more with the thunder of giant footsteps.
+<p>Di nuovo la terra trema sotto i tuonanti passi dei Giganti. 
+Giganti delle colline attaccano fattorie per il cibo, i giganti di pietra distruggono ogni insediamento sulla loro strada. I giganti di fuoco scavano e raccolgono schiavi, mentre i giganti delle nuvole nei loro castelli attraversano il cielo, lanciando inquietanti ombre sulle città del Nord. Ma nessuna minaccia è comparabile all'ira dei giganti delle tempeste, traditi. 
 
-Hill giants raid farms for food and livestock, as stone giants lay waste to settlements in their path. Frost giants plunder coastal towns, as fire giants gather slaves. Cloud giant castles drift across the sky, casting ominous shadows on the cities of the North. But no threat compares to the wrath of the storm giants, who stand betrayed.
-
-Puny adventurers must rise to the challenge, gather their strength, unlock the power of ancient runes, and take the fight to the giants' doorsteps."</p>
+Indomiti avventurieri devono levarsi verso la sfida, raccogliere le proprie forze e con l'uso di antiche rune, portare la battaglia nella casa dei Giganti.</p>
 
 <h2>Sessioni</h2>
 
