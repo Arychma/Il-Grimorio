@@ -20,7 +20,7 @@ description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D p
 
 <h2>Trama</h2>
 
-<p>Nel paese di Ven Lisk, il mago Shen Isfel richiede l'aiuto dei giocatori, ma quando arrivano al ritrovo concordato lui non si presenta.</p>
+<p>Nel paese di Ven Lisk, il mago <a  href="archivio/personaggi/shen-isfel.md">Shen Isfel</a> richiede l'aiuto dei giocatori, ma quando arrivano al ritrovo concordato lui non si presenta.</p>
 
 <h2>Sessioni</h2>
 
