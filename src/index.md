@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Home
-siteName: "The Iron Pact"
+siteName: "Il grimorio"
 ---
 
 <div class="ornament">⚔ ✦ ⚔</div>
@@ -24,25 +24,21 @@ siteName: "The Iron Pact"
 {% endfor %}
 </ul>
 
-[→ All session logs](/sessions/)
+[→ Log delle sessioni](/sessions/)
 
 <div class="ornament">· · ·</div>
 
 <img src="/downloads/TheNorth.png" alt="Il Nord, Forgotten Realms" style="max-width: 100%; border-radius: 6px;">
 
+<div class="ornament">· · ·</div>
+
 ## Explore the World
 
 <div class="card-grid">
-  <a class="card" href="/npcs/">
-    <h3>👤 Characters & NPCs</h3>
-    <p>The faces you've met, the allies you've made, the enemies you've earned.</p>
-    <span class="card-tag">PEOPLE</span>
-  </a>
-  <a class="card" href="/locations/">
-    <h3>🗺 Locations</h3>
-    <p>Cities, dungeons, taverns, and forgotten places across the realm.</p>
-    <span class="card-tag">PLACES</span>
-  </a>
+  <a class="card" href="/src/downloads/index">
+    <h3>Downloads</h3>
+    <p>Materiali da scaricare</p>
+    <span class="card-tag">Materiali</span>
   <a class="card" href="/downloads/">
     <h3>⬇ Downloads</h3>
     <p>Maps, character sheets, handouts, and other materials for the table.</p>
