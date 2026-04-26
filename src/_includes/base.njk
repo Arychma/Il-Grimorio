@@ -124,16 +124,22 @@ details > *:not(summary) {
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* ── BASE ───────────────────────────────────────────────── */
-    html { font-size: 17px; }
+    html {
+  font-size: 17px;
+  height: 100%;
+}
 
-    body {
-      font-family: var(--font-body);
-      background-color: var(--dark-bg);
-      color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+body {
+  font-family: var(--font-body);
+  background-color: var(--dark-bg);
+  color: var(--ink);
+  min-height: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
 
     /* ══════════════════════════════════════════════════════════
        HEADER MOBILE (hamburger)
@@ -304,13 +310,15 @@ details > *:not(summary) {
     /* ══════════════════════════════════════════════════════════
        CONTENUTO PRINCIPALE
     ══════════════════════════════════════════════════════════ */
-    .main-content {
-      flex: 1;
-      background: var(--parchment);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  .main-content {
+  flex: 1;
+  background: var(--parchment);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
     .page-inner {
       max-width: 860px;
