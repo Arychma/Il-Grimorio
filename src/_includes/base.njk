@@ -1,532 +1,659 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title }} | The Chronicle</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} | Il Grimorio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
   <style>
-    /* ── VARIABLES ─────────────────────────────────── */
+    /* ── VARIABILI ──────────────────────────────────────────── */
     :root {
-      --parchment:   #f2e8d5;
+      --parchment:      #f2e8d5;
       --parchment-dark: #e0d0b0;
-      --ink:         #1a1209;
-      --ink-faded:   #4a3728;
-      --red:         #8b1a1a;
-      --gold:        #c8922a;
-      --gold-light:  #e8b84b;
-      --shadow:      #0a0705;
-      --sidebar-w:   240px;
+      --ink:            #1a1209;
+      --ink-faded:      #4a3728;
+      --red:            #8b1a1a;
+      --gold:           #c8922a;
+      --gold-light:     #e8b84b;
+      --dark-bg:        #12090a;
+      --sidebar-w:      260px;
+      --header-h:       56px;  /* altezza header mobile */
+
+      --font-title:  'Cinzel', serif;
+      --font-body:   'IM Fell English', serif;
+      --font-mono:   'Share Tech Mono', monospace;
     }
 
-    /* ── RESET ─────────────────────────────────────── */
+    /* ── RESET ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── BODY / BACKGROUND ─────────────────────────── */
+    /* ── BASE ───────────────────────────────────────────────── */
+    html { font-size: 17px; }
+
     body {
-      background-color: #12090a;
-      background-image:
-        radial-gradient(ellipse at 20% 50%, #1e0e05 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, #0d1a0a 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%2312090a'/%3E%3Ccircle cx='1' cy='1' r='0.5' fill='%231a0f08' opacity='0.6'/%3E%3C/svg%3E");
+      font-family: var(--font-body);
+      background-color: var(--dark-bg);
       color: var(--ink);
-      font-family: 'IM Fell English', Georgia, serif;
-      font-size: 17px;
-      line-height: 1.75;
       min-height: 100vh;
-    }
-
-    /* ── WRAPPER ───────────────────────────────────── */
-    .wrapper {
-      display: flex;
-      max-width: 1100px;
-      margin: 0 auto;
-      min-height: 100vh;
-      gap: 0;
-    }
-
-    /* ── SIDEBAR ───────────────────────────────────── */
-    .sidebar {
-      width: var(--sidebar-w);
-      flex-shrink: 0;
-      background: linear-gradient(180deg, #1c1005 0%, #110a03 100%);
-      border-right: 2px solid var(--gold);
-      padding: 28px 16px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       HEADER MOBILE (hamburger)
+    ══════════════════════════════════════════════════════════ */
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--dark-bg);
+      border-bottom: 1px solid var(--gold);
+      z-index: 200;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+
+    .mobile-header-title {
+      font-family: var(--font-title);
+      color: var(--gold-light);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      transition: all 0.3s ease;
+    }
+
+    /* Stato aperto */
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Overlay scuro quando sidebar è aperta su mobile */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 150;
+    }
+    .sidebar-overlay.active { display: block; }
+
+    /* ══════════════════════════════════════════════════════════
+       LAYOUT PRINCIPALE
+    ══════════════════════════════════════════════════════════ */
+    .site-wrapper {
+      display: flex;
+      flex: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-height: 100vh;
+      background: var(--dark-bg);
+      border-right: 1px solid var(--gold);
+      display: flex;
+      flex-direction: column;
       position: sticky;
       top: 0;
       height: 100vh;
       overflow-y: auto;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) transparent;
     }
 
     .sidebar-title {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--gold-light);
+      padding: 1.5rem 1rem 1rem;
+      border-bottom: 1px solid var(--gold);
       text-align: center;
-      letter-spacing: 0.08em;
-      text-shadow: 0 0 20px rgba(200,146,42,0.5);
-      line-height: 1.3;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #3a2510;
     }
 
-    .sidebar-title span {
+    .sidebar-title .label {
       display: block;
-      font-size: 0.65rem;
-      color: var(--ink-faded);
-      font-family: 'Share Tech Mono', monospace;
-      letter-spacing: 0.2em;
-      margin-bottom: 6px;
-      text-shadow: none;
-    }
-
-    .nav-section h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
+      font-family: var(--font-mono);
       color: var(--gold);
-      margin-bottom: 8px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid #2a1a08;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.4rem;
     }
 
-    .nav-section ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .sidebar-title .name {
+      font-family: var(--font-title);
+      color: var(--gold-light);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
     }
+
+    /* Sezioni nav */
+    .nav-section {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(200,146,42,0.2);
+    }
+
+    .nav-section-label {
+      font-family: var(--font-mono);
+      color: var(--gold);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0 1rem 0.4rem;
+      display: block;
+    }
+
+    .nav-section ul { list-style: none; }
 
     .nav-section ul li a {
       display: block;
-      padding: 5px 10px;
-      color: #c8b89a;
+      padding: 0.35rem 1rem 0.35rem 1.2rem;
+      font-family: var(--font-body);
+      color: var(--parchment-dark);
       text-decoration: none;
-      font-family: 'IM Fell English', serif;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
+      transition: color 0.2s, background 0.2s;
       border-left: 2px solid transparent;
-      transition: all 0.15s ease;
     }
 
     .nav-section ul li a:hover,
     .nav-section ul li a.active {
       color: var(--gold-light);
       border-left-color: var(--gold);
-      background: rgba(200,146,42,0.07);
-      padding-left: 14px;
+      background: rgba(200,146,42,0.08);
+    }
+
+    /* Sottomenu (sistemi) */
+    .nav-subsection { padding-left: 0.8rem; }
+
+    .nav-subsection-label {
+      font-family: var(--font-mono);
+      color: var(--ink-faded);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem 0.2rem;
+      display: block;
     }
 
     .sidebar-stamp {
       margin-top: auto;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.62rem;
-      color: #3a2a18;
+      padding: 1rem;
+      font-family: var(--font-mono);
+      color: var(--ink-faded);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
       text-align: center;
-      line-height: 1.8;
+      border-top: 1px solid rgba(200,146,42,0.2);
     }
 
-    /* ── MAIN CONTENT ──────────────────────────────── */
-    .content-wrap {
+    /* ══════════════════════════════════════════════════════════
+       CONTENUTO PRINCIPALE
+    ══════════════════════════════════════════════════════════ */
+    .main-content {
       flex: 1;
+      background: var(--parchment);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      background: var(--parchment);
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
-        linear-gradient(160deg, #f5edd8 0%, #ecddc0 50%, #e8d5b0 100%);
-      min-height: 100vh;
-      position: relative;
     }
 
-    /* aged edges */
-    .content-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to right, rgba(26,18,9,0.08) 0%, transparent 40px),
-        linear-gradient(to left,  rgba(26,18,9,0.05) 0%, transparent 30px),
-        linear-gradient(to bottom, rgba(26,18,9,0.06) 0%, transparent 50px);
-      pointer-events: none;
+    .page-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      flex: 1;
     }
 
-    /* ── HEADER ────────────────────────────────────── */
-    .site-header {
-      padding: 20px 40px 16px;
-      border-bottom: 3px double var(--gold);
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      background: rgba(26,18,9,0.04);
-    }
-
+    /* Breadcrumb */
     .breadcrumb {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--ink-faded);
-      letter-spacing: 0.05em;
-    }
-
-    .breadcrumb a { color: var(--red); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-
-    /* ── PAGE CONTENT ──────────────────────────────── */
-    main {
-      padding: 36px 48px 60px;
-      max-width: 760px;
-      position: relative;
-      z-index: 1;
-    }
-
-    main h1 {
-      font-family: 'Cinzel', serif;
-      font-weight: 900;
-      font-size: 2rem;
-      color: var(--ink);
-      line-height: 1.2;
-      margin-bottom: 6px;
-      text-shadow: 1px 1px 0 rgba(200,146,42,0.2);
-    }
-
-    .page-meta {
-      font-family: 'Share Tech Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--ink-faded);
       letter-spacing: 0.1em;
-      margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--parchment-dark);
+      margin-bottom: 1.5rem;
     }
 
-    .page-content h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
+    .breadcrumb a {
       color: var(--red);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* Titoli */
+    h1 {
+      font-family: var(--font-title);
+      color: var(--red);
+      font-size: 2rem;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: var(--font-title);
+      color: var(--ink);
+      font-size: 1.3rem;
       margin: 2rem 0 0.75rem;
-      padding-bottom: 6px;
+      padding-bottom: 0.3rem;
       border-bottom: 1px solid var(--parchment-dark);
     }
 
-    .page-content h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
+    h3 {
+      font-family: var(--font-title);
       color: var(--ink-faded);
+      font-size: 1rem;
       margin: 1.5rem 0 0.5rem;
     }
 
-    .page-content p { margin-bottom: 1rem; }
+    p { line-height: 1.75; margin-bottom: 1rem; }
 
-    .page-content a {
-      color: var(--red);
-      text-decoration: underline;
-      text-decoration-color: rgba(139,26,26,0.4);
-    }
-    .page-content a:hover { color: var(--gold); }
+    a { color: var(--red); }
+    a:hover { color: var(--gold); }
 
-    .page-content ul, .page-content ol {
-      padding-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .page-content li { margin-bottom: 0.3rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { line-height: 1.7; margin-bottom: 0.25rem; }
 
-    .page-content blockquote {
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--ink); }
+
+    blockquote {
       border-left: 3px solid var(--gold);
-      padding: 12px 20px;
-      margin: 1.5rem 0;
-      background: rgba(200,146,42,0.06);
+      padding: 0.5rem 1rem;
+      margin: 1rem 0;
+      background: rgba(200,146,42,0.08);
       font-style: italic;
       color: var(--ink-faded);
     }
 
-    /* ── CARDS / GRIDS ─────────────────────────────── */
+    code {
+      font-family: var(--font-mono);
+      background: var(--parchment-dark);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--parchment-dark);
+      margin: 2rem 0;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+
+    /* ── CARD GRIGLIA ───────────────────────────────────────── */
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
       margin: 1.5rem 0;
     }
 
     .card {
-      background: rgba(26,18,9,0.05);
+      display: block;
+      background: white;
       border: 1px solid var(--parchment-dark);
       border-top: 3px solid var(--gold);
-      padding: 16px;
+      padding: 1.2rem;
       text-decoration: none;
       color: var(--ink);
-      display: block;
-      transition: all 0.15s ease;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
-      background: rgba(26,18,9,0.09);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      color: var(--ink);
     }
 
     .card h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-family: var(--font-title);
       color: var(--red);
-      margin-bottom: 6px;
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
     }
 
     .card p {
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       color: var(--ink-faded);
       margin: 0;
       line-height: 1.5;
     }
 
-    .card .card-tag {
+    /* ── TAG ────────────────────────────────────────────────── */
+    .tag {
       display: inline-block;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.6rem;
-      background: var(--gold);
-      color: var(--ink);
-      padding: 2px 6px;
-      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
+      padding: 0.2em 0.6em;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 2px;
+      margin: 0.2em;
     }
 
-    /* ── DOWNLOAD BOX ──────────────────────────────── */
+    .tag.red   { border-color: var(--red);  color: var(--red); }
+    .tag.faded { border-color: var(--ink-faded); color: var(--ink-faded); }
+
+    /* ── LISTA VOCI (sessioni, regole, ecc.) ────────────────── */
+    .entry-list { list-style: none; padding: 0; }
+
+    .entry-list li {
+      border-bottom: 1px solid var(--parchment-dark);
+      padding: 0.75rem 0;
+    }
+
+    .entry-list li:last-child { border-bottom: none; }
+
+    .entry-list a {
+      font-family: var(--font-title);
+      font-size: 1rem;
+      text-decoration: none;
+      color: var(--red);
+    }
+
+    .entry-list a:hover { color: var(--gold); }
+
+    .entry-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--ink-faded);
+      margin-top: 0.2rem;
+    }
+
+    /* ── DOWNLOAD BOX ───────────────────────────────────────── */
     .download-box {
       display: flex;
       align-items: center;
-      gap: 16px;
-      background: rgba(26,18,9,0.06);
+      gap: 1rem;
+      padding: 1rem;
       border: 1px solid var(--parchment-dark);
-      border-left: 4px solid var(--red);
-      padding: 14px 18px;
-      margin: 0.75rem 0;
+      background: white;
       text-decoration: none;
       color: var(--ink);
-      transition: all 0.15s;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s;
     }
-    .download-box:hover { background: rgba(139,26,26,0.07); }
-    .download-box .dl-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .download-box .dl-info strong {
+
+    .download-box:hover { border-color: var(--gold); color: var(--ink); }
+
+    .dl-icon { font-size: 1.8rem; }
+
+    .dl-info strong {
       display: block;
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
+      font-family: var(--font-title);
+      font-size: 0.95rem;
       color: var(--red);
     }
-    .download-box .dl-info span {
-      font-family: 'Share Tech Mono', monospace;
+
+    .dl-info span {
+      font-family: var(--font-mono);
       font-size: 0.7rem;
       color: var(--ink-faded);
     }
 
-    /* ── SESSION LOG ───────────────────────────────── */
-    .session-list { list-style: none; padding: 0; }
-    .session-list li {
-      border-bottom: 1px solid var(--parchment-dark);
-      padding: 14px 0;
-    }
-    .session-list li a {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .session-list li a:hover { color: var(--red); }
-    .session-list .s-date {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--ink-faded);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .session-list .s-desc {
-      font-size: 0.85rem;
-      color: var(--ink-faded);
-      font-style: italic;
-      margin-top: 4px;
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE — MOBILE
+    ══════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* Mostra header mobile */
+      .mobile-header { display: flex; }
+
+      /* Il contenuto scende sotto l'header */
+      .site-wrapper { padding-top: var(--header-h); }
+
+      /* Sidebar si nasconde fuori schermo */
+      .sidebar {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        height: calc(100vh - var(--header-h));
+        z-index: 160;
+        transform: translateX(-100%);
+        width: min(var(--sidebar-w), 85vw);
+      }
+
+      /* Quando il menu è aperto */
+      .sidebar.open { transform: translateX(0); }
+
+      /* Padding ridotto */
+      .page-inner { padding: 1.5rem 1rem 3rem; }
+
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.1rem; }
+
+      .card-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── DECORATIVE RULE ───────────────────────────── */
-    .ornament {
-      text-align: center;
-      color: var(--gold);
-      font-size: 1.1rem;
-      letter-spacing: 0.5em;
-      margin: 2rem 0;
-      opacity: 0.6;
+    @media (min-width: 769px) {
+      /* Desktop: layout sidebar + content affiancati */
+      .site-wrapper { flex-direction: row; }
     }
 
-    /* ── RESPONSIVE ────────────────────────────────── */
-    @media (max-width: 700px) {
-      .wrapper { flex-direction: column; }
-      .sidebar { width: 100%; height: auto; position: static; flex-direction: row; flex-wrap: wrap; padding: 16px; gap: 12px; }
-      .sidebar-title { width: 100%; }
-      .sidebar-stamp { display: none; }
-      main { padding: 24px 20px 40px; }
-    }
   </style>
 </head>
 <body>
-  {% include "password.html" %}
-  <div class="wrapper">
 
-    <!-- SIDEBAR NAV -->
-    <aside class="sidebar">
+  <!-- ── OVERLAY mobile ────────────────────────────────────── -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── HEADER MOBILE ─────────────────────────────────────── -->
+  <header class="mobile-header">
+    <span class="mobile-header-title">✦ Il Grimorio ✦</span>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="site-wrapper">
+
+    <!-- ── SIDEBAR ─────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+
       <div class="sidebar-title">
-        <span>✦ THE CHRONICLE ✦</span>
-        {{ siteName or "Campaign Wiki" }}
+        <span class="label">✦ IL GRIMORIO ✦</span>
+        <span class="name">{{ siteName or "Il Grimorio" }}</span>
       </div>
 
+      <!-- Home -->
       <nav class="nav-section">
-        <h3>Navigate</h3>
         <ul>
-          <li><a href="/">⌂ Home</a></li>
-          <li><a href="/sessions/">📜 Session Logs</a></li>
-          <li><a href="/npcs/">👤 NPCs</a></li>
-          <li><a href="/locations/">🗺 Locations</a></li>
-          <li><a href="/downloads/">⬇ Downloads</a></li>
+          <li><a href="/">🏠 Home</a></li>
         </ul>
       </nav>
 
+      <!-- Sistemi di gioco -->
       <nav class="nav-section">
-        <div class="nav-section">
-          <h3>Search</h3>
-          <div id="search"></div>
+        <span class="nav-section-label">Sistemi di Gioco</span>
+
+        <div class="nav-subsection">
+          <span class="nav-subsection-label">D&D 5.5e</span>
+          <ul>
+            <li><a href="/sistemi/dnd55e/">Panoramica</a></li>
+            <li><a href="/sistemi/dnd55e/guida/">📖 Guida</a></li>
+            <li><a href="/sistemi/dnd55e/avventure/">⚔ Avventure</a></li>
+            <li><a href="/sistemi/dnd55e/archivio/personaggi/">👤 Personaggi</a></li>
+            <li><a href="/sistemi/dnd55e/archivio/luoghi/">📍 Luoghi</a></li>
+            <li><a href="/sistemi/dnd55e/archivio/regole/">📜 Regole</a></li>
+            <li><a href="/sistemi/dnd55e/archivio/oggetti/">💎 Oggetti</a></li>
+          </ul>
         </div>
-        <h3>Quick Links</h3>
+
+        <div class="nav-subsection">
+          <span class="nav-subsection-label">GURPS</span>
+          <ul>
+            <li><a href="/sistemi/gurps/">Panoramica</a></li>
+            <li><a href="/sistemi/gurps/guida/">📖 Guida</a></li>
+            <li><a href="/sistemi/gurps/avventure/">⚔ Avventure</a></li>
+            <li><a href="/sistemi/gurps/archivio/personaggi/">👤 Personaggi</a></li>
+            <li><a href="/sistemi/gurps/archivio/luoghi/">📍 Luoghi</a></li>
+            <li><a href="/sistemi/gurps/archivio/regole/">📜 Regole</a></li>
+            <li><a href="/sistemi/gurps/archivio/oggetti/">💎 Oggetti</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Ambientazioni -->
+      <nav class="nav-section">
+        <span class="nav-section-label">Ambientazioni</span>
         <ul>
-          <li><a href="/downloads/#maps">Maps</a></li>
-          <li><a href="/downloads/#sheets">Character Sheets</a></li>
-          <li><a href="/downloads/#handouts">Handouts</a></li>
+          <li><a href="/ambientazioni/">Tutte le ambientazioni</a></li>
+          <li><a href="/ambientazioni/forgotten-realms/">🌍 Forgotten Realms</a></li>
+          <li><a href="/ambientazioni/khaesil/">🌍 Khaesil</a></li>
+        </ul>
+      </nav>
+
+      <!-- Comunicazioni -->
+      <nav class="nav-section">
+        <span class="nav-section-label">Comunicazioni</span>
+        <ul>
+          <li><a href="/comunicazioni/blog/">📝 Blog</a></li>
+          <li><a href="/comunicazioni/newsletter/">📨 Newsletter</a></li>
+          <li><a href="/comunicazioni/downloads/">📥 Download</a></li>
+        </ul>
+      </nav>
+
+      <!-- Jolly -->
+      <nav class="nav-section">
+        <ul>
+          <li><a href="/jolly/">🃏 Jolly</a></li>
         </ul>
       </nav>
 
       <div class="sidebar-stamp">
-        ✦ ✦ ✦<br>
-        Last updated:<br>
-        {{ page.date | readableDate }}<br>
-        ✦ ✦ ✦
+        {% if page.date %}
+          ✦ Aggiornato: {{ page.date | readableDate }} ✦
+        {% else %}
+          ✦ Il Grimorio ✦
+        {% endif %}
       </div>
+
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <div class="content-wrap">
-      <header class="site-header">
-        <div class="breadcrumb">
-          <a href="/">Chronicle</a>
-          {% if breadcrumb %} › {{ breadcrumb }}{% endif %}
-          {% if title and title != "Home" %} › {{ title }}{% endif %}
-        </div>
-      </header>
+    <!-- ── CONTENUTO ───────────────────────────────────────── -->
+    <main class="main-content">
+      <div class="page-inner">
 
-      <main>
-        <h1>{{ title }}</h1>
-        {% if date %}
-        <div class="page-meta">
-          SESSION LOG ✦ {{ date | readableDate }}
-          {% if tags %} ✦ {% for tag in tags %}{{ tag }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}
-        </div>
+        {% if breadcrumb %}
+          <div class="breadcrumb">
+            <a href="/">Home</a>
+            {% if breadcrumb2 %} › <a href="{{ breadcrumb2url }}">{{ breadcrumb2 }}</a>{% endif %}
+            › {{ breadcrumb }}
+          </div>
         {% endif %}
 
-        <div class="page-content">
-          {{ content | safe }}
-        </div>
-      </main>
-    </div>
+        {{ content | safe }}
 
+      </div>
+    </main>
+
+  </div><!-- /site-wrapper -->
+
+  <!-- ── PASSWORD OVERLAY ───────────────────────────────────── -->
+  <div id="pw-overlay" style="
+    display:none; position:fixed; inset:0; z-index:999;
+    background:#12090a; align-items:center; justify-content:center;
+    flex-direction:column; gap:1.2rem; font-family:'Cinzel',serif;">
+
+    <h2 style="color:#e8b84b; font-size:1.4rem; letter-spacing:0.1em;">⚔ Il Grimorio ⚔</h2>
+    <p style="color:#c8922a; font-family:'IM Fell English',serif; font-style:italic;">Pronuncia la parola, avventuriero.</p>
+
+    <input id="pw-input" type="password" placeholder="Password"
+      style="padding:0.6rem 1rem; background:#1e1010; border:1px solid #c8922a;
+             color:#f2e8d5; font-family:'Share Tech Mono',monospace; font-size:1rem;
+             outline:none; width:220px; text-align:center;"
+      onkeydown="if(event.key==='Enter') checkPw()">
+
+    <button onclick="checkPw()"
+      style="padding:0.5rem 2rem; background:none; border:1px solid #c8922a;
+             color:#c8922a; font-family:'Cinzel',serif; font-size:0.85rem;
+             letter-spacing:0.15em; cursor:pointer;">ENTRA</button>
+
+    <p id="pw-error" style="color:#8b1a1a; font-family:'Share Tech Mono',monospace;
+       font-size:0.75rem; min-height:1em;"></p>
   </div>
 
-<script src="/pagefind/pagefind-ui.js"></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    new PagefindUI({
-      element: "#search",
-      showSubResults: false,
-      resetStyles: true
+  <script>
+    // ── PASSWORD ──────────────────────────────────────────────
+    const SITE_PASSWORD = "Mellon";
+    const STORAGE_KEY   = "grimorio_auth";
+
+    function checkPw() {
+      const val = document.getElementById("pw-input").value;
+      if (val === SITE_PASSWORD) {
+        sessionStorage.setItem(STORAGE_KEY, "1");
+        document.getElementById("pw-overlay").style.display = "none";
+      } else {
+        document.getElementById("pw-error").textContent = "Password errata. Riprova.";
+        document.getElementById("pw-input").value = "";
+      }
+    }
+
+    (function() {
+      if (!sessionStorage.getItem(STORAGE_KEY)) {
+        const ov = document.getElementById("pw-overlay");
+        ov.style.display = "flex";
+        setTimeout(() => document.getElementById("pw-input").focus(), 100);
+      }
+    })();
+
+    // ── HAMBURGER MENU ────────────────────────────────────────
+    const hamburger = document.getElementById("hamburger");
+    const sidebar   = document.getElementById("sidebar");
+    const overlay   = document.getElementById("sidebarOverlay");
+
+    function toggleSidebar(open) {
+      sidebar.classList.toggle("open", open);
+      hamburger.classList.toggle("open", open);
+      overlay.classList.toggle("active", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+    hamburger.addEventListener("click", () => toggleSidebar(!sidebar.classList.contains("open")));
+    overlay.addEventListener("click", () => toggleSidebar(false));
+
+    // Chiudi sidebar su navigazione (mobile)
+    sidebar.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768) toggleSidebar(false);
+      });
     });
-  });
-</script>
-<style>
-  .pagefind-ui__form { position: relative; }
 
-  .pagefind-ui__search-input {
-    width: 100%;
-    padding: 7px 10px 7px 28px;
-    background: #1c1005;
-    border: 1px solid #3a2510;
-    border-radius: 0;
-    color: #e8b84b;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.78rem;
-    outline: none;
-    box-shadow: none;
-    -webkit-appearance: none;
-  }
-  .pagefind-ui__search-input:focus { border-color: #c8922a; }
-  .pagefind-ui__search-input::placeholder { color: #3a2a18; letter-spacing: 0.1em; }
+    // Evidenzia link attivo
+    const current = window.location.pathname;
+    document.querySelectorAll(".sidebar a").forEach(a => {
+      if (a.getAttribute("href") === current) a.classList.add("active");
+    });
+  </script>
 
-  .pagefind-ui__search-clear { display: none; }
-
-  /* Hide the default magnifier and add a tiny one via pseudo-element */
-  .pagefind-ui__search-input[type="search"]::-webkit-search-decoration,
-  .pagefind-ui__search-input[type="search"]::-webkit-search-cancel-button { display: none; }
-
-  .pagefind-ui__form::before {
-    content: '⌕';
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #3a2a18;
-    font-size: 0.9rem;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .pagefind-ui__results-area {
-    position: absolute;
-    left: 0;
-    width: 300px;
-    background: #1c1005;
-    border: 1px solid #c8922a;
-    z-index: 100;
-    margin-top: 4px;
-  }
-
-  .pagefind-ui__result {
-    padding: 10px 12px;
-    border-bottom: 1px solid #2a1a08;
-  }
-  .pagefind-ui__result:last-child { border-bottom: none; }
-
-  .pagefind-ui__result-link {
-    color: #e8b84b !important;
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    text-decoration: none;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .pagefind-ui__result-link:hover { color: #c8922a !important; }
-
-  .pagefind-ui__result-excerpt {
-    color: #4a3728;
-    font-size: 0.72rem;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    line-height: 1.4;
-  }
-
-  .pagefind-ui__message {
-    color: #4a3728;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.68rem;
-    padding: 10px 12px;
-  }
-</style>
 </body>
 </html>

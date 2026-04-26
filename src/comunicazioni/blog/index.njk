@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: "Blog"
+siteName: "Il Grimorio"
+breadcrumb: "Blog"
+---
+
+<h1>Blog</h1>
+
+<p><em>Note, aggiornamenti e riflessioni dal master.</em></p>
+
+{% if collections.blog and collections.blog.length %}
+<ul class="entry-list">
+{% for item in collections.blog %}
+  <li>
+    <a href="{{ item.url }}">{{ item.data.title }}</a>
+    {% if item.data.date %}<div class="entry-meta">{{ item.data.date | readableDate }}{% if item.data.description %} — {{ item.data.description }}{% endif %}</div>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+{% else %}
+<p><em>Nessun articolo ancora presente.</em></p>
+{% endif %}

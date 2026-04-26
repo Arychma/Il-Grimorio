@@ -1,47 +1,56 @@
 ---
 layout: base.njk
 title: Home
-siteName: "Il grimorio"
+siteName: "Il Grimorio"
 ---
 
-<div class="ornament">⚔ ✦ ⚔</div>
+<h1>Il Grimorio</h1>
 
-<p><em>Welcome, adventurer. Within these pages lies the collected lore, records, and secrets of our campaign. Choose your path wisely.</em></p>
+<p><em>Benvenuto. Qui trovi tutto quello che ti serve per le nostre campagne — sessioni, personaggi, luoghi, regole e molto altro.</em></p>
 
-<div class="ornament">· · ·</div>
-
-## Latest Sessions
-
-<ul class="session-list">
-{% for session in collections.sessions | first(3) %}
-  <li>
-    <span class="s-date">{{ session.date | readableDate }}</span>
-    <a href="{{ session.url }}">{{ session.data.title }}</a>
-    {% if session.data.description %}
-    <div class="s-desc">{{ session.data.description }}</div>
-    {% endif %}
-  </li>
-{% endfor %}
-</ul>
-
-[→ Log delle sessioni](/sessions/)
-
-<div class="ornament">· · ·</div>
-
-<img src="/downloads/TheNorth.png" alt="Il Nord, Forgotten Realms" style="max-width: 100%; border-radius: 6px;">
-
-<div class="ornament">· · ·</div>
-
-## Explore the World
+<h2>Sistemi di Gioco</h2>
 
 <div class="card-grid">
-  <a class="card" href="/src/downloads/index">
-    <h3>Downloads</h3>
-    <p>Materiali da scaricare</p>
-    <span class="card-tag">Materiali</span>
-  <a class="card" href="/downloads/">
-    <h3>⬇ Downloads</h3>
-    <p>Maps, character sheets, handouts, and other materials for the table.</p>
-    <span class="card-tag">FILES</span>
+  <a class="card" href="/sistemi/dnd55e/">
+    <h3>⚔ D&D 5.5e</h3>
+    <p>Avventure, archivio e guida al sistema.</p>
+  </a>
+  <a class="card" href="/sistemi/gurps/">
+    <h3>⚙ GURPS</h3>
+    <p>Avventure, archivio e guida al sistema.</p>
+  </a>
+</div>
+
+<h2>Ambientazioni</h2>
+
+<div class="card-grid">
+  <a class="card" href="/ambientazioni/forgotten-realms/">
+    <h3>🌍 Forgotten Realms</h3>
+    <p>Il mondo di Faerûn e dintorni.</p>
+  </a>
+  <a class="card" href="/ambientazioni/khaesil/">
+    <h3>🌍 Khaesil</h3>
+    <p>Ambientazione homebrew.</p>
+  </a>
+</div>
+
+<h2>Altro</h2>
+
+<div class="card-grid">
+  <a class="card" href="/comunicazioni/blog/">
+    <h3>📝 Blog</h3>
+    <p>Aggiornamenti e note dal master.</p>
+  </a>
+  <a class="card" href="/comunicazioni/newsletter/">
+    <h3>📨 Newsletter</h3>
+    <p>Comunicazioni ai giocatori.</p>
+  </a>
+  <a class="card" href="/comunicazioni/downloads/">
+    <h3>📥 Download</h3>
+    <p>File, mappe e materiali scaricabili.</p>
+  </a>
+  <a class="card" href="/jolly/">
+    <h3>🃏 Jolly</h3>
+    <p>Tutto quello che non rientra altrove.</p>
   </a>
 </div>

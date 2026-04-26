@@ -1,13 +1,12 @@
 {
-  "name": "ttrpg-wiki",
+  "name": "il-grimorio",
   "version": "1.0.0",
-  "description": "My TTRPG Campaign Wiki",
+  "description": "Wiki per campagne TTRPG — Il Grimorio",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy && npx pagefind --site _site"
+    "build": "eleventy"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "pagefind": "^1.0.4"
+    "@11ty/eleventy": "^2.0.1"
   }
 }

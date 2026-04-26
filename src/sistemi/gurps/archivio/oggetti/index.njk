@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: "Oggetti — GURPS"
+siteName: "Il Grimorio"
+breadcrumb: "Oggetti"
+breadcrumb2: "GURPS"
+breadcrumb2url: "/sistemi/gurps/"
+---
+
+<h1>Oggetti — GURPS</h1>
+
+<p><em>Oggetti speciali in GURPS.</em></p>
+
+{% if collections.gurps_oggetti and collections.gurps_oggetti.length %}
+<ul class="entry-list">
+{% for item in collections.gurps_oggetti %}
+  <li>
+    <a href="{{ item.url }}">{{ item.data.title }}</a>
+    {% if item.data.date %}<div class="entry-meta">{{ item.data.date | readableDate }}{% if item.data.description %} — {{ item.data.description }}{% endif %}</div>{% endif %}
+    <div class="entry-meta">
+      {% if item.data.role %}{{ item.data.role }} {% endif %}
+      {% if item.data.type %}{{ item.data.type }} {% endif %}
+      {% if item.data.status %}<span class="tag">{{ item.data.status }}</span>{% endif %}
+      {% if item.data.region %}<span class="tag faded">{{ item.data.region }}</span>{% endif %}
+    </div>
+  </li>
+{% endfor %}
+</ul>
+{% else %}
+<p><em>Nessuna voce ancora presente.</em></p>
+{% endif %}
