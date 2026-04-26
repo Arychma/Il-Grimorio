@@ -9,6 +9,98 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
+/* ── CALLOUT ────────────────────────────────────────────── */
+.callout {
+  padding: 0.85rem 1.1rem;
+  border-left: 4px solid;
+  border-radius: 0 4px 4px 0;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.callout.info    { background: #e8f4f8; border-color: #4a90b8; color: #1a3a4a; }
+.callout.warning { background: #fdf3e3; border-color: #c8922a; color: #4a3000; }
+.callout.danger  { background: #fdecea; border-color: #8b1a1a; color: #4a0000; }
+.callout.lore    { background: #f5f0e8; border-color: #7a6a4a; color: #3a2a10;
+                   font-family: var(--font-body); font-style: italic; }
+
+/* ── DETAILS / COMPRIMIBILE ─────────────────────────────── */
+details {
+  border: 1px solid var(--parchment-dark);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  margin: 1.25rem 0;
+  background: white;
+}
+details[open] summary { border-bottom: 1px solid var(--parchment-dark); }
+
+summary {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  color: var(--red);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before {
+  content: '▶';
+  font-size: 0.6rem;
+  color: var(--gold);
+  transition: transform 0.2s;
+  display: inline-block;
+}
+details[open] summary::before { transform: rotate(90deg); }
+
+details > *:not(summary) {
+  padding: 0.75rem 1rem 0.75rem 1.2rem;
+}
+
+/* ── TAB ────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 2px solid var(--parchment-dark);
+  margin: 1.5rem 0 0;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: none;
+  border: 1px solid var(--parchment-dark);
+  border-bottom: none;
+  padding: 0.45rem 1rem;
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-faded);
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: -2px;
+}
+.tab-btn:hover { background: var(--parchment-dark); color: var(--ink); }
+.tab-btn.active {
+  background: var(--parchment);
+  color: var(--red);
+  border-color: var(--parchment-dark);
+  border-bottom-color: var(--parchment);
+  font-weight: 600;
+}
+.tab-content {
+  display: none;
+  padding: 1rem 0.25rem;
+  border: 1px solid var(--parchment-dark);
+  border-top: none;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: white;
+}
+.tab-content.active { display: block; }
+
   <style>
     /* ── VARIABILI ──────────────────────────────────────────── */
     :root {
@@ -601,6 +693,17 @@
     <p id="pw-error" style="color:#8b1a1a; font-family:'Share Tech Mono',monospace;
        font-size:0.75rem; min-height:1em;"></p>
   </div>
+
+// ── TAB ──────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.closest('.tab-group') || btn.parentElement.parentElement;
+    group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    group.querySelector('#' + btn.dataset.tab).classList.add('active');
+  });
+});
 
   <script>
     // ── PASSWORD ──────────────────────────────────────────────
