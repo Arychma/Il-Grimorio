@@ -28,6 +28,8 @@ siteName: "The Iron Pact"
 
 <div class="ornament">· · ·</div>
 
+![Sword coast map](assets/images/Sword-Coast-Map.jpg)
+
 ## Explore the World
 
 <div class="card-grid">
