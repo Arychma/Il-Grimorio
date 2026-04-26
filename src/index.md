@@ -28,7 +28,7 @@ siteName: "The Iron Pact"
 
 <div class="ornament">· · ·</div>
 
-![Sword coast map](assets/images/Sword-Coast-Map.jpg)
+<img src="/downloads/TheNorth.png" alt="Il Nord, Forgotten Realms" style="max-width: 100%; border-radius: 6px;">
 
 ## Explore the World
 
