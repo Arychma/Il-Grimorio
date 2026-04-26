@@ -23,6 +23,10 @@ breadcrumb: "D&D 5.5e"
 <h2>Archivio</h2>
 
 <div class="card-grid">
+  <a class="card" href="/sistemi/dnd55e/archivio/regole/">
+    <h3>📜 Regole</h3>
+    <p>Regole di riferimento e house rules.</p>
+  </a>
   <a class="card" href="/sistemi/dnd55e/archivio/personaggi/">
     <h3>👤 Personaggi</h3>
     <p>PG e PNG incontrati nelle avventure.</p>
@@ -30,10 +34,6 @@ breadcrumb: "D&D 5.5e"
   <a class="card" href="/sistemi/dnd55e/archivio/luoghi/">
     <h3>📍 Luoghi</h3>
     <p>Locazioni esplorate e da esplorare.</p>
-  </a>
-  <a class="card" href="/sistemi/dnd55e/archivio/regole/">
-    <h3>📜 Regole</h3>
-    <p>Regole di riferimento e house rules.</p>
   </a>
   <a class="card" href="/sistemi/dnd55e/archivio/oggetti/">
     <h3>💎 Oggetti</h3>
