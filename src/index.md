@@ -28,7 +28,7 @@ siteName: "The Iron Pact"
 
 <div class="ornament">· · ·</div>
 
-<img src="/downloads/TheNorth.png" alt="Il Nord, Forgotten Realms" style="width: 400px; border-radius: 6px;">
+<img src="/downloads/TheNorth.png" alt="Il Nord, Forgotten Realms" style="max-width: 10%; border-radius: 6px;">
 
 ## Explore the World
 
