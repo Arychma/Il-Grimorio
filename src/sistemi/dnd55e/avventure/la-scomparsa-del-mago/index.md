@@ -23,6 +23,7 @@ description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D p
 <p>Nel paese di Ven Lisk, il mago Shen Isfel richiede l'aiuto dei giocatori, ma quando arrivano al ritrovo concordato lui non si presenta.</p>
 
 <h2>Sessioni</h2>
-![Sessione 1](sessioni/sessione-01.md)
+
+<a  href="sessioni/sessione-01.md">Sessione 1</a>
 
 <a class="card" href="sessioni/">Vedi tutte le sessioni →</a>
