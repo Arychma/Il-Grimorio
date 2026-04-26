@@ -4,7 +4,7 @@ title: "Sessione 01: Il Titolo"
 siteName: "Il Grimorio"
 breadcrumb: "Sessione 01"
 breadcrumb2: "Nome Avventura"
-breadcrumb2url: "/sistemi/dnd55e/avventure/esempio-avventura/"
+breadcrumb2url: "/sistemi/dnd55e/avventure/la-scomparsa-del-mago/"
 date: 2025-01-01
 description: "Breve riassunto della sessione."
 tags: ["sessione", "dnd55e"]
