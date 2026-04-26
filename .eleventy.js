@@ -84,6 +84,7 @@ module.exports = function(eleventyConfig) {
 
   // ─── OUTPUT ──────────────────────────────────────────────────────────────
   return {
+    pathPrefix: "/Il-Grimorio/",
     dir: {
       input: "src",
       output: "_site",
