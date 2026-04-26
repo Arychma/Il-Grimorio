@@ -11,4 +11,4 @@ breadcrumb2url: "/ambientazioni/"
 
 <p><em>Ambientazione homebrew.</em></p>
 
-<p>Aggiungi qui la descrizione del mondo, la sua storia, geografia e i suoi abitanti.</p>
+<p>Pagina ancora da allestire</p>
