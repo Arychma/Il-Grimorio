@@ -24,7 +24,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
-  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" }););
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy("src/comunicazioni/downloads");
 
   // ─── TEMPLATE FORMATS ────────────────────────────────────────────────────
