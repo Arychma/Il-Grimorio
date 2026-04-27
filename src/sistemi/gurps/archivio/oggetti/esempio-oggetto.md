@@ -6,6 +6,7 @@ eleventyNavigation:
   parent: gurps-oggetti
 type: "Oggetto magico raro"
 status: "In possesso del gruppo"
+draft: true
 ---
 
 <h1>Nome Oggetto</h1>

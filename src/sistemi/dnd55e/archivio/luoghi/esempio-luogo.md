@@ -6,6 +6,7 @@ eleventyNavigation:
   parent: dnd-luoghi
 type: "Città, porto commerciale"
 setting: "Forgotten Realms"
+draft: true
 ---
 
 <h1>Nome Luogo</h1>

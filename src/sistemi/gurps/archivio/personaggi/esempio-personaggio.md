@@ -6,6 +6,7 @@ eleventyNavigation:
   parent: gurps-personaggi
 role: "Guerriero, Guardia della città"
 status: "Alleato"
+draft: true
 ---
 
 <h1>Nome Personaggio</h1>

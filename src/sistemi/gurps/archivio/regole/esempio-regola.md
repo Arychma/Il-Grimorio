@@ -6,6 +6,7 @@ eleventyNavigation:
   key: gurps-nomeregola
   parent: gurps-archivio
 type: "Official"
+draft: true
 ---
 
 <h1>Nome Regola</h1>

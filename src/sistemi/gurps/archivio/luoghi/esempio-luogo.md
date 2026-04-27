@@ -6,6 +6,7 @@ eleventyNavigation:
   parent: gurps-luoghi
 type: "Città, porto commerciale"
 region: "Forgotten Realms"
+draft: true
 ---
 
 <h1>Nome Luogo</h1>
