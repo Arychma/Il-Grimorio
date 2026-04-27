@@ -14,12 +14,10 @@ module.exports = function(eleventyConfig) {
         (item.fileSlug === key)
       );
     });
-
     if (targetPage) {
       const text = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
       return `<a href="${targetPage.url}">${text}</a>`;
     }
-
     return `<span style="color:orange; font-weight:bold;">[Link non trovato: ${key}]</span>`;
   });
 
@@ -56,29 +54,37 @@ module.exports = function(eleventyConfig) {
     categorieArchivio.forEach(cat => {
       eleventyConfig.addCollection(`${prefix}-${cat}`, api =>
         api.getFilteredByGlob(`src/sistemi/${sistema}/archivio/${cat}/*.{md,njk}`)
+          .filter(page => !page.data.draft)
       );
     });
 
     eleventyConfig.addCollection(`${prefix}-avventure`, api =>
       api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/*.{md,njk}`)
+        .filter(page => !page.data.draft)
     );
 
     eleventyConfig.addCollection(`${prefix}-sessioni`, api =>
-      api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/sessioni/*.{md,njk}`).reverse()
+      api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/sessioni/*.{md,njk}`)
+        .reverse()
+        .filter(page => !page.data.draft)
     );
 
     eleventyConfig.addCollection(`${prefix}-guida`, api =>
       api.getFilteredByGlob(`src/sistemi/${sistema}/guida/**/*.{md,njk}`)
+        .filter(page => !page.data.draft)
     );
   });
 
   eleventyConfig.addCollection("ambientazioni", api =>
     api.getFilteredByGlob("src/ambientazioni/**/*.{md,njk}")
+      .filter(page => !page.data.draft)
   );
 
   ["blog", "newsletter", "jolly"].forEach(tipo => {
     eleventyConfig.addCollection(tipo, api =>
-      api.getFilteredByGlob(`src/comunicazioni/${tipo}/*.{md,njk}`).reverse()
+      api.getFilteredByGlob(`src/comunicazioni/${tipo}/*.{md,njk}`)
+        .reverse()
+        .filter(page => !page.data.draft)
     );
   });
 
