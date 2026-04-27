@@ -112,7 +112,7 @@
 
     <main class="main-content">
       <div class="page-inner">
-
+      {#
         {% if eleventyNavigation and eleventyNavigation.key %}
           {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
           <div class="breadcrumb">
@@ -127,6 +127,7 @@
             <a href="{{ '/' | url }}">Home</a> › {{ title }}
           </div>
         {% endif %}
+      #}
 
         {{ content | safe }}
 
