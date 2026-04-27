@@ -4,7 +4,7 @@ title: "Come funziona D&D"
 siteName: "Il Grimorio"
 eleventyNavigation:
   key: "dnd-guida-01"
-  parent: dnd
+  parent: "dnd-guida"
 ---
 
 Come funziona D&D?
