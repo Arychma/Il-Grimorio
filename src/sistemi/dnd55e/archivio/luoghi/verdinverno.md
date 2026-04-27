@@ -1,16 +1,15 @@
 ---
 layout: base.njk
-title: "Nome Luogo"
+title: "Verdinverno"
 eleventyNavigation:
-  key: dnd-nomeluogo
+  key: verdinverno
   parent: dnd-luoghi
 type: "Città, porto commerciale"
 setting: "Forgotten Realms"
-originalname: "Original name"
-draft: "true"
+originalname: "Neverwinter"
 ---
 
-<h1>Nome Luogo</h1>
+<h1>Verdinverno</h1>
 <p><em>{{ originalname }}</em></p>
 
 <span class="tag faded">{{ setting }}</span>
@@ -18,6 +17,6 @@ draft: "true"
 <p><em>{{ type }}</em></p>
 
 <h3>Descrizione</h3>
-
+È guidata da Dagult Verdimber.
 
 <h3>Informazioni conosciute</h3>

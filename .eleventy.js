@@ -45,7 +45,7 @@ module.exports = function(eleventyConfig) {
 
   // ─── COLLEZIONI ──────────────────────────────────────────────────────────
   const sistemi = ["dnd55e", "gurps"];
-  const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti"];
+  const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti", "miscellanea"];
   const prefissi = { dnd55e: "dnd", gurps: "gurps" };
 
   sistemi.forEach(sistema => {
