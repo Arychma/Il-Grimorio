@@ -6,6 +6,8 @@ eleventyNavigation:
   parent: "dnd-guida"
 ---
 
+<h2>Introduzione a D&D</h2>
+
 Come funziona D&D?
 Se non hai mai visto una sessione di D&D o di un qualunque gioco di ruolo questa è una bella domanda. 
 
