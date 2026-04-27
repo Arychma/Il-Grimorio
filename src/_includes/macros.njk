@@ -1,0 +1,13 @@
+{% macro cardGrid(key) %}
+{% set items = collections.all | eleventyNavigation(key) %}
+{% if items.length %}
+<div class="card-grid">
+  {% for item in items %}
+    <a class="card" href="{{ item.url }}">
+      <h3>{{ item.title }}</h3>
+      {% if item.excerpt %}<p>{{ item.excerpt }}</p>{% endif %}
+    </a>
+  {% endfor %}
+</div>
+{% endif %}
+{% endmacro %}

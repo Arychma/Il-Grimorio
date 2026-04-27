@@ -9,6 +9,8 @@ sistema: "dnd55e"
 ambientazione: "Forgotten Realms"
 stato: "In corso"
 description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D per nuovi giocatori."
+eleventyNavigation:
+    key: avventura-sdm
 ---
 
 <h1>La Scomparsa del mago</h1>
@@ -24,6 +26,7 @@ description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D p
 
 <h2>Sessioni</h2>
 
-<a  href= {% navLink collections, "sdm-sessione-01" %}>Sessione 1</a>
+{% navLink collections, "sdm-sessione-01" %}
 
-<a class="card" href="sessioni/">Vedi tutte le sessioni →</a>
+{% from "macros.njk" import cardGrid %}
+{{ cardGrid("sdm-sessioni") }}

@@ -10,6 +10,7 @@ description: "Breve riassunto della sessione."
 tags: ["sessione", "dnd55e"]
 eleventyNavigation:
     key: sdm-sessione-01
+    parent: sdm-sessioni
 ---
 
 <h1>Sessione 01: Il Titolo</h1>
