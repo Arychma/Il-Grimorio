@@ -4,7 +4,7 @@ title: "Dral Thelev"
 eleventyNavigation:
   key: dral-thelev
   parent: dnd-personaggi
-role: "Barista, Mezzorco"
+role: "Mezzorco, Barista"
 status: "Alleato"
 ---
 

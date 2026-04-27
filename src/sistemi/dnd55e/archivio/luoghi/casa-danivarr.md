@@ -4,7 +4,7 @@ title: "Casa Danivarr"
 eleventyNavigation:
   key: casa-danivarr
   parent: dnd-luoghi
-type: "Locanda"
+caption: "Locanda a Eterbosco"
 setting: "Forgotten Realms"
 region: "Eterbosco"
 ---
@@ -13,7 +13,6 @@ region: "Eterbosco"
 
 <span class="tag faded">{{ setting }}</span>
 
-<p><em>{{ type }}</em></p>
-<p><em>{{ region }}</em></p>
+<p><em>{{ caption }}</em></p>
 
 Presente a {% navLink collections, "eterbosco" %} e gestita da {% navLink collections, "dral-thelev" %}.
