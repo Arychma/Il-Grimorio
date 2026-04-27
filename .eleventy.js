@@ -69,11 +69,6 @@ module.exports = function(eleventyConfig) {
     return api.getFilteredByGlob("src/comunicazioni/newsletter/*.{md,njk}").reverse();
   });
 
-  // Ambientazioni
-  eleventyConfig.addCollection("ambientazioni", function(api) {
-    return api.getFilteredByGlob("src/ambientazioni/*/*.{md,njk}");
-  });
-
   // Jolly
   eleventyConfig.addCollection("jolly", function(api) {
     return api.getFilteredByGlob("src/jolly/*.{md,njk}").reverse();
