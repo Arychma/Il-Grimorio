@@ -7,7 +7,7 @@ eleventyNavigation:
 date: "2025-01-01"
 description: "Breve riassunto della sessione."
 tags: ["sessione", "dnd55e"]
-draft: true
+draft: "true"
 ---
 
 <h1>Sessione 01: Il Titolo</h1>
