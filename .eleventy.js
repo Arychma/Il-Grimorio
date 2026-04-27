@@ -57,23 +57,6 @@ module.exports = function(eleventyConfig) {
   });
 });
 
-// ─── GLOBAL COLLECTIONS ──────────────────────────────────────────────────
-
-  // Blog
-  eleventyConfig.addCollection("blog", function(api) {
-    return api.getFilteredByGlob("src/comunicazioni/blog/*.{md,njk}").reverse();
-  });
-
-  // Newsletter
-  eleventyConfig.addCollection("newsletter", function(api) {
-    return api.getFilteredByGlob("src/comunicazioni/newsletter/*.{md,njk}").reverse();
-  });
-
-  // Jolly
-  eleventyConfig.addCollection("jolly", function(api) {
-    return api.getFilteredByGlob("src/jolly/*.{md,njk}").reverse();
-  });
-
 // ─── CONFIGURAZIONE SISTEMI (D&D, GURPS, ecc.) ──────────────────────────
 const sistemi = ["dnd55e", "gurps"];
 const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti"];
