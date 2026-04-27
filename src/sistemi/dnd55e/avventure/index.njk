@@ -1,15 +1,15 @@
 ---
 layout: base.njk
-title: "Avventure — D&D 5.5e"
+title: "Avventure — D&D"
 siteName: "Il Grimorio"
 eleventyNavigation:
-  key: dnd-avventure
+  key: "dnd-avventure"
   parent: dnd
 ---
 
-<h1>Avventure — D&D 5.5e</h1>
+<h1>Avventure — D&D</h1>
 
-<p><em>Tutte le avventure D&D 5.5e.</em></p>
+<p><em>Tutte le avventure D&D.</em></p>
 
 {% from "macros.njk" import cardGrid %}
-{{ collections, cardGrid("dnd-avventure") }}
+{{ cardGrid(collections, "dnd-avventure") }}
