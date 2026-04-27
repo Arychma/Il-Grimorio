@@ -1,8 +1,8 @@
 {% macro cardGrid(collectionName, tagFilter=null) %}
-  {# 1. Recupero della collezione con le parentesi quadre per gestire i trattini #}
+  {# Recupero sicuro: se la collezione non esiste, usa una lista vuota #}
   {% set allItems = collections[collectionName] or [] %}
   
-  {# 2. Applicazione del filtro tag (se richiesto) #}
+  {# Filtro opzionale per tag (utile per le ambientazioni) #}
   {% if tagFilter %}
     {% set items = allItems | filterByTag(tagFilter) %}
   {% else %}
@@ -14,21 +14,25 @@
       <article class="card">
         <a href="{{ item.url }}">
           <div class="card-body">
-            {# 3. Gestione flessibile del titolo (cerca in diverse posizioni) #}
+            {# Gestione Titolo: supporta Markdown e Navigation #}
             <h3 class="card-title">
               {{ item.data.title or item.title or "Senza Titolo" }}
             </h3>
             
+            {# Estrazione Dati: normalizza l'accesso al frontmatter #}
+            {% set info = item.data if item.data else item %}
+            
             <div class="card-meta">
-              {# 4. Normalizzazione dei dati per accedere a 'type' o 'region' #}
-              {% set info = item.data if item.data else item %}
-              
               {% if info.type %}
                 <span class="tag-type">{{ info.type }}</span>
               {% endif %}
               
               {% if info.region %}
                 <span class="tag-region">{{ info.region }}</span>
+              {% endif %}
+
+              {% if info.status %}
+                <span class="status {{ info.status | lower }}">{{ info.status }}</span>
               {% endif %}
             </div>
 
@@ -39,12 +43,8 @@
         </a>
       </article>
     {% else %}
-      {# 5. Messaggio di debug migliorato #}
-      <div class="debug-error" style="padding: 20px; border: 1px dashed #ccc; color: #666;">
-        <strong>Nota:</strong> Nessun elemento trovato nella collezione 
-        <code>"{{ collectionName }}"</code> 
-        {% if tagFilter %}con il tag <code>"{{ tagFilter }}"</code>{% endif %}.
-      </div>
+      {# Questo appare solo se la collezione è davvero vuota #}
+      <p class="debug-msg">Nessun elemento presente in <em>{{ collectionName }}</em>.</p>
     {% endfor %}
   </div>
 {% endmacro %}

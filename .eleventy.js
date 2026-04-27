@@ -9,26 +9,26 @@ module.exports = function(eleventyConfig) {
 
   // ─── NUOVO SHORTCODE NAVLINK (POTENZIATO) ────────────────────────────────
     eleventyConfig.addShortcode("navLink", function(collections, key) {
-    const allPages = collections.all;
-    
-    // DEBUG: Questo scriverà nei log di GitHub Actions quante pagine vede lo snippet
-    console.log(`[DEBUG] navLink sta cercando "${key}" tra ${allPages.length} pagine totali.`);
+  // Cerca in tutte le pagine caricate dal sito
+  const allPages = collections.all;
 
-    const targetPage = allPages.find(item => {
-      return (
-        (item.data.eleventyNavigation && item.data.eleventyNavigation.key === key) ||
-        (item.data.title === key) ||
-        (item.fileSlug === key)
-      );
-    });
-
-    if (targetPage) {
-      const text = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
-      return `<a href="${targetPage.url}">${text}</a>`;
-    }
-
-    return `<span style="color:red; font-weight:bold;">[Link Mancante: ${key}]</span>`;
+  const targetPage = allPages.find(item => {
+    return (
+      (item.data.eleventyNavigation && item.data.eleventyNavigation.key === key) || 
+      (item.data.title === key) || 
+      (item.fileSlug === key)
+    );
   });
+
+  if (targetPage) {
+    // Sceglie il testo migliore: Titolo Navigation > Titolo Pagina > Chiave
+    const text = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
+    return `<a href="${targetPage.url}">${text}</a>`;
+  }
+
+  // Fallback visibile per il debug
+  return `<span style="color:orange; font-weight:bold;">[Link non trovato: ${key}]</span>`;
+});
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("src/assets");
@@ -49,15 +49,13 @@ module.exports = function(eleventyConfig) {
 
   // Filtra le collezioni per tag (quello nuovo che abbiamo creato)
   eleventyConfig.addFilter("filterByTag", function(collection, tag) {
-    if (!tag) return collection;
-    return collection.filter(item => {
-      const tags = item.data.tags;
-      if (Array.isArray(tags)) {
-        return tags.includes(tag);
-      }
-      return tags === tag;
-    });
+  if (!tag) return collection;
+  return collection.filter(item => {
+    const tags = item.data.tags || [];
+    // Gestisce sia tag singoli che liste di tag
+    return typeof tags === "string" ? tags === tag : tags.includes(tag);
   });
+});
 
 // ─── GLOBAL COLLECTIONS ──────────────────────────────────────────────────
 
