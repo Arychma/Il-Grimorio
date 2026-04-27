@@ -1,5 +1,4 @@
-{% macro cardGrid(collections, parentKey, filters={}) %}
-
+{% macro cardGrid(collections, parentKey, filters={}, sort="default") %}
   {% set navItems = collections.all | eleventyNavigation(parentKey) %}
   {% set finalItems = [] %}
 
@@ -28,47 +27,43 @@
     {% endfor %}
   {% endfor %}
 
+  {% if sort == "title" %}
+    {% set finalItems = finalItems | sort(false, false, "data.title") %}
+  {% elif sort == "date" %}
+    {% set finalItems = finalItems | sort(true, false, "data.date") %}
+  {% endif %}
+
   <div class="card-grid">
     {% for item in finalItems %}
       <article class="card">
         <a href="{{ item.url }}">
           <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
-
           {% if item.data.role or item.data.type %}
             <p class="card-subtitle">{{ item.data.role or item.data.type }}</p>
           {% endif %}
-
           <div class="card-meta">
-
             {% if item.data.adventure %}
               <span class="card-tag">{{ item.data.adventure }}</span>
             {% endif %}
-
             {% if item.data.status %}
               <span class="card-status card-status--{{ item.data.status | lower | replace(' ', '-') }}">
                 {{ item.data.status }}
               </span>
             {% endif %}
-
             {% if item.data.setting %}
               <span class="card-tag">{{ item.data.setting }}</span>
             {% endif %}
-
             {% if item.data.date %}
               <span class="card-tag">{{ item.data.date | readableDate }}</span>
             {% endif %}
-
           </div>
-
           {% if item.data.description %}
             <p class="card-description">{{ item.data.description }}</p>
           {% endif %}
-
         </a>
       </article>
     {% else %}
       <p class="card-empty">Nessun elemento figlio di <em>{{ parentKey }}</em>.</p>
     {% endfor %}
   </div>
-
 {% endmacro %}
