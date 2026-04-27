@@ -10,528 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 
-  <style>
-    /* ── VARIABILI ──────────────────────────────────────────── */
-    :root {
-      --parchment:      #f2e8d5;
-      --parchment-dark: #e0d0b0;
-      --ink:            #1a1209;
-      --ink-faded:      #4a3728;
-      --red:            #8b1a1a;
-      --gold:           #c8922a;
-      --gold-light:     #e8b84b;
-      --dark-bg:        #12090a;
-      --sidebar-w:      260px;
-      --header-h:       56px;
-
-      --font-title:  'Cinzel', serif;
-      --font-body:   'IM Fell English', serif;
-      --font-mono:   'Share Tech Mono', monospace;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { font-size: 17px; height: 100%; }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--dark-bg);
-      color: var(--ink);
-      min-height: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── HEADER MOBILE ──────────────────────────────────────── */
-    .mobile-header {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: var(--header-h);
-      background: var(--dark-bg);
-      border-bottom: 1px solid var(--gold);
-      z-index: 200;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
-    }
-
-    .mobile-header-title {
-      font-family: var(--font-title);
-      color: var(--gold-light);
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-    }
-
-    .hamburger {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--gold);
-      transition: all 0.3s ease;
-    }
-
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 150;
-    }
-    .sidebar-overlay.active { display: block; }
-
-    /* ── LAYOUT ─────────────────────────────────────────────── */
-    .site-wrapper { display: flex; flex: 1; }
-
-    /* ── SIDEBAR ────────────────────────────────────────────── */
-    .sidebar {
-      width: var(--sidebar-w);
-      min-height: 100vh;
-      background: var(--dark-bg);
-      border-right: 1px solid var(--gold);
-      display: flex;
-      flex-direction: column;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      flex-shrink: 0;
-      transition: transform 0.3s ease;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold) transparent;
-    }
-
-    .sidebar-title {
-      padding: 1.5rem 1rem 1rem;
-      border-bottom: 1px solid var(--gold);
-      text-align: center;
-    }
-
-    .sidebar-title .label {
-      display: block;
-      font-family: var(--font-mono);
-      color: var(--gold);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      margin-bottom: 0.4rem;
-    }
-
-    .sidebar-title .name {
-      font-family: var(--font-title);
-      color: var(--gold-light);
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-    }
-
-    /* ── RICERCA ────────────────────────────────────────────── */
-    .search-box {
-      padding: 0.75rem;
-      border-bottom: 1px solid rgba(200,146,42,0.2);
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 0.4rem 0.6rem;
-      background: #1e1010;
-      border: 1px solid var(--gold);
-      color: var(--parchment);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      outline: none;
-      border-radius: 2px;
-    }
-
-    /* Stile risultati Pagefind */
-    .pagefind-ui__search-input {
-      background: #1e1010 !important;
-      border: 1px solid var(--gold) !important;
-      color: var(--parchment) !important;
-      font-family: var(--font-mono) !important;
-      font-size: 0.8rem !important;
-      border-radius: 2px !important;
-    }
-
-    .pagefind-ui__results {
-      background: var(--dark-bg);
-      color: var(--parchment-dark);
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-    }
-
-    .pagefind-ui__result-link { color: var(--gold-light) !important; }
-    .pagefind-ui__result-link:hover { color: var(--gold) !important; }
-
-    .nav-section {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(200,146,42,0.2);
-    }
-
-    .nav-section-label {
-      font-family: var(--font-mono);
-      color: var(--gold);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0 1rem 0.4rem;
-      display: block;
-    }
-
-    .nav-section ul { list-style: none; }
-
-    .nav-section ul li a {
-      display: block;
-      padding: 0.35rem 1rem 0.35rem 1.2rem;
-      font-family: var(--font-body);
-      color: var(--parchment-dark);
-      text-decoration: none;
-      font-size: 0.92rem;
-      transition: color 0.2s, background 0.2s;
-      border-left: 2px solid transparent;
-    }
-
-    .nav-section ul li a:hover,
-    .nav-section ul li a.active {
-      color: var(--gold-light);
-      border-left-color: var(--gold);
-      background: rgba(200,146,42,0.08);
-    }
-
-    .nav-subsection { padding-left: 0.8rem; }
-
-    .nav-subsection-label {
-      font-family: var(--font-mono);
-      color: var(--ink-faded);
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem 0.2rem;
-      display: block;
-    }
-
-    .sidebar-stamp {
-      margin-top: auto;
-      padding: 1rem;
-      font-family: var(--font-mono);
-      color: var(--ink-faded);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      text-align: center;
-      border-top: 1px solid rgba(200,146,42,0.2);
-    }
-
-    /* ── CONTENUTO PRINCIPALE ───────────────────────────────── */
-    .main-content {
-      flex: 1;
-      background: var(--parchment);
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .page-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem 4rem;
-      flex: 1;
-    }
-
-    .breadcrumb {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--ink-faded);
-      letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-
-    .breadcrumb a { color: var(--red); text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-
-    h1 {
-      font-family: var(--font-title);
-      color: var(--red);
-      font-size: 2rem;
-      border-bottom: 2px solid var(--gold);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    h2 {
-      font-family: var(--font-title);
-      color: var(--ink);
-      font-size: 1.3rem;
-      margin: 2rem 0 0.75rem;
-      padding-bottom: 0.3rem;
-      border-bottom: 1px solid var(--parchment-dark);
-    }
-
-    h3 {
-      font-family: var(--font-title);
-      color: var(--ink-faded);
-      font-size: 1rem;
-      margin: 1.5rem 0 0.5rem;
-    }
-
-    p { line-height: 1.75; margin-bottom: 1rem; }
-    a { color: var(--red); }
-    a:hover { color: var(--gold); }
-    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
-    li { line-height: 1.7; margin-bottom: 0.25rem; }
-    em { font-style: italic; }
-    strong { font-weight: bold; color: var(--ink); }
-
-    blockquote {
-      border-left: 3px solid var(--gold);
-      padding: 0.5rem 1rem;
-      margin: 1rem 0;
-      background: rgba(200,146,42,0.08);
-      font-style: italic;
-      color: var(--ink-faded);
-    }
-
-    code {
-      font-family: var(--font-mono);
-      background: var(--parchment-dark);
-      padding: 0.1em 0.4em;
-      border-radius: 3px;
-      font-size: 0.85em;
-    }
-
-    hr { border: none; border-top: 1px solid var(--parchment-dark); margin: 2rem 0; }
-    img { max-width: 100%; border-radius: 4px; }
-
-    /* ── CARD GRIGLIA (Aggiornato) ───────────────────────────────────────── */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-
-    .card {
-      display: block;
-      background: var(--parchment-dark); /* Usiamo il colore del sito invece del bianco */
-      border: 1px solid rgba(0,0,0,0.1);
-      border-top: 3px solid var(--gold);
-      padding: 1.2rem;
-      text-decoration: none;
-      color: var(--ink) !important;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-
-    .card h3 { 
-      font-family: var(--font-title); 
-      color: var(--red); 
-      margin: 0 0 0.6rem; 
-      font-size: 1.1rem; 
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      padding-bottom: 0.3rem;
-    }
-
-    /* Nuova sezione per i metadati della macro */
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .tag-type, .tag-region {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.7rem;
-      background: rgba(0,0,0,0.05);
-      padding: 1px 5px;
-      border: 1px solid rgba(0,0,0,0.1);
-      text-transform: uppercase;
-      color: var(--ink-faded);
-    }
-
-    .status-badge {
-      font-family: var(--font-title);
-      font-size: 0.7rem;
-      padding: 1px 6px;
-      color: white;
-      background: var(--ink-faded);
-      border-radius: 2px;
-    }
-
-    /* Colori dinamici per lo status */
-    .status-badge.attivo { background: #2e7d32; }
-    .status-badge.deceduto { background: #7b1a1a; }
-
-    .card p { font-size: 0.88rem; color: var(--ink-faded); margin: 0; line-height: 1.4; font-style: italic; }
-    
-    /* ── TAG ────────────────────────────────────────────────── */
-    .tag {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      padding: 0.2em 0.6em;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      border-radius: 2px;
-      margin: 0.2em;
-    }
-    .tag.red   { border-color: var(--red);      color: var(--red); }
-    .tag.faded { border-color: var(--ink-faded); color: var(--ink-faded); }
-
-    /* ── LISTA VOCI ─────────────────────────────────────────── */
-    .entry-list { list-style: none; padding: 0; }
-    .entry-list li { border-bottom: 1px solid var(--parchment-dark); padding: 0.75rem 0; }
-    .entry-list li:last-child { border-bottom: none; }
-    .entry-list a { font-family: var(--font-title); font-size: 1rem; text-decoration: none; color: var(--red); }
-    .entry-list a:hover { color: var(--gold); }
-    .entry-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-faded); margin-top: 0.2rem; }
-
-    /* ── DOWNLOAD BOX ───────────────────────────────────────── */
-    .download-box {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      border: 1px solid var(--parchment-dark);
-      background: white;
-      text-decoration: none;
-      color: var(--ink);
-      margin-bottom: 0.75rem;
-      transition: border-color 0.2s;
-    }
-    .download-box:hover { border-color: var(--gold); color: var(--ink); }
-    .dl-icon { font-size: 1.8rem; }
-    .dl-info strong { display: block; font-family: var(--font-title); font-size: 0.95rem; color: var(--red); }
-    .dl-info span   { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-faded); }
-
-    /* ── CALLOUT ────────────────────────────────────────────── */
-    .callout {
-      padding: 0.85rem 1.1rem;
-      border-left: 4px solid;
-      border-radius: 0 4px 4px 0;
-      margin: 1.25rem 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .callout.info    { background: #e8f4f8; border-color: #4a90b8; color: #1a3a4a; }
-    .callout.warning { background: #fdf3e3; border-color: #c8922a; color: #4a3000; }
-    .callout.danger  { background: #fdecea; border-color: #8b1a1a; color: #4a0000; }
-    .callout.lore    { background: #f5f0e8; border-color: #7a6a4a; color: #3a2a10; font-family: var(--font-body); font-style: italic; }
-
-    /* ── DETAILS / COMPRIMIBILE ─────────────────────────────── */
-    details {
-      border: 1px solid var(--parchment-dark);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 4px 4px 0;
-      margin: 1.25rem 0;
-      background: white;
-    }
-    details[open] summary { border-bottom: 1px solid var(--parchment-dark); }
-    summary {
-      padding: 0.7rem 1rem;
-      cursor: pointer;
-      font-family: var(--font-title);
-      font-size: 0.95rem;
-      color: var(--red);
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      user-select: none;
-    }
-    summary::-webkit-details-marker { display: none; }
-    summary::before { content: '▶'; font-size: 0.6rem; color: var(--gold); transition: transform 0.2s; display: inline-block; }
-    details[open] summary::before { transform: rotate(90deg); }
-    details > *:not(summary) { padding: 0.75rem 1rem 0.75rem 1.2rem; }
-
-    /* ── TAB ────────────────────────────────────────────────── */
-    .tabs {
-      display: flex;
-      gap: 0.25rem;
-      border-bottom: 2px solid var(--parchment-dark);
-      margin: 1.5rem 0 0;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      background: none;
-      border: 1px solid var(--parchment-dark);
-      border-bottom: none;
-      padding: 0.45rem 1rem;
-      font-family: var(--font-title);
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      color: var(--ink-faded);
-      cursor: pointer;
-      border-radius: 4px 4px 0 0;
-      transition: background 0.2s, color 0.2s;
-      margin-bottom: -2px;
-    }
-    .tab-btn:hover { background: var(--parchment-dark); color: var(--ink); }
-    .tab-btn.active {
-      background: var(--parchment);
-      color: var(--red);
-      border-color: var(--parchment-dark);
-      border-bottom-color: var(--parchment);
-      font-weight: 600;
-    }
-    .tab-content {
-      display: none;
-      border: 1px solid var(--parchment-dark);
-      border-top: none;
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: white;
-    }
-    .tab-content.active { display: block; }
-
-    /* ── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .mobile-header { display: flex; }
-      .site-wrapper  { padding-top: var(--header-h); }
-
-      .sidebar {
-        position: fixed;
-        top: var(--header-h);
-        left: 0;
-        height: calc(100vh - var(--header-h));
-        z-index: 160;
-        transform: translateX(-100%);
-        width: min(var(--sidebar-w), 85vw);
-      }
-
-      .sidebar.open { transform: translateX(0); }
-      .page-inner   { padding: 1.5rem 1rem 3rem; }
-      h1 { font-size: 1.5rem; }
-      h2 { font-size: 1.1rem; }
-      .card-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (min-width: 769px) {
-      .site-wrapper { flex-direction: row; }
-    }
-
-  </style>
+  <link rel="stylesheet" href="/assets/css/variables.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/sidebar.css">
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
 </head>
 <body>
 
@@ -628,58 +111,41 @@
     </aside>
 
     <main class="main-content">
-  <div class="page-inner">
+      <div class="page-inner">
 
-    {% if eleventyNavigation and eleventyNavigation.key %}
-      {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
-      <div class="breadcrumb">
-        <a href="{{ '/' | url }}">Home</a>
-        {% for crumb in navPages %}
-          › <a href="{{ crumb.url | url }}">{{ crumb.title }}</a>
-        {% endfor %}
-        › {{ title }}
-      </div>
-    {% else %}
-      {# Opzionale: mostra solo Home per le pagine senza navigazione definita #}
-      <div class="breadcrumb">
-        <a href="{{ '/' | url }}">Home</a> › {{ title }}
-      </div>
-    {% endif %}
+        {% if eleventyNavigation and eleventyNavigation.key %}
+          {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+          <div class="breadcrumb">
+            <a href="{{ '/' | url }}">Home</a>
+            {% for crumb in navPages %}
+              › <a href="{{ crumb.url | url }}">{{ crumb.title }}</a>
+            {% endfor %}
+            › {{ title }}
+          </div>
+        {% else %}
+          <div class="breadcrumb">
+            <a href="{{ '/' | url }}">Home</a> › {{ title }}
+          </div>
+        {% endif %}
 
-    {{ content | safe }}
+        {{ content | safe }}
+
+      </div>
+    </main>
 
   </div>
-</main>
 
-  </div>
-
-  <!-- ── PASSWORD OVERLAY ───────────────────────────────────── -->
-  <div id="pw-overlay" style="
-    display:none; position:fixed; inset:0; z-index:999;
-    background:#12090a; align-items:center; justify-content:center;
-    flex-direction:column; gap:1.2rem; font-family:'Cinzel',serif;">
-
-    <h2 style="color:#e8b84b; font-size:1.4rem; letter-spacing:0.1em;">⚔ Il Grimorio ⚔</h2>
-    <p style="color:#c8922a; font-family:'IM Fell English',serif; font-style:italic;">Pronuncia la parola, avventuriero.</p>
-
+  <div id="pw-overlay">
+    <h2>⚔ Il Grimorio ⚔</h2>
+    <p>Pronuncia la parola, avventuriero.</p>
     <input id="pw-input" type="password" placeholder="Password"
-      style="padding:0.6rem 1rem; background:#1e1010; border:1px solid #c8922a;
-             color:#f2e8d5; font-family:'Share Tech Mono',monospace; font-size:1rem;
-             outline:none; width:220px; text-align:center;"
       onkeydown="if(event.key==='Enter') checkPw()">
-
-    <button onclick="checkPw()"
-      style="padding:0.5rem 2rem; background:none; border:1px solid #c8922a;
-             color:#c8922a; font-family:'Cinzel',serif; font-size:0.85rem;
-             letter-spacing:0.15em; cursor:pointer;">ENTRA</button>
-
-    <p id="pw-error" style="color:#8b1a1a; font-family:'Share Tech Mono',monospace;
-       font-size:0.75rem; min-height:1em;"></p>
+    <button onclick="checkPw()">ENTRA</button>
+    <p id="pw-error"></p>
   </div>
 
   <script src="/pagefind/pagefind-ui.js"></script>
   <script>
-    // ── PASSWORD ──────────────────────────────────────────────
     const SITE_PASSWORD = "Mellon";
     const STORAGE_KEY   = "grimorio_auth";
 
@@ -702,7 +168,6 @@
       }
     })();
 
-    // ── HAMBURGER MENU ────────────────────────────────────────
     const hamburger = document.getElementById("hamburger");
     const sidebar   = document.getElementById("sidebar");
     const overlay   = document.getElementById("sidebarOverlay");
@@ -723,13 +188,11 @@
       });
     });
 
-    // ── LINK ATTIVO ───────────────────────────────────────────
     const current = window.location.pathname;
     document.querySelectorAll(".sidebar a").forEach(a => {
       if (a.getAttribute("href") === current) a.classList.add("active");
     });
 
-    // ── TAB ───────────────────────────────────────────────────
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const group = btn.closest('.tab-group') || btn.parentElement.parentElement;
@@ -740,7 +203,6 @@
       });
     });
 
-    // ── PAGEFIND ──────────────────────────────────────────────
     window.addEventListener('DOMContentLoaded', () => {
       new PagefindUI({ element: "#search", showImages: false });
     });

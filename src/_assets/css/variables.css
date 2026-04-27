@@ -1,0 +1,19 @@
+:root {
+  --parchment:      #f2e8d5;
+  --parchment-dark: #e0d0b0;
+  --ink:            #1a1209;
+  --ink-faded:      #4a3728;
+  --red:            #8b1a1a;
+  --gold:           #c8922a;
+  --gold-light:     #e8b84b;
+  --dark-bg:        #12090a;
+  --sidebar-w:      260px;
+  --header-h:       56px;
+
+  --font-title: 'Cinzel', serif;
+  --font-body:  'IM Fell English', serif;
+  --font-mono:  'Share Tech Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 17px; height: 100%; }
