@@ -1,8 +1,8 @@
 {% macro cardGrid(collectionName, tagFilter=null) %}
-  {# 1. Recuperiamo gli elementi #}
+  {# 1. ACCESSO SICURO ALLA COLLEZIONE (fondamentale per i nomi con il trattino) #}
   {% set allItems = collections[collectionName] %}
   
-  {# 2. Applichiamo il filtro solo se necessario #}
+  {# 2. FILTRAGGIO #}
   {% if tagFilter %}
     {% set items = allItems | filterByTag(tagFilter) %}
   {% else %}
@@ -19,6 +19,13 @@
             <div class="card-meta">
               {% if item.data.type %}<span class="tag-type">{{ item.data.type }}</span>{% endif %}
               {% if item.data.region %}<span class="tag-region">{{ item.data.region }}</span>{% endif %}
+              
+              {# Aggiungiamo anche lo status se presente #}
+              {% if item.data.status %}
+                <span class="status-badge {{ item.data.status | lower }}">
+                  {{ item.data.status }}
+                </span>
+              {% endif %}
             </div>
 
             {% if item.data.description %}
@@ -28,11 +35,8 @@
         </a>
       </article>
     {% else %}
-      {# Se non vede nulla, ci aiuta a capire perché #}
-      <div style="border: 1px dashed var(--red); padding: 10px; font-size: 0.8rem;">
-        <strong>Debug:</strong> Nessun elemento trovato per la collezione <code>"{{ collectionName }}"</code> 
-        {% if tagFilter %}con tag <code>"{{ tagFilter }}"</code>{% endif %}.
-        <br>Verifica che la collezione esista in <code>.eleventy.js</code>.
+      <div class="debug-error">
+        <strong>Debug:</strong> Nessun elemento trovato per la collezione <code>"{{ collectionName }}"</code>.
       </div>
     {% endfor %}
   </div>
