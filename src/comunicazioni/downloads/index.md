@@ -2,7 +2,9 @@
 layout: base.njk
 title: "Download"
 siteName: "Il Grimorio"
-breadcrumb: "Download"
+eleventyNavigation:
+  key: downloads
+  parent: home
 ---
 
 <h1>Download</h1>

@@ -2,9 +2,9 @@
 layout: base.njk
 title: "Forgotten Realms"
 siteName: "Il Grimorio"
-breadcrumb: "Forgotten Realms"
-breadcrumb2: "Ambientazioni"
-breadcrumb2url: "/ambientazioni/"
+eleventyNavigation:
+    key: forgotten-realms
+    parent: ambientazioni
 ---
 
 <h1>Forgotten Realms</h1>

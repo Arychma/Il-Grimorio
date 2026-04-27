@@ -2,6 +2,8 @@
 layout: base.njk
 title: Home
 siteName: "Il Grimorio"
+eleventyNavigation:
+  key: home
 ---
 
 <h1>Il Grimorio</h1>

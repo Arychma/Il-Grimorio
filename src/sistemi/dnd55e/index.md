@@ -5,6 +5,7 @@ siteName: "Il Grimorio"
 breadcrumb: "D&D"
 eleventyNavigation:
   key: dnd
+  parent: home
 ---
 
 <h1>D&D 5.5e</h1>

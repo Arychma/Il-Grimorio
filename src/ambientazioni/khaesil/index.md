@@ -2,9 +2,9 @@
 layout: base.njk
 title: "Khaesil"
 siteName: "Il Grimorio"
-breadcrumb: "Khaesil"
-breadcrumb2: "Ambientazioni"
-breadcrumb2url: "/ambientazioni/"
+eleventyNavigation:
+    key: khaesil
+    parent: ambientazioni
 ---
 
 <h1>Khaesil</h1>
