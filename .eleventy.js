@@ -9,25 +9,31 @@ module.exports = function(eleventyConfig) {
 
   // ─── NUOVO SHORTCODE NAVLINK (POTENZIATO) ────────────────────────────────
     eleventyConfig.addShortcode("navLink", function(collections, key) {
-      const allPages = collections.all;
-      
-      // Cerchiamo la pagina con più criteri per sicurezza
-      const targetPage = allPages.find(item => {
-        const nav = item.data.eleventyNavigation;
-        return (nav && nav.key === key) || (item.data.title === key);
-      });
-      
-      if (targetPage) {
-        // Priorità titolo: 1. Navigazione, 2. Titolo Pagina, 3. La Key stessa
-        const linkText = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
-        return `<a href="${targetPage.url}">${linkText}</a>`;
-      }
-      
-      // Se fallisce ancora, stampa un log nel terminale di build (visibile su GitHub Actions)
-      console.log(`[navLink Error] Impossibile trovare la pagina con key o titolo: "${key}"`);
-      
-      return `<span style="color:red;">Link Errato: "${key}" non trovata</span>`;
+    // 1. Uniamo tutte le collezioni per essere sicuri di non mancare nulla
+    const allItems = collections.all;
+
+    // 2. Cerchiamo il match con molta tolleranza
+    const targetPage = allItems.find(item => {
+      return (
+        (item.data.eleventyNavigation && item.data.eleventyNavigation.key === key) ||
+        (item.data.title === key) ||
+        (item.fileSlug === key) // Cerca anche nel nome del file (es. "come-funziona-dnd")
+      );
     });
+
+    if (targetPage) {
+      // 3. Recuperiamo il titolo migliore possibile
+      const title = targetPage.data.eleventyNavigation?.key === key 
+                    ? (targetPage.data.eleventyNavigation.title || targetPage.data.title)
+                    : targetPage.data.title;
+                    
+      return `<a href="${targetPage.url}">${title || key}</a>`;
+    }
+
+    // 4. Se proprio non lo trova, debug nel terminale
+    console.log(`[DEBUG] navLink non trova: ${key}`);
+    return `<span style="color:red;">Link Errato: ${key}</span>`;
+  });
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("src/assets");
