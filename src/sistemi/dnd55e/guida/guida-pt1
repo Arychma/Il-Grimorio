@@ -5,6 +5,9 @@ siteName: "Il Grimorio"
 breadcrumb: "Guida 01"
 breadcrumb2: "D&D"
 breadcrumb2url: "/sistemi/dnd55e/"
+eleventyNavigation:
+    key: dnd-guida-01
+    parent: dnd
 ---
 Come funziona D&D?
 Se non hai mai visto una sessione di D&D o di un qualunque gioco di ruolo questa è una bella domanda. 
