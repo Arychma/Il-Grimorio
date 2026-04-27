@@ -3,7 +3,7 @@ layout: base.njk
 title: "Come funziona D&D"
 siteName: "Il Grimorio"
 eleventyNavigation:
-  key: "dnd-guida01"
+  key: "dnd-guida-01"
   parent: dnd
 ---
 
