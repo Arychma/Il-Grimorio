@@ -1,9 +1,7 @@
 ---
-layout: base.njk
-title: "Come funziona D&D"
+title: "TEST"
 eleventyNavigation:
   key: "dnd-guida-01"
-  parent: "dnd-guida"
 ---
 
 Come funziona D&D?
