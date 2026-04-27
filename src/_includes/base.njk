@@ -9,6 +9,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
+  /* ── RICERCA ────────────────────────────────────────────── */
+  .search-box {
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(200,146,42,0.2);
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    background: #1e1010;
+    border: 1px solid var(--gold);
+    color: var(--parchment);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    outline: none;
+    border-radius: 2px;
+  }
+
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+
   <style>
     /* ── VARIABILI ──────────────────────────────────────────── */
     :root {
@@ -477,6 +498,10 @@
 
     <aside class="sidebar" id="sidebar">
 
+      <div class="search-box">
+        <div id="search"></div>
+      </div>
+
       <div class="sidebar-title">
         <span class="label">✦ IL GRIMORIO ✦</span>
         <span class="name">{{ siteName or "Il Grimorio" }}</span>
@@ -593,6 +618,9 @@
     <p id="pw-error" style="color:#8b1a1a; font-family:'Share Tech Mono',monospace;
        font-size:0.75rem; min-height:1em;"></p>
   </div>
+
+// ── PAGEFIND ──────────────────────────────────────────────
+  new PagefindUI({ element: "#search", showImages: false });
 
   <script>
     // ── PASSWORD ──────────────────────────────────────────────
