@@ -7,18 +7,27 @@ module.exports = function(eleventyConfig) {
   // Attiva il plugin di navigazione
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
 
-  // Shortcode personalizzato per linkare i file tramite la "key" del frontmatter
-  eleventyConfig.addShortcode("navLink", function(collections, key) {
-    const allPages = collections.all;
-    const targetPage = allPages.find(item => item.data.eleventyNavigation && item.data.eleventyNavigation.key === key);
-    
-    if (targetPage) {
-      return `<a href="${targetPage.url}">${targetPage.data.eleventyNavigation.title || targetPage.data.title}</a>`;
-    }
-    
-    // Messaggio di errore visibile se sbagli a scrivere la key
-    return `<span style="color:red;">Link Errato: Key "${key}" non trovata</span>`;
-  });
+  // ─── NUOVO SHORTCODE NAVLINK (POTENZIATO) ────────────────────────────────
+    eleventyConfig.addShortcode("navLink", function(collections, key) {
+      const allPages = collections.all;
+      
+      // Cerchiamo la pagina con più criteri per sicurezza
+      const targetPage = allPages.find(item => {
+        const nav = item.data.eleventyNavigation;
+        return (nav && nav.key === key) || (item.data.title === key);
+      });
+      
+      if (targetPage) {
+        // Priorità titolo: 1. Navigazione, 2. Titolo Pagina, 3. La Key stessa
+        const linkText = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
+        return `<a href="${targetPage.url}">${linkText}</a>`;
+      }
+      
+      // Se fallisce ancora, stampa un log nel terminale di build (visibile su GitHub Actions)
+      console.log(`[navLink Error] Impossibile trovare la pagina con key o titolo: "${key}"`);
+      
+      return `<span style="color:red;">Link Errato: "${key}" non trovata</span>`;
+    });
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
   eleventyConfig.addPassthroughCopy("src/assets");
