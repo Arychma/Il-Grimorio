@@ -5,7 +5,7 @@ eleventyNavigation:
   key: bracciale-portatile
   parent: dnd-oggetti
 type: "Oggetto magico raro, posseduto da Lumine"
-status: "In possesso di Lumine"
+status: ""
 adventure: "Storm King's Thunder"
 tags: ["homebrew"]
 ---
@@ -13,6 +13,7 @@ tags: ["homebrew"]
 <h1>Bracciale portatile</h1>
 
 <span class="tag">{{ type }}</span>
+<span class="tag faded">{{ status }}</span>
 <p><em>{{ tags }}</em></p>
 
 <h2>Descrizione</h2>
