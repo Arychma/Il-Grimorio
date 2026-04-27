@@ -1,17 +1,18 @@
 ---
 layout: base.njk
 title: "Shen Isfel"
-siteName: "Il Grimorio"
 eleventyNavigation:
   key: shen-isfel
   parent: dnd-personaggi
 role: "Mago"
 status: "Alleato"
+adventure: "La scomparsa del mago"
 ---
 
 <h1>Shen Isfel</h1>
 
 <span class="tag">{{ status }}</span>
+<span class="tag">{{ adventure }}</span>
 
 <p><em>{{ role }}</em></p>
 

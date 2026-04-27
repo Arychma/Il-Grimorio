@@ -25,5 +25,7 @@ Giganti delle colline attaccano fattorie per il cibo, i giganti di pietra distru
 Indomiti avventurieri devono levarsi verso la sfida, raccogliere le proprie forze e con l'uso di antiche rune, portare la battaglia nella casa dei Giganti.</p>
 
 <h2>Sessioni</h2>
+{% from "macros.njk" import cardGrid %}
+{{ cardGrid("skt-sessioni") }}
 
 <a class="card" href="sessioni/">Vedi tutte le sessioni →</a>
