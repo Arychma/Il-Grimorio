@@ -1,4 +1,4 @@
-/* ── CARD ── */
+/* ── CARD GRID ── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -7,65 +7,92 @@
 }
 
 .card {
-  display: block;
   background: var(--parchment-dark);
-  border: 1px solid rgba(0,0,0,0.1);
   border-top: 3px solid var(--gold);
   padding: 1.2rem;
-  text-decoration: none;
-  color: var(--ink) !important;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.card:hover .card-title {
+  color: var(--gold);
 }
 
-.card h3 {
+.card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-title {
   font-family: var(--font-title);
   color: var(--red);
-  margin: 0 0 0.6rem;
-  font-size: 1.1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  padding-bottom: 0.3rem;
+  font-size: 1rem;
+  margin: 0 0 0.3rem;
+}
+
+.card-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faded);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .card-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.8rem;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
 }
 
-.tag-type, .tag-region {
+.card-tag {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  background: rgba(0,0,0,0.05);
-  padding: 1px 5px;
-  border: 1px solid rgba(0,0,0,0.1);
-  text-transform: uppercase;
-  color: var(--ink-faded);
+  font-size: 0.65rem;
+  padding: 0.15em 0.5em;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  border-radius: 2px;
+  letter-spacing: 0.05em;
 }
 
-.status-badge {
-  font-family: var(--font-title);
-  font-size: 0.7rem;
-  padding: 1px 6px;
+.card-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.15em 0.5em;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
   color: white;
   background: var(--ink-faded);
-  border-radius: 2px;
 }
 
-.status-badge.attivo   { background: #2e7d32; }
-.status-badge.deceduto { background: #7b1a1a; }
+.card-status--alleato     { background: #2e6b35; }
+.card-status--nemico      { background: #7b1a1a; }
+.card-status--deceduto    { background: #3a3a3a; }
+.card-status--in-possesso-del-gruppo { background: #2e5b7b; }
+.card-status--neutrale    { background: #6b5a2e; }
 
-.card p { font-size: 0.88rem; color: var(--ink-faded); margin: 0; line-height: 1.4; font-style: italic; }
+.card-description {
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.card-empty {
+  color: var(--ink-faded);
+  font-style: italic;
+  font-size: 0.9rem;
+}
 
 @media (max-width: 768px) {
   .card-grid { grid-template-columns: 1fr; }
 }
-
 /* ── TAG ── */
 .tag {
   display: inline-block;

@@ -5,12 +5,12 @@ eleventyNavigation:
   key: dnd-nomeluogo
   parent: dnd-luoghi
 type: "Città, porto commerciale"
-region: "Forgotten Realms"
+setting: "Forgotten Realms"
 ---
 
 <h1>Nome Luogo</h1>
 
-<span class="tag faded">{{ region }}</span>
+<span class="tag faded">{{ setting }}</span>
 
 <p><em>{{ type }}</em></p>
 

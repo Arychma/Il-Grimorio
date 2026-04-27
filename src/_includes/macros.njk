@@ -1,14 +1,11 @@
 {% macro cardGrid(collections, parentKey, filters={}) %}
 
-  {# 1. Prendi i figli dalla navigazione #}
   {% set navItems = collections.all | eleventyNavigation(parentKey) %}
-
-  {# 2. Per ogni nav item, recupera la pagina completa #}
   {% set finalItems = [] %}
+
   {% for navItem in navItems %}
     {% for page in collections.all %}
       {% if page.url == navItem.url %}
-        {# 3. Applica i filtri dal frontmatter #}
         {% set include = true %}
         {% if filters.tag and page.data.tags %}
           {% if filters.tag not in page.data.tags %}
@@ -21,7 +18,7 @@
         {% if filters.status and page.data.status != filters.status %}
           {% set include = false %}
         {% endif %}
-        {% if filters.region and page.data.region != filters.region %}
+        {% if filters.setting and page.data.setting != filters.setting %}
           {% set include = false %}
         {% endif %}
         {% if include %}
@@ -31,37 +28,47 @@
     {% endfor %}
   {% endfor %}
 
-  {# 4. Render #}
   <div class="card-grid">
     {% for item in finalItems %}
       <article class="card">
         <a href="{{ item.url }}">
-          <div class="card-body">
-            <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
-            <div class="card-meta">
-              {% if item.data.type %}
-                <span class="tag-type">{{ item.data.type }}</span>
-              {% endif %}
-              {% if item.data.region %}
-                <span class="tag-region">{{ item.data.region }}</span>
-              {% endif %}
-              {% if item.data.status %}
-                <span class="status {{ item.data.status | lower }}">{{ item.data.status }}</span>
-              {% endif %}
-              {% if item.data.tags %}
-                {% for tag in item.data.tags %}
-                  <span class="tag">{{ tag }}</span>
-                {% endfor %}
-              {% endif %}
-            </div>
-            {% if item.data.description %}
-              <p class="card-text">{{ item.data.description }}</p>
+          <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
+
+          {% if item.data.role or item.data.type %}
+            <p class="card-subtitle">{{ item.data.role or item.data.type }}</p>
+          {% endif %}
+
+          <div class="card-meta">
+
+            {% if item.data.status %}
+              <span class="card-status card-status--{{ item.data.status | lower | replace(' ', '-') }}">
+                {{ item.data.status }}
+              </span>
             {% endif %}
+
+            {% if item.data.setting %}
+              <span class="card-tag">{{ item.data.setting }}</span>
+            {% endif %}
+
+            {% if item.data.adventure %}
+              <span class="card-tag">{{ item.data.adventure }}</span>
+            {% endif %}
+
+            {% if item.data.date %}
+              <span class="card-tag">{{ item.data.date | readableDate }}</span>
+            {% endif %}
+
           </div>
+
+          {% if item.data.description %}
+            <p class="card-description">{{ item.data.description }}</p>
+          {% endif %}
+
         </a>
       </article>
     {% else %}
-      <p class="debug-msg">Nessun elemento figlio di <em>{{ parentKey }}</em>.</p>
+      <p class="card-empty">Nessun elemento figlio di <em>{{ parentKey }}</em>.</p>
     {% endfor %}
   </div>
+
 {% endmacro %}
