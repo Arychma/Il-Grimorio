@@ -1,47 +1,67 @@
-{% macro cardGrid(collectionName, tagFilter=null) %}
-  {# 1. Recuperiamo la collezione dall'oggetto globale #}
-  {% set allItems = collections[collectionName] or [] %}
-  
-  {# 2. Decidiamo se filtrare o usare tutto #}
-  {% if tagFilter %}
-    {% set finalItems = allItems | filterByTag(tagFilter) %}
-  {% else %}
-    {% set finalItems = allItems %}
-  {% endif %}
+{% macro cardGrid(collections, parentKey, filters={}) %}
 
+  {# 1. Prendi i figli dalla navigazione #}
+  {% set navItems = collections.all | eleventyNavigation(parentKey) %}
+
+  {# 2. Per ogni nav item, recupera la pagina completa #}
+  {% set finalItems = [] %}
+  {% for navItem in navItems %}
+    {% for page in collections.all %}
+      {% if page.url == navItem.url %}
+        {# 3. Applica i filtri dal frontmatter #}
+        {% set include = true %}
+        {% if filters.tag and page.data.tags %}
+          {% if filters.tag not in page.data.tags %}
+            {% set include = false %}
+          {% endif %}
+        {% endif %}
+        {% if filters.type and page.data.type != filters.type %}
+          {% set include = false %}
+        {% endif %}
+        {% if filters.status and page.data.status != filters.status %}
+          {% set include = false %}
+        {% endif %}
+        {% if filters.region and page.data.region != filters.region %}
+          {% set include = false %}
+        {% endif %}
+        {% if include %}
+          {% set finalItems = finalItems.concat([page]) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {# 4. Render #}
   <div class="card-grid">
     {% for item in finalItems %}
       <article class="card">
         <a href="{{ item.url }}">
           <div class="card-body">
-            <h3 class="card-title">
-              {{ item.data.title or item.title or "Senza Titolo" }}
-            </h3>
-            
-            {% set info = item.data if item.data else item %}
-            
+            <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
             <div class="card-meta">
-              {% if info.type %}
-                <span class="tag-type">{{ info.type }}</span>
+              {% if item.data.type %}
+                <span class="tag-type">{{ item.data.type }}</span>
               {% endif %}
-              
-              {% if info.region %}
-                <span class="tag-region">{{ info.region }}</span>
+              {% if item.data.region %}
+                <span class="tag-region">{{ item.data.region }}</span>
               {% endif %}
-
-              {% if info.status %}
-                <span class="status {{ info.status | lower }}">{{ info.status }}</span>
+              {% if item.data.status %}
+                <span class="status {{ item.data.status | lower }}">{{ item.data.status }}</span>
+              {% endif %}
+              {% if item.data.tags %}
+                {% for tag in item.data.tags %}
+                  <span class="tag">{{ tag }}</span>
+                {% endfor %}
               {% endif %}
             </div>
-
-            {% if info.description %}
-              <p class="card-text">{{ info.description }}</p>
+            {% if item.data.description %}
+              <p class="card-text">{{ item.data.description }}</p>
             {% endif %}
           </div>
         </a>
       </article>
     {% else %}
-      <p class="debug-msg">Nessun elemento presente in <em>{{ collectionName }}</em>.</p>
+      <p class="debug-msg">Nessun elemento figlio di <em>{{ parentKey }}</em>.</p>
     {% endfor %}
   </div>
 {% endmacro %}
