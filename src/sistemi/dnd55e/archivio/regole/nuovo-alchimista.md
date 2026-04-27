@@ -2,8 +2,8 @@
 layout: base.njk
 title: "Nuovo Alchimista"
 eleventyNavigation:
-  key: dnd-nuovoalchimista
-  parent: dnd-archivio
+  key: "dnd-nuovoalchimista"
+  parent: "dnd-regole"
 type: "Homebrew, sottoclasse per Artefice"
 tags: ["homebrew"]
 adventure: "Stork King's Thunder"

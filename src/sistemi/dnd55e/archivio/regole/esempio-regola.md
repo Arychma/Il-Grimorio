@@ -3,8 +3,8 @@ layout: base.njk
 title: "Nome Regola"
 siteName: "Il Grimorio"
 eleventyNavigation:
-  key: dnd-nomeregola
-  parent: dnd-archivio
+  key: "dnd-nomeregola"
+  parent: "dnd-regole"
 type: "House rule"
 draft: "true"
 ---
