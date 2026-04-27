@@ -2,8 +2,8 @@
 layout: base.njk
 title: "Shen Isfel"
 eleventyNavigation:
-  key: shen-isfel
-  parent: dnd-personaggi
+  key: "shen-isfel"
+  parent: "dnd-personaggi"
 role: "Mago"
 status: "Alleato"
 adventure: "La scomparsa del mago"

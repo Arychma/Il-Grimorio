@@ -10,6 +10,9 @@ eleventyNavigation:
 
 <p><em>PG e PNG dell'archivio D&D .</em></p>
 
+{% from "macros.njk" import cardGrid %}
+{{ cardGrid("dnd-personaggi") }}
+
 {% if collections.dnd55e_personaggi and collections.dnd55e_personaggi.length %}
 <ul class="entry-list">
 {% for item in collections.dnd55e_personaggi %}
