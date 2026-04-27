@@ -1,23 +1,24 @@
 {% macro cardGrid(collectionName, tagFilter=null) %}
-  {# Usiamo il filtro filterByTag che abbiamo definito in .eleventy.js #}
-  {% set items = collections[collectionName] | filterByTag(tagFilter) %}
+  {# 1. Recuperiamo gli elementi #}
+  {% set allItems = collections[collectionName] %}
+  
+  {# 2. Applichiamo il filtro solo se necessario #}
+  {% if tagFilter %}
+    {% set items = allItems | filterByTag(tagFilter) %}
+  {% else %}
+    {% set items = allItems %}
+  {% endif %}
 
   <div class="card-grid">
     {% for item in items %}
       <article class="card">
-        <a href="{{ item.url | url }}">
+        <a href="{{ item.url }}">
           <div class="card-body">
-            <h3 class="card-title">{{ item.data.title }}</h3>
+            <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
             
             <div class="card-meta">
               {% if item.data.type %}<span class="tag-type">{{ item.data.type }}</span>{% endif %}
               {% if item.data.region %}<span class="tag-region">{{ item.data.region }}</span>{% endif %}
-              
-              {% if item.data.status %}
-                <span class="status-badge {{ item.data.status | lower | replace(' ', '-') }}">
-                  {{ item.data.status }}
-                </span>
-              {% endif %}
             </div>
 
             {% if item.data.description %}
@@ -27,7 +28,12 @@
         </a>
       </article>
     {% else %}
-      <p class="no-content">Nessuna voce trovata in questa categoria.</p>
+      {# Se non vede nulla, ci aiuta a capire perché #}
+      <div style="border: 1px dashed var(--red); padding: 10px; font-size: 0.8rem;">
+        <strong>Debug:</strong> Nessun elemento trovato per la collezione <code>"{{ collectionName }}"</code> 
+        {% if tagFilter %}con tag <code>"{{ tagFilter }}"</code>{% endif %}.
+        <br>Verifica che la collezione esista in <code>.eleventy.js</code>.
+      </div>
     {% endfor %}
   </div>
 {% endmacro %}
