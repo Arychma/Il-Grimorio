@@ -1,12 +1,12 @@
 ---
 layout: base.njk
 title: "Shen Isfel"
-eleventyNavigation:
-  key: "shen-isfel"
-  parent: "dnd-personaggi"
 role: "Mago"
 status: "Alleato"
 adventure: "La scomparsa del mago"
+eleventyNavigation:
+  key: "shen-isfel"
+  parent: "dnd-personaggi"
 ---
 
 <h1>Shen Isfel</h1>

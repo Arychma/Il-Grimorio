@@ -1,12 +1,12 @@
 ---
 layout: base.njk
 title: "Eelin Zoar"
-eleventyNavigation:
-  key: "eelin-zoar"
-  parent: "dnd-personaggi"
 role: "Nobile, famiglia Zoar"
 status: "Alleato"
 adventure: "Storm King's Thunder"
+eleventyNavigation:
+  key: "eelin-zoar"
+  parent: "dnd-personaggi"
 ---
 
 <h1>Eelin Zoar</h1>
