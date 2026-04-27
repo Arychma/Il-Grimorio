@@ -1,8 +1,8 @@
 {% macro cardGrid(collectionName, tagFilter=null) %}
-  {# 1. ACCESSO SICURO ALLA COLLEZIONE (fondamentale per i nomi con il trattino) #}
-  {% set allItems = collections[collectionName] %}
+  {# 1. Recupero della collezione con le parentesi quadre per gestire i trattini #}
+  {% set allItems = collections[collectionName] or [] %}
   
-  {# 2. FILTRAGGIO #}
+  {# 2. Applicazione del filtro tag (se richiesto) #}
   {% if tagFilter %}
     {% set items = allItems | filterByTag(tagFilter) %}
   {% else %}
@@ -14,29 +14,36 @@
       <article class="card">
         <a href="{{ item.url }}">
           <div class="card-body">
-            <h3 class="card-title">{{ item.data.title or "Senza Titolo" }}</h3>
+            {# 3. Gestione flessibile del titolo (cerca in diverse posizioni) #}
+            <h3 class="card-title">
+              {{ item.data.title or item.title or "Senza Titolo" }}
+            </h3>
             
             <div class="card-meta">
-              {% if item.data.type %}<span class="tag-type">{{ item.data.type }}</span>{% endif %}
-              {% if item.data.region %}<span class="tag-region">{{ item.data.region }}</span>{% endif %}
+              {# 4. Normalizzazione dei dati per accedere a 'type' o 'region' #}
+              {% set info = item.data if item.data else item %}
               
-              {# Aggiungiamo anche lo status se presente #}
-              {% if item.data.status %}
-                <span class="status-badge {{ item.data.status | lower }}">
-                  {{ item.data.status }}
-                </span>
+              {% if info.type %}
+                <span class="tag-type">{{ info.type }}</span>
+              {% endif %}
+              
+              {% if info.region %}
+                <span class="tag-region">{{ info.region }}</span>
               {% endif %}
             </div>
 
-            {% if item.data.description %}
-              <p class="card-text">{{ item.data.description }}</p>
+            {% if info.description %}
+              <p class="card-text">{{ info.description }}</p>
             {% endif %}
           </div>
         </a>
       </article>
     {% else %}
-      <div class="debug-error">
-        <strong>Debug:</strong> Nessun elemento trovato per la collezione <code>"{{ collectionName }}"</code>.
+      {# 5. Messaggio di debug migliorato #}
+      <div class="debug-error" style="padding: 20px; border: 1px dashed #ccc; color: #666;">
+        <strong>Nota:</strong> Nessun elemento trovato nella collezione 
+        <code>"{{ collectionName }}"</code> 
+        {% if tagFilter %}con il tag <code>"{{ tagFilter }}"</code>{% endif %}.
       </div>
     {% endfor %}
   </div>

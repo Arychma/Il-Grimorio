@@ -59,7 +59,7 @@ module.exports = function(eleventyConfig) {
     });
   });
 
-  // ─── GLOBAL COLLECTIONS ──────────────────────────────────────────────────
+// ─── GLOBAL COLLECTIONS ──────────────────────────────────────────────────
 
   // Blog
   eleventyConfig.addCollection("blog", function(api) {
@@ -81,52 +81,46 @@ module.exports = function(eleventyConfig) {
     return api.getFilteredByGlob("src/jolly/*.{md,njk}").reverse();
   });
 
-  // ─── SISTEMI: D&D 5.5e ───────────────────────────────────────────────────
-  eleventyConfig.addCollection("dnd-avventure", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/avventure/*/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("dnd-sessioni", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/avventure/*/sessioni/*.{md,njk}").reverse();
-  });
-  eleventyConfig.addCollection("dnd-personaggi", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/archivio/personaggi/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("dnd-luoghi", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/archivio/luoghi/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("dnd-regole", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/archivio/regole/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("dnd-oggetti", function(api) {
-    return api.getFilteredByGlob("src/sistemi/dnd55e/archivio/oggetti/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("dnd-guida", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/sistemi/dnd55e/guida/**/*.{md,njk}");
+// ─── CONFIGURAZIONE SISTEMI (D&D, GURPS, ecc.) ──────────────────────────
+const sistemi = ["dnd55e", "gurps"];
+const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti"];
+
+sistemi.forEach(sistema => {
+  const prefix = sistema.replace('55e', 'dnd'); // trasforma dnd55e in dnd per coerenza link
+
+  // Genera automaticamente: dnd-personaggi, gurps-personaggi, ecc.
+  categorieArchivio.forEach(cat => {
+    eleventyConfig.addCollection(`${prefix}-${cat}`, api => {
+      return api.getFilteredByGlob(`src/sistemi/${sistema}/archivio/${cat}/*.{md,njk}`);
+    });
   });
 
-  // ─── SISTEMI: GURPS ──────────────────────────────────────────────────────
-  eleventyConfig.addCollection("gurps-avventure", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/avventure/*/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("gurps-sessioni", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/avventure/*/sessioni/*.{md,njk}").reverse();
-  });
-  eleventyConfig.addCollection("gurps-personaggi", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/archivio/personaggi/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("gurps-luoghi", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/archivio/luoghi/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("gurps-regole", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/archivio/regole/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("gurps-oggetti", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/archivio/oggetti/*.{md,njk}");
-  });
-  eleventyConfig.addCollection("gurps-guida", function(api) {
-    return api.getFilteredByGlob("src/sistemi/gurps/guida/*.{md,njk}");
-  });
+  // Collezioni speciali per sistema
+  eleventyConfig.addCollection(`${prefix}-avventure`, api => 
+    api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/*.{md,njk}`)
+  );
+  eleventyConfig.addCollection(`${prefix}-sessioni`, api => 
+    api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/sessioni/*.{md,njk}`).reverse()
+  );
+  eleventyConfig.addCollection(`${prefix}-guida`, api => 
+    api.getFilteredByGlob(`src/sistemi/${sistema}/guida/**/*.{md,njk}`)
+  );
+});
 
+// ─── AMBIENTAZIONI (SISTEMA DINAMICO) ──────────────────────────────────────
+// Questa collezione prende QUALSIASI cosa stia dentro src/ambientazioni/
+// Non dovrai mai più toccare eleventy.js per le nuove ambientazioni.
+eleventyConfig.addCollection("ambientazioni", function(api) {
+  return api.getFilteredByGlob("src/ambientazioni/**/*.{md,njk}");
+});
+
+// ─── COLLEZIONI GLOBALI (BLOG, NEWSLETTER, ecc.) ──────────────────────────
+const globali = ["blog", "newsletter", "jolly"];
+globali.forEach(tipo => {
+  eleventyConfig.addCollection(tipo, api => {
+    return api.getFilteredByGlob(`src/comunicazioni/${tipo}/*.{md,njk}`).reverse();
+  });
+});
   // ─── OUTPUT ──────────────────────────────────────────────────────────────
   return {
     dir: {
