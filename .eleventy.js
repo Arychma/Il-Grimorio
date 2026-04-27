@@ -101,8 +101,8 @@ module.exports = function(eleventyConfig) {
     return api.getFilteredByGlob("src/sistemi/dnd55e/archivio/oggetti/*.{md,njk}");
   });
   eleventyConfig.addCollection("dnd-guida", function(collectionApi) {
-  return collectionApi.getFilteredByGlob("src/sistemi/dnd55e/guida/*.{md,njk}");
-});
+    return collectionApi.getFilteredByGlob("src/sistemi/dnd55e/guida/**/*.{md,njk}");
+  });
 
   // ─── SISTEMI: GURPS ──────────────────────────────────────────────────────
   eleventyConfig.addCollection("gurps-avventure", function(api) {
