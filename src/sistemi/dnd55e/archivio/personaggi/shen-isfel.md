@@ -2,13 +2,11 @@
 layout: base.njk
 title: "Shen Isfel"
 siteName: "Il Grimorio"
-breadcrumb: "Personaggi"
-breadcrumb2: "D&D 5.5e"
-breadcrumb2url: "/sistemi/dnd55e/"
+eleventyNavigation:
+  key: shen-isfel
+  parent: dnd-personaggi
 role: "Mago"
 status: "Alleato"
-eleventyNavigation:
-    key: shen-isfel
 ---
 
 <h1>Shen Isfel</h1>

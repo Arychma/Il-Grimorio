@@ -27,10 +27,25 @@ module.exports = function(eleventyConfig) {
   // ─── TEMPLATE FORMATS ────────────────────────────────────────────────────
   eleventyConfig.setTemplateFormats(["njk", "md", "html"]);
 
+  
   // ─── FILTERS ─────────────────────────────────────────────────────────────
+  
+  // Trasforma le date in formato italiano
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return new Date(dateObj).toLocaleDateString("it-IT", {
       year: "numeric", month: "long", day: "numeric"
+    });
+  });
+
+  // Filtra le collezioni per tag (quello nuovo che abbiamo creato)
+  eleventyConfig.addFilter("filterByTag", function(collection, tag) {
+    if (!tag) return collection;
+    return collection.filter(item => {
+      const tags = item.data.tags;
+      if (Array.isArray(tags)) {
+        return tags.includes(tag);
+      }
+      return tags === tag;
     });
   });
 

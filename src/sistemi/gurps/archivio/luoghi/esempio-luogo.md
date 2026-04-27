@@ -2,8 +2,8 @@
 layout: base.njk
 title: "Nome Luogo"
 eleventyNavigation:
-  key: dnd-nomeluogo
-  parent: dnd-luoghi
+  key: gurps-nomeluogo
+  parent: gurps-luoghi
 type: "Città, porto commerciale"
 region: "Forgotten Realms"
 ---

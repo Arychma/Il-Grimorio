@@ -1,19 +1,18 @@
 ---
 layout: base.njk
-title: "Regole — GURPS"
-siteName: "Il Grimorio"
-breadcrumb: "Regole"
-breadcrumb2: "GURPS"
-breadcrumb2url: "/sistemi/gurps/"
+title: "Regole — Gurps"
+eleventyNavigation:
+  key: gurps-regole
+  parent: gurps-archivio
 ---
 
 <h1>Regole — GURPS</h1>
 
-<p><em>Regole e house rules per GURPS.</em></p>
+<p><em>Regole e house rules per GURPS</em></p>
 
-{% if collections.gurps_regole and collections.gurps_regole.length %}
+{% if collections.dnd55e_regole and collections.dnd55e_regole.length %}
 <ul class="entry-list">
-{% for item in collections.gurps_regole %}
+{% for item in collections.dnd55e_regole %}
   <li>
     <a href="{{ item.url }}">{{ item.data.title }}</a>
     {% if item.data.date %}<div class="entry-meta">{{ item.data.date | readableDate }}{% if item.data.description %} — {{ item.data.description }}{% endif %}</div>{% endif %}

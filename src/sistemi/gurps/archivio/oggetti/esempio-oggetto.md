@@ -2,8 +2,8 @@
 layout: base.njk
 title: "Nome Oggetto"
 eleventyNavigation:
-  key: dnd-nomeoggetto
-  parent: dnd-oggetti
+  key: gurps-nomeoggetto
+  parent: gurps-oggetti
 type: "Oggetto magico raro"
 status: "In possesso del gruppo"
 ---

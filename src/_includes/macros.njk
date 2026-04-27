@@ -1,13 +1,43 @@
-{% macro cardGrid(key) %}
-{% set items = collections.all | eleventyNavigation(key) %}
-{% if items.length %}
-<div class="card-grid">
-  {% for item in items %}
-    <a class="card" href="{{ item.url }}">
-      <h3>{{ item.title }}</h3>
-      {% if item.excerpt %}<p>{{ item.excerpt }}</p>{% endif %}
-    </a>
-  {% endfor %}
-</div>
-{% endif %}
+{% macro cardGrid(collectionName, tagFilter=null) %}
+  {# Applichiamo il filtro Javascript che abbiamo aggiunto al file .eleventy.js #}
+  {% set items = collections[collectionName] | filterByTag(tagFilter) %}
+
+  <div class="card-grid">
+    {% for item in items %}
+      <article class="card">
+        <a href="{{ item.url | url }}">
+          <div class="card-body">
+            <h3 class="card-title">{{ item.data.title }}</h3>
+            
+            <div class="card-meta">
+              {# Visualizza il tipo (es. "Umanoide", "Locanda") se presente #}
+              {% if item.data.type %}
+                <span class="tag-type">{{ item.data.type }}</span>
+              {% endif %}
+              
+              {# Visualizza la regione (es. "Costa della Spada") se presente #}
+              {% if item.data.region %}
+                <span class="tag-region">{{ item.data.region }}</span>
+              {% endif %}
+              
+              {# Badge per lo stato (es: "Attivo", "Deceduto", "Inesplorato") #}
+              {% if item.data.status %}
+                <span class="status-badge {{ item.data.status | lower | replace(' ', '-') }}">
+                  {{ item.data.status }}
+                </span>
+              {% endif %}
+            </div>
+
+            {# Breve descrizione opzionale #}
+            {% if item.data.description %}
+              <p class="card-text">{{ item.data.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+    {% else %}
+      {# Questo messaggio appare se la collezione è vuota o il filtro tag non trova nulla #}
+      <p class="no-content">Nessuna voce trovata per i criteri selezionati.</p>
+    {% endfor %}
+  </div>
 {% endmacro %}

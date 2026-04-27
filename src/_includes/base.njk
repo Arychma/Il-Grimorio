@@ -318,7 +318,7 @@
     hr { border: none; border-top: 1px solid var(--parchment-dark); margin: 2rem 0; }
     img { max-width: 100%; border-radius: 4px; }
 
-    /* ── CARD GRIGLIA ───────────────────────────────────────── */
+    /* ── CARD GRIGLIA (Aggiornato) ───────────────────────────────────────── */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -328,24 +328,62 @@
 
     .card {
       display: block;
-      background: white;
-      border: 1px solid var(--parchment-dark);
+      background: var(--parchment-dark); /* Usiamo il colore del sito invece del bianco */
+      border: 1px solid rgba(0,0,0,0.1);
       border-top: 3px solid var(--gold);
       padding: 1.2rem;
       text-decoration: none;
-      color: var(--ink);
+      color: var(--ink) !important;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-      color: var(--ink);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
 
-    .card h3 { font-family: var(--font-title); color: var(--red); margin: 0 0 0.4rem; font-size: 1rem; }
-    .card p  { font-size: 0.88rem; color: var(--ink-faded); margin: 0; line-height: 1.5; }
+    .card h3 { 
+      font-family: var(--font-title); 
+      color: var(--red); 
+      margin: 0 0 0.6rem; 
+      font-size: 1.1rem; 
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-bottom: 0.3rem;
+    }
 
+    /* Nuova sezione per i metadati della macro */
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tag-type, .tag-region {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(0,0,0,0.05);
+      padding: 1px 5px;
+      border: 1px solid rgba(0,0,0,0.1);
+      text-transform: uppercase;
+      color: var(--ink-faded);
+    }
+
+    .status-badge {
+      font-family: var(--font-title);
+      font-size: 0.7rem;
+      padding: 1px 6px;
+      color: white;
+      background: var(--ink-faded);
+      border-radius: 2px;
+    }
+
+    /* Colori dinamici per lo status */
+    .status-badge.attivo { background: #2e7d32; }
+    .status-badge.deceduto { background: #7b1a1a; }
+
+    .card p { font-size: 0.88rem; color: var(--ink-faded); margin: 0; line-height: 1.4; font-style: italic; }
+    
     /* ── TAG ────────────────────────────────────────────────── */
     .tag {
       display: inline-block;

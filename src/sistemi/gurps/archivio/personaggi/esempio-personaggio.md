@@ -2,8 +2,8 @@
 layout: base.njk
 title: "Nome Personaggio"
 eleventyNavigation:
-  key: dnd-nomepersonaggio
-  parent: dnd-personaggi
+  key: gurps-nomepersonaggio
+  parent: gurps-personaggi
 role: "Guerriero, Guardia della città"
 status: "Alleato"
 ---

@@ -3,9 +3,9 @@ layout: base.njk
 title: "Nome Regola"
 siteName: "Il Grimorio"
 eleventyNavigation:
-  key: dnd-nomeregola
-  parent: dnd-archivio
-type: "House rule"
+  key: gurps-nomeregola
+  parent: gurps-archivio
+type: "Official"
 ---
 
 <h1>Nome Regola</h1>

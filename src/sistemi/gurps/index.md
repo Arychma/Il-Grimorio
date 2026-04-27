@@ -1,8 +1,9 @@
 ---
 layout: base.njk
 title: "GURPS"
-siteName: "Il Grimorio"
-breadcrumb: "GURPS"
+eleventyNavigation:
+  key: gurps
+  parent: home
 ---
 
 <h1>GURPS</h1>

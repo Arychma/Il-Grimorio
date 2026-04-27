@@ -1,14 +1,10 @@
 ---
 layout: base.njk
 title: "Storm King's Thunder"
-siteName: "Il Grimorio"
-breadcrumb: "Avventure"
-breadcrumb2: "D&D 5.5e"
-breadcrumb2url: "/sistemi/dnd55e/"
 sistema: "dnd55e"
 ambientazione: "Forgotten Realms"
 stato: "In corso"
-description: "To Fight Giants, You Must Be Giant."
+description: "To Fight Giants, You Must Become Giant."
 eleventyNavigation:
     key: avventura-skt
     parent: dnd

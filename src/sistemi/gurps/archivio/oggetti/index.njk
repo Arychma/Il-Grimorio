@@ -1,19 +1,21 @@
 ---
 layout: base.njk
 title: "Oggetti — GURPS"
-siteName: "Il Grimorio"
-breadcrumb: "Oggetti"
-breadcrumb2: "GURPS"
-breadcrumb2url: "/sistemi/gurps/"
+eleventyNavigation:
+  key: gurps-oggetti
+  parent: gurps-archivio
 ---
 
 <h1>Oggetti — GURPS</h1>
 
-<p><em>Oggetti speciali in GURPS.</em></p>
+<p><em>Oggetti magici in GURPS.</em></p>
 
-{% if collections.gurps_oggetti and collections.gurps_oggetti.length %}
+{% from "macros.njk" import cardGrid %}
+{{ cardGrid("gurps-oggetti") }}
+
+{% if collections.dnd55e_oggetti and collections.dnd55e_oggetti.length %}
 <ul class="entry-list">
-{% for item in collections.gurps_oggetti %}
+{% for item in collections.dnd55e_oggetti %}
   <li>
     <a href="{{ item.url }}">{{ item.data.title }}</a>
     {% if item.data.date %}<div class="entry-meta">{{ item.data.date | readableDate }}{% if item.data.description %} — {{ item.data.description }}{% endif %}</div>{% endif %}
