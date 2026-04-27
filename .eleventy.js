@@ -60,10 +60,12 @@ module.exports = function(eleventyConfig) {
 // 1. Definiamo i sistemi e le sottocartelle dell'archivio
 const sistemi = ["dnd55e", "gurps"];
 const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti"];
+const prefissi = { dnd55e: "dnd", gurps: "gurps" };
 
 sistemi.forEach(sistema => {
-  // Trasformiamo "dnd55e" in "dnd" per le collezioni, mentre "gurps" resta "gurps"
-  const prefix = sistema.replace('55e', 'dnd'); 
+  const prefix = prefissi[sistema] ?? sistema;
+  // ...
+});
 
   // --- ARCHIVIO (Personaggi, Luoghi, ecc.) ---
   categorieArchivio.forEach(cat => {
