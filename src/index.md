@@ -8,6 +8,9 @@ siteName: "Il Grimorio"
 
 <p><em>Benvenuto. Qui trovi tutto quello che ti serve per le nostre campagne — sessioni, personaggi, luoghi, regole e molto altro.</em></p>
 
+<h3>Quick links</h3>
+{% navLink collections, "avventura-skt" %}
+
 <h2>Sistemi di Gioco</h2>
 
 <div class="card-grid">

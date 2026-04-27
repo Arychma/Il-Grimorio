@@ -1,8 +1,10 @@
 ---
 layout: base.njk
-title: "D&D 5.5e"
+title: "D&D"
 siteName: "Il Grimorio"
-breadcrumb: "D&D 5.5e"
+breadcrumb: "D&D"
+eleventyNavigation:
+  key: dnd
 ---
 
 <h1>D&D 5.5e</h1>

@@ -9,6 +9,9 @@ sistema: "dnd55e"
 ambientazione: "Forgotten Realms"
 stato: "In corso"
 description: "To Fight Giants, You Must Be Giant."
+eleventyNavigation:
+    key: avventura-skt
+    parent: dnd
 ---
 
 <h1>Storm King's Thunder</h1>
