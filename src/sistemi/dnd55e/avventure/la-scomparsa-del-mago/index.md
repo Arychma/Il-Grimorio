@@ -24,6 +24,6 @@ description: "Una richiesta di soccorso, una sparizione. Un'introduzione a D&D p
 
 <h2>Sessioni</h2>
 
-<a  href="src/sistemi/dnd55e/avventure/la-scomparsa-del-mago/sessioni/sessione-01.md">Sessione 1</a>
+<a  href= {% navLink collections, "sdm-sessione-01" %}>Sessione 1</a>
 
 <a class="card" href="sessioni/">Vedi tutte le sessioni →</a>
