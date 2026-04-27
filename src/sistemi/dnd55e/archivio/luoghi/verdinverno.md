@@ -7,6 +7,7 @@ eleventyNavigation:
 type: "Città, porto commerciale"
 setting: "Forgotten Realms"
 originalname: "Neverwinter"
+adventure: "Storm King's Thunder"
 ---
 
 <h1>Verdinverno</h1>

@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-title: "Il tuo titolo"
+title: "Pagina 01"
 eleventyNavigation:
   key: "dnd-guida-01"
   parent: "dnd-guida"

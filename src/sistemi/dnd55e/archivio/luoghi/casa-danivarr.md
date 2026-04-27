@@ -7,6 +7,7 @@ eleventyNavigation:
 caption: "Locanda a Eterbosco"
 setting: "Forgotten Realms"
 region: "Eterbosco"
+adventure: "Storm King's Thunder"
 ---
 
 <h1>Casa Danivarr</h1>

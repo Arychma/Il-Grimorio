@@ -6,6 +6,8 @@ eleventyNavigation:
   parent: dnd-personaggi
 role: "Mezzorco, Barista"
 status: "Alleato"
+setting: "Forgotten Realms"
+adventure: "Storm King's Thunder"
 ---
 
 <h1>Dral Thelev</h1>

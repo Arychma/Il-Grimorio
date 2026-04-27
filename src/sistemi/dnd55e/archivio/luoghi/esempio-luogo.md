@@ -7,6 +7,7 @@ eleventyNavigation:
 type: "Città, porto commerciale"
 setting: "Forgotten Realms"
 originalname: "Original name"
+adventure: "Nome avventura"
 draft: "true"
 ---
 

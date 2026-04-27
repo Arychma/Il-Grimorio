@@ -10,20 +10,5 @@ eleventyNavigation:
 
 <p><em>Pagine di riferimento per D&D.</em></p>
 
-{% navLink collections, "dnd-guida-01" %}
-
-<div style="background: #f0f0f0; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; font-family: monospace; font-size: 12px;">
-  <strong>Debug Collezioni:</strong>
-  <ul>
-    {% for name, coll in collections %}
-      {% if "dnd" in name or "guida" in name %}
-        <li>{{ name }}: {{ coll.length }} elementi</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
-
 {% from "macros.njk" import cardGrid %}
 {{ cardGrid(collections, "dnd-guida") }}
-
-{% navLink collections, "dnd-guida-01" %}

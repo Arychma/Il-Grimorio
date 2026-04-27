@@ -8,6 +8,7 @@ type: "Città del Nord"
 setting: "Forgotten Realms"
 originalname: "Everlund"
 region: "Eterbosco"
+adventure: "Storm King's Thunder"
 ---
 
 <h1>Eterbosco</h1>
