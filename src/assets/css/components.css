@@ -18,7 +18,7 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 .card:hover .card-title {
-  color: var(--gold);
+  color: var(--gold) !important;
 }
 
 .card a {
