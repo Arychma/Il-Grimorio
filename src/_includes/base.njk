@@ -590,20 +590,27 @@
     </aside>
 
     <main class="main-content">
-      <div class="page-inner">
+  <div class="page-inner">
 
-        {% if breadcrumb %}
-          <div class="breadcrumb">
-            <a href="{{ '/' | url }}">Home</a>
-            {% if breadcrumb2 %} › <a href="{{ breadcrumb2url }}">{{ breadcrumb2 }}</a>{% endif %}
-            › {{ breadcrumb }}
-          </div>
-        {% endif %}
+    {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+    <div class="breadcrumb">
+      <a href="{{ '/' | url }}">Home</a>
+      
+      {# Ciclo sulle pagine genitore individuate dal plugin #}
+      {% for crumb in navPages %}
+        › <a href="{{ crumb.url | url }}">{{ crumb.title }}</a>
+      {% endfor %}
 
-        {{ content | safe }}
+      {# Mostra il titolo della pagina corrente se è definita una chiave di navigazione #}
+      {% if eleventyNavigation.key %}
+        › {{ title }}
+      {% endif %}
+    </div>
 
-      </div>
-    </main>
+    {{ content | safe }}
+
+  </div>
+</main>
 
   </div>
 
