@@ -6,7 +6,7 @@ eleventyNavigation:
   key: dnd-nomeregola
   parent: dnd-archivio
 type: "House rule"
-draft: true
+draft: "true"
 ---
 
 <h1>Nome Regola</h1>
