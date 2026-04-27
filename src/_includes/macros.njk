@@ -1,25 +1,23 @@
 {% macro cardGrid(collectionName, tagFilter=null) %}
-  {# Recupero sicuro: se la collezione non esiste, usa una lista vuota #}
+  {# 1. Recuperiamo la collezione dall'oggetto globale #}
   {% set allItems = collections[collectionName] or [] %}
   
-  {# Filtro opzionale per tag (utile per le ambientazioni) #}
+  {# 2. Decidiamo se filtrare o usare tutto #}
   {% if tagFilter %}
-    {% set items = allItems | filterByTag(tagFilter) %}
+    {% set finalItems = allItems | filterByTag(tagFilter) %}
   {% else %}
-    {% set items = allItems %}
+    {% set finalItems = allItems %}
   {% endif %}
 
   <div class="card-grid">
-    {% for item in items %}
+    {% for item in finalItems %}
       <article class="card">
         <a href="{{ item.url }}">
           <div class="card-body">
-            {# Gestione Titolo: supporta Markdown e Navigation #}
             <h3 class="card-title">
               {{ item.data.title or item.title or "Senza Titolo" }}
             </h3>
             
-            {# Estrazione Dati: normalizza l'accesso al frontmatter #}
             {% set info = item.data if item.data else item %}
             
             <div class="card-meta">
@@ -43,7 +41,6 @@
         </a>
       </article>
     {% else %}
-      {# Questo appare solo se la collezione è davvero vuota #}
       <p class="debug-msg">Nessun elemento presente in <em>{{ collectionName }}</em>.</p>
     {% endfor %}
   </div>
