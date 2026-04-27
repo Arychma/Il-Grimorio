@@ -11,21 +11,5 @@ eleventyNavigation:
 
 <p><em>Tutte le avventure D&D 5.5e.</em></p>
 
-{% if collections.dnd55e_avventure and collections.dnd55e_avventure.length %}
-<ul class="entry-list">
-{% for item in collections.dnd55e_avventure %}
-  <li>
-    <a href="{{ item.url }}">{{ item.data.title }}</a>
-    {% if item.data.date %}<div class="entry-meta">{{ item.data.date | readableDate }}{% if item.data.description %} — {{ item.data.description }}{% endif %}</div>{% endif %}
-    <div class="entry-meta">
-      {% if item.data.role %}{{ item.data.role }} {% endif %}
-      {% if item.data.type %}{{ item.data.type }} {% endif %}
-      {% if item.data.status %}<span class="tag">{{ item.data.status }}</span>{% endif %}
-      {% if item.data.region %}<span class="tag faded">{{ item.data.region }}</span>{% endif %}
-    </div>
-  </li>
-{% endfor %}
-</ul>
-{% else %}
-<p><em>Nessuna voce ancora presente.</em></p>
-{% endif %}
+{% from "macros.njk" import cardGrid %}
+{{ cardGrid("dnd-avventure") }}
