@@ -8,27 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
-  /* ── RICERCA ────────────────────────────────────────────── */
-  .search-box {
-    padding: 0.75rem;
-    border-bottom: 1px solid rgba(200,146,42,0.2);
-  }
-
-  .search-box input {
-    width: 100%;
-    padding: 0.4rem 0.6rem;
-    background: #1e1010;
-    border: 1px solid var(--gold);
-    color: var(--parchment);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    outline: none;
-    border-radius: 2px;
-  }
-
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-  <script src="/pagefind/pagefind-ui.js"></script>
 
   <style>
     /* ── VARIABILI ──────────────────────────────────────────── */
@@ -51,10 +31,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      font-size: 17px;
-      height: 100%;
-    }
+    html { font-size: 17px; height: 100%; }
 
     body {
       font-family: var(--font-body);
@@ -121,10 +98,7 @@
     .sidebar-overlay.active { display: block; }
 
     /* ── LAYOUT ─────────────────────────────────────────────── */
-    .site-wrapper {
-      display: flex;
-      flex: 1;
-    }
+    .site-wrapper { display: flex; flex: 1; }
 
     /* ── SIDEBAR ────────────────────────────────────────────── */
     .sidebar {
@@ -165,6 +139,44 @@
       font-size: 1.1rem;
       letter-spacing: 0.08em;
     }
+
+    /* ── RICERCA ────────────────────────────────────────────── */
+    .search-box {
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(200,146,42,0.2);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.4rem 0.6rem;
+      background: #1e1010;
+      border: 1px solid var(--gold);
+      color: var(--parchment);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      outline: none;
+      border-radius: 2px;
+    }
+
+    /* Stile risultati Pagefind */
+    .pagefind-ui__search-input {
+      background: #1e1010 !important;
+      border: 1px solid var(--gold) !important;
+      color: var(--parchment) !important;
+      font-family: var(--font-mono) !important;
+      font-size: 0.8rem !important;
+      border-radius: 2px !important;
+    }
+
+    .pagefind-ui__results {
+      background: var(--dark-bg);
+      color: var(--parchment-dark);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+    }
+
+    .pagefind-ui__result-link { color: var(--gold-light) !important; }
+    .pagefind-ui__result-link:hover { color: var(--gold) !important; }
 
     .nav-section {
       padding: 0.75rem 0;
@@ -346,8 +358,8 @@
       border-radius: 2px;
       margin: 0.2em;
     }
-    .tag.red   { border-color: var(--red);       color: var(--red); }
-    .tag.faded { border-color: var(--ink-faded);  color: var(--ink-faded); }
+    .tag.red   { border-color: var(--red);      color: var(--red); }
+    .tag.faded { border-color: var(--ink-faded); color: var(--ink-faded); }
 
     /* ── LISTA VOCI ─────────────────────────────────────────── */
     .entry-list { list-style: none; padding: 0; }
@@ -498,13 +510,13 @@
 
     <aside class="sidebar" id="sidebar">
 
-      <div class="search-box">
-        <div id="search"></div>
-      </div>
-
       <div class="sidebar-title">
         <span class="label">✦ IL GRIMORIO ✦</span>
         <span class="name">{{ siteName or "Il Grimorio" }}</span>
+      </div>
+
+      <div class="search-box">
+        <div id="search"></div>
       </div>
 
       <nav class="nav-section">
@@ -619,9 +631,7 @@
        font-size:0.75rem; min-height:1em;"></p>
   </div>
 
-// ── PAGEFIND ──────────────────────────────────────────────
-  new PagefindUI({ element: "#search", showImages: false });
-
+  <script src="/pagefind/pagefind-ui.js"></script>
   <script>
     // ── PASSWORD ──────────────────────────────────────────────
     const SITE_PASSWORD = "Mellon";
@@ -682,6 +692,11 @@
         btn.classList.add('active');
         group.querySelector('#' + btn.dataset.tab).classList.add('active');
       });
+    });
+
+    // ── PAGEFIND ──────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      new PagefindUI({ element: "#search", showImages: false });
     });
   </script>
 
