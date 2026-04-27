@@ -9,26 +9,24 @@ module.exports = function(eleventyConfig) {
 
   // ─── NUOVO SHORTCODE NAVLINK (POTENZIATO) ────────────────────────────────
     eleventyConfig.addShortcode("navLink", function(collections, key) {
-    // Cerchiamo in TUTTI i file che Eleventy ha caricato
     const allPages = collections.all;
+    
+    // DEBUG: Questo scriverà nei log di GitHub Actions quante pagine vede lo snippet
+    console.log(`[DEBUG] navLink sta cercando "${key}" tra ${allPages.length} pagine totali.`);
 
     const targetPage = allPages.find(item => {
-      // Cerchiamo la corrispondenza in 3 posti diversi:
       return (
-        (item.data.eleventyNavigation && item.data.eleventyNavigation.key === key) || // 1. La chiave di navigazione
-        (item.data.title === key) ||                                                  // 2. Il titolo esatto
-        (item.fileSlug === key)                                                       // 3. Il nome del file (senza .md)
+        (item.data.eleventyNavigation && item.data.eleventyNavigation.key === key) ||
+        (item.data.title === key) ||
+        (item.fileSlug === key)
       );
     });
 
     if (targetPage) {
-      // Se lo trova, prendiamo il titolo migliore disponibile
       const text = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
       return `<a href="${targetPage.url}">${text}</a>`;
     }
 
-    // Se arriviamo qui, il file non è proprio nel database di Eleventy
-    console.log(`[ERRORE GRIMORIO] Non trovo nulla per la chiave: ${key}`);
     return `<span style="color:red; font-weight:bold;">[Link Mancante: ${key}]</span>`;
   });
 
