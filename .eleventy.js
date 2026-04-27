@@ -57,42 +57,45 @@ module.exports = function(eleventyConfig) {
   });
 });
 
-// ─── CONFIGURAZIONE SISTEMI (D&D, GURPS, ecc.) ──────────────────────────
+// 1. Definiamo i sistemi e le sottocartelle dell'archivio
 const sistemi = ["dnd55e", "gurps"];
 const categorieArchivio = ["personaggi", "luoghi", "regole", "oggetti"];
 
 sistemi.forEach(sistema => {
-  const prefix = sistema.replace('55e', 'dnd'); // trasforma dnd55e in dnd per coerenza link
+  // Trasformiamo "dnd55e" in "dnd" per le collezioni, mentre "gurps" resta "gurps"
+  const prefix = sistema.replace('55e', 'dnd'); 
 
-  // Genera automaticamente: dnd-personaggi, gurps-personaggi, ecc.
+  // --- ARCHIVIO (Personaggi, Luoghi, ecc.) ---
   categorieArchivio.forEach(cat => {
     eleventyConfig.addCollection(`${prefix}-${cat}`, api => {
       return api.getFilteredByGlob(`src/sistemi/${sistema}/archivio/${cat}/*.{md,njk}`);
     });
   });
 
-  // Collezioni speciali per sistema
+  // --- COLLEZIONI SPECIALI ---
+  // Avventure
   eleventyConfig.addCollection(`${prefix}-avventure`, api => 
     api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/*.{md,njk}`)
   );
+  
+  // Sessioni (Rovesciate per vedere l'ultima per prima)
   eleventyConfig.addCollection(`${prefix}-sessioni`, api => 
     api.getFilteredByGlob(`src/sistemi/${sistema}/avventure/*/sessioni/*.{md,njk}`).reverse()
   );
+
+  // Guida
   eleventyConfig.addCollection(`${prefix}-guida`, api => 
     api.getFilteredByGlob(`src/sistemi/${sistema}/guida/**/*.{md,njk}`)
   );
 });
 
-// ─── AMBIENTAZIONI (SISTEMA DINAMICO) ──────────────────────────────────────
-// Questa collezione prende QUALSIASI cosa stia dentro src/ambientazioni/
-// Non dovrai mai più toccare eleventy.js per le nuove ambientazioni.
-eleventyConfig.addCollection("ambientazioni", function(api) {
+// --- AMBIENTAZIONI ---
+eleventyConfig.addCollection("ambientazioni", api => {
   return api.getFilteredByGlob("src/ambientazioni/**/*.{md,njk}");
 });
 
-// ─── COLLEZIONI GLOBALI (BLOG, NEWSLETTER, ecc.) ──────────────────────────
-const globali = ["blog", "newsletter", "jolly"];
-globali.forEach(tipo => {
+// --- BLOG & NEWSLETTER ---
+["blog", "newsletter", "jolly"].forEach(tipo => {
   eleventyConfig.addCollection(tipo, api => {
     return api.getFilteredByGlob(`src/comunicazioni/${tipo}/*.{md,njk}`).reverse();
   });
