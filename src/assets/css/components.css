@@ -7,15 +7,17 @@
 }
 
 .card {
-  background: var(--parchment-dark);
-  border-top: 3px solid var(--gold);
-  padding: 1.2rem;
+  background: transparent;
+  border-top: 1px solid var(--parchment-dark);
+  border-bottom: 1px solid var(--parchment-dark);
+  border-left: none;
+  border-right: none;
+  padding: 1rem 0;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 .card:hover .card-title {
   color: var(--gold) !important;
