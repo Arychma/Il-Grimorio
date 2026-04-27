@@ -9,98 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
-/* ── CALLOUT ────────────────────────────────────────────── */
-.callout {
-  padding: 0.85rem 1.1rem;
-  border-left: 4px solid;
-  border-radius: 0 4px 4px 0;
-  margin: 1.25rem 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-.callout.info    { background: #e8f4f8; border-color: #4a90b8; color: #1a3a4a; }
-.callout.warning { background: #fdf3e3; border-color: #c8922a; color: #4a3000; }
-.callout.danger  { background: #fdecea; border-color: #8b1a1a; color: #4a0000; }
-.callout.lore    { background: #f5f0e8; border-color: #7a6a4a; color: #3a2a10;
-                   font-family: var(--font-body); font-style: italic; }
-
-/* ── DETAILS / COMPRIMIBILE ─────────────────────────────── */
-details {
-  border: 1px solid var(--parchment-dark);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 4px 4px 0;
-  margin: 1.25rem 0;
-  background: white;
-}
-details[open] summary { border-bottom: 1px solid var(--parchment-dark); }
-
-summary {
-  padding: 0.7rem 1rem;
-  cursor: pointer;
-  font-family: var(--font-title);
-  font-size: 0.95rem;
-  color: var(--red);
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  user-select: none;
-}
-summary::-webkit-details-marker { display: none; }
-summary::before {
-  content: '▶';
-  font-size: 0.6rem;
-  color: var(--gold);
-  transition: transform 0.2s;
-  display: inline-block;
-}
-details[open] summary::before { transform: rotate(90deg); }
-
-details > *:not(summary) {
-  padding: 0.75rem 1rem 0.75rem 1.2rem;
-}
-
-/* ── TAB ────────────────────────────────────────────────── */
-.tabs {
-  display: flex;
-  gap: 0.25rem;
-  border-bottom: 2px solid var(--parchment-dark);
-  margin: 1.5rem 0 0;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  background: none;
-  border: 1px solid var(--parchment-dark);
-  border-bottom: none;
-  padding: 0.45rem 1rem;
-  font-family: var(--font-title);
-  font-size: 0.82rem;
-  letter-spacing: 0.05em;
-  color: var(--ink-faded);
-  cursor: pointer;
-  border-radius: 4px 4px 0 0;
-  transition: background 0.2s, color 0.2s;
-  margin-bottom: -2px;
-}
-.tab-btn:hover { background: var(--parchment-dark); color: var(--ink); }
-.tab-btn.active {
-  background: var(--parchment);
-  color: var(--red);
-  border-color: var(--parchment-dark);
-  border-bottom-color: var(--parchment);
-  font-weight: 600;
-}
-.tab-content {
-  display: none;
-  padding: 1rem 0.25rem;
-  border: 1px solid var(--parchment-dark);
-  border-top: none;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: white;
-}
-.tab-content.active { display: block; }
-
   <style>
     /* ── VARIABILI ──────────────────────────────────────────── */
     :root {
@@ -113,37 +21,33 @@ details > *:not(summary) {
       --gold-light:     #e8b84b;
       --dark-bg:        #12090a;
       --sidebar-w:      260px;
-      --header-h:       56px;  /* altezza header mobile */
+      --header-h:       56px;
 
       --font-title:  'Cinzel', serif;
       --font-body:   'IM Fell English', serif;
       --font-mono:   'Share Tech Mono', monospace;
     }
 
-    /* ── RESET ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── BASE ───────────────────────────────────────────────── */
     html {
-  font-size: 17px;
-  height: 100%;
-}
+      font-size: 17px;
+      height: 100%;
+    }
 
-body {
-  font-family: var(--font-body);
-  background-color: var(--dark-bg);
-  color: var(--ink);
-  min-height: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
+    body {
+      font-family: var(--font-body);
+      background-color: var(--dark-bg);
+      color: var(--ink);
+      min-height: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
 
-    /* ══════════════════════════════════════════════════════════
-       HEADER MOBILE (hamburger)
-    ══════════════════════════════════════════════════════════ */
+    /* ── HEADER MOBILE ──────────────────────────────────────── */
     .mobile-header {
       display: none;
       position: fixed;
@@ -182,12 +86,10 @@ body {
       transition: all 0.3s ease;
     }
 
-    /* Stato aperto */
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Overlay scuro quando sidebar è aperta su mobile */
     .sidebar-overlay {
       display: none;
       position: fixed;
@@ -197,17 +99,13 @@ body {
     }
     .sidebar-overlay.active { display: block; }
 
-    /* ══════════════════════════════════════════════════════════
-       LAYOUT PRINCIPALE
-    ══════════════════════════════════════════════════════════ */
+    /* ── LAYOUT ─────────────────────────────────────────────── */
     .site-wrapper {
       display: flex;
       flex: 1;
     }
 
-    /* ══════════════════════════════════════════════════════════
-       SIDEBAR
-    ══════════════════════════════════════════════════════════ */
+    /* ── SIDEBAR ────────────────────────────────────────────── */
     .sidebar {
       width: var(--sidebar-w);
       min-height: 100vh;
@@ -247,7 +145,6 @@ body {
       letter-spacing: 0.08em;
     }
 
-    /* Sezioni nav */
     .nav-section {
       padding: 0.75rem 0;
       border-bottom: 1px solid rgba(200,146,42,0.2);
@@ -283,7 +180,6 @@ body {
       background: rgba(200,146,42,0.08);
     }
 
-    /* Sottomenu (sistemi) */
     .nav-subsection { padding-left: 0.8rem; }
 
     .nav-subsection-label {
@@ -307,18 +203,16 @@ body {
       border-top: 1px solid rgba(200,146,42,0.2);
     }
 
-    /* ══════════════════════════════════════════════════════════
-       CONTENUTO PRINCIPALE
-    ══════════════════════════════════════════════════════════ */
-  .main-content {
-  flex: 1;
-  background: var(--parchment);
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+    /* ── CONTENUTO PRINCIPALE ───────────────────────────────── */
+    .main-content {
+      flex: 1;
+      background: var(--parchment);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
 
     .page-inner {
       max-width: 860px;
@@ -327,7 +221,6 @@ body {
       flex: 1;
     }
 
-    /* Breadcrumb */
     .breadcrumb {
       font-family: var(--font-mono);
       font-size: 0.7rem;
@@ -336,14 +229,9 @@ body {
       margin-bottom: 1.5rem;
     }
 
-    .breadcrumb a {
-      color: var(--red);
-      text-decoration: none;
-    }
-
+    .breadcrumb a { color: var(--red); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
 
-    /* Titoli */
     h1 {
       font-family: var(--font-title);
       color: var(--red);
@@ -370,13 +258,10 @@ body {
     }
 
     p { line-height: 1.75; margin-bottom: 1rem; }
-
     a { color: var(--red); }
     a:hover { color: var(--gold); }
-
     ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
     li { line-height: 1.7; margin-bottom: 0.25rem; }
-
     em { font-style: italic; }
     strong { font-weight: bold; color: var(--ink); }
 
@@ -397,16 +282,8 @@ body {
       font-size: 0.85em;
     }
 
-    hr {
-      border: none;
-      border-top: 1px solid var(--parchment-dark);
-      margin: 2rem 0;
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 4px;
-    }
+    hr { border: none; border-top: 1px solid var(--parchment-dark); margin: 2rem 0; }
+    img { max-width: 100%; border-radius: 4px; }
 
     /* ── CARD GRIGLIA ───────────────────────────────────────── */
     .card-grid {
@@ -433,19 +310,8 @@ body {
       color: var(--ink);
     }
 
-    .card h3 {
-      font-family: var(--font-title);
-      color: var(--red);
-      margin: 0 0 0.4rem;
-      font-size: 1rem;
-    }
-
-    .card p {
-      font-size: 0.88rem;
-      color: var(--ink-faded);
-      margin: 0;
-      line-height: 1.5;
-    }
+    .card h3 { font-family: var(--font-title); color: var(--red); margin: 0 0 0.4rem; font-size: 1rem; }
+    .card p  { font-size: 0.88rem; color: var(--ink-faded); margin: 0; line-height: 1.5; }
 
     /* ── TAG ────────────────────────────────────────────────── */
     .tag {
@@ -459,35 +325,16 @@ body {
       border-radius: 2px;
       margin: 0.2em;
     }
+    .tag.red   { border-color: var(--red);       color: var(--red); }
+    .tag.faded { border-color: var(--ink-faded);  color: var(--ink-faded); }
 
-    .tag.red   { border-color: var(--red);  color: var(--red); }
-    .tag.faded { border-color: var(--ink-faded); color: var(--ink-faded); }
-
-    /* ── LISTA VOCI (sessioni, regole, ecc.) ────────────────── */
+    /* ── LISTA VOCI ─────────────────────────────────────────── */
     .entry-list { list-style: none; padding: 0; }
-
-    .entry-list li {
-      border-bottom: 1px solid var(--parchment-dark);
-      padding: 0.75rem 0;
-    }
-
+    .entry-list li { border-bottom: 1px solid var(--parchment-dark); padding: 0.75rem 0; }
     .entry-list li:last-child { border-bottom: none; }
-
-    .entry-list a {
-      font-family: var(--font-title);
-      font-size: 1rem;
-      text-decoration: none;
-      color: var(--red);
-    }
-
+    .entry-list a { font-family: var(--font-title); font-size: 1rem; text-decoration: none; color: var(--red); }
     .entry-list a:hover { color: var(--gold); }
-
-    .entry-meta {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--ink-faded);
-      margin-top: 0.2rem;
-    }
+    .entry-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-faded); margin-top: 0.2rem; }
 
     /* ── DOWNLOAD BOX ───────────────────────────────────────── */
     .download-box {
@@ -502,36 +349,96 @@ body {
       margin-bottom: 0.75rem;
       transition: border-color 0.2s;
     }
-
     .download-box:hover { border-color: var(--gold); color: var(--ink); }
-
     .dl-icon { font-size: 1.8rem; }
+    .dl-info strong { display: block; font-family: var(--font-title); font-size: 0.95rem; color: var(--red); }
+    .dl-info span   { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-faded); }
 
-    .dl-info strong {
-      display: block;
+    /* ── CALLOUT ────────────────────────────────────────────── */
+    .callout {
+      padding: 0.85rem 1.1rem;
+      border-left: 4px solid;
+      border-radius: 0 4px 4px 0;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .callout.info    { background: #e8f4f8; border-color: #4a90b8; color: #1a3a4a; }
+    .callout.warning { background: #fdf3e3; border-color: #c8922a; color: #4a3000; }
+    .callout.danger  { background: #fdecea; border-color: #8b1a1a; color: #4a0000; }
+    .callout.lore    { background: #f5f0e8; border-color: #7a6a4a; color: #3a2a10; font-family: var(--font-body); font-style: italic; }
+
+    /* ── DETAILS / COMPRIMIBILE ─────────────────────────────── */
+    details {
+      border: 1px solid var(--parchment-dark);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 4px 4px 0;
+      margin: 1.25rem 0;
+      background: white;
+    }
+    details[open] summary { border-bottom: 1px solid var(--parchment-dark); }
+    summary {
+      padding: 0.7rem 1rem;
+      cursor: pointer;
       font-family: var(--font-title);
       font-size: 0.95rem;
       color: var(--red);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
     }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: '▶'; font-size: 0.6rem; color: var(--gold); transition: transform 0.2s; display: inline-block; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details > *:not(summary) { padding: 0.75rem 1rem 0.75rem 1.2rem; }
 
-    .dl-info span {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
+    /* ── TAB ────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 0.25rem;
+      border-bottom: 2px solid var(--parchment-dark);
+      margin: 1.5rem 0 0;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: none;
+      border: 1px solid var(--parchment-dark);
+      border-bottom: none;
+      padding: 0.45rem 1rem;
+      font-family: var(--font-title);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
       color: var(--ink-faded);
+      cursor: pointer;
+      border-radius: 4px 4px 0 0;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: -2px;
     }
+    .tab-btn:hover { background: var(--parchment-dark); color: var(--ink); }
+    .tab-btn.active {
+      background: var(--parchment);
+      color: var(--red);
+      border-color: var(--parchment-dark);
+      border-bottom-color: var(--parchment);
+      font-weight: 600;
+    }
+    .tab-content {
+      display: none;
+      border: 1px solid var(--parchment-dark);
+      border-top: none;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: white;
+    }
+    .tab-content.active { display: block; }
 
-    /* ══════════════════════════════════════════════════════════
-       RESPONSIVE — MOBILE
-    ══════════════════════════════════════════════════════════ */
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 768px) {
-
-      /* Mostra header mobile */
       .mobile-header { display: flex; }
+      .site-wrapper  { padding-top: var(--header-h); }
 
-      /* Il contenuto scende sotto l'header */
-      .site-wrapper { padding-top: var(--header-h); }
-
-      /* Sidebar si nasconde fuori schermo */
       .sidebar {
         position: fixed;
         top: var(--header-h);
@@ -542,20 +449,14 @@ body {
         width: min(var(--sidebar-w), 85vw);
       }
 
-      /* Quando il menu è aperto */
       .sidebar.open { transform: translateX(0); }
-
-      /* Padding ridotto */
-      .page-inner { padding: 1.5rem 1rem 3rem; }
-
+      .page-inner   { padding: 1.5rem 1rem 3rem; }
       h1 { font-size: 1.5rem; }
       h2 { font-size: 1.1rem; }
-
       .card-grid { grid-template-columns: 1fr; }
     }
 
     @media (min-width: 769px) {
-      /* Desktop: layout sidebar + content affiancati */
       .site-wrapper { flex-direction: row; }
     }
 
@@ -563,10 +464,8 @@ body {
 </head>
 <body>
 
-  <!-- ── OVERLAY mobile ────────────────────────────────────── -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <!-- ── HEADER MOBILE ─────────────────────────────────────── -->
   <header class="mobile-header">
     <span class="mobile-header-title">✦ Il Grimorio ✦</span>
     <button class="hamburger" id="hamburger" aria-label="Apri menu">
@@ -576,7 +475,6 @@ body {
 
   <div class="site-wrapper">
 
-    <!-- ── SIDEBAR ─────────────────────────────────────────── -->
     <aside class="sidebar" id="sidebar">
 
       <div class="sidebar-title">
@@ -584,68 +482,63 @@ body {
         <span class="name">{{ siteName or "Il Grimorio" }}</span>
       </div>
 
-      <!-- Home -->
       <nav class="nav-section">
         <ul>
-          <li><a href="/">🏠 Home</a></li>
+          <li><a href="{{ '/' | url }}">🏠 Home</a></li>
         </ul>
       </nav>
 
-      <!-- Sistemi di gioco -->
       <nav class="nav-section">
         <span class="nav-section-label">Sistemi di Gioco</span>
 
         <div class="nav-subsection">
           <span class="nav-subsection-label">D&D 5.5e</span>
           <ul>
-            <li><a href="/sistemi/dnd55e/">Panoramica</a></li>
-            <li><a href="/sistemi/dnd55e/guida/">📖 Guida</a></li>
-            <li><a href="/sistemi/dnd55e/avventure/">⚔ Avventure</a></li>
-            <li><a href="/sistemi/dnd55e/archivio/personaggi/">👤 Personaggi</a></li>
-            <li><a href="/sistemi/dnd55e/archivio/luoghi/">📍 Luoghi</a></li>
-            <li><a href="/sistemi/dnd55e/archivio/regole/">📜 Regole</a></li>
-            <li><a href="/sistemi/dnd55e/archivio/oggetti/">💎 Oggetti</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/' | url }}">Panoramica</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/guida/' | url }}">📖 Guida</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/avventure/' | url }}">⚔ Avventure</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/archivio/personaggi/' | url }}">👤 Personaggi</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/archivio/luoghi/' | url }}">📍 Luoghi</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/archivio/regole/' | url }}">📜 Regole</a></li>
+            <li><a href="{{ '/sistemi/dnd55e/archivio/oggetti/' | url }}">💎 Oggetti</a></li>
           </ul>
         </div>
 
         <div class="nav-subsection">
           <span class="nav-subsection-label">GURPS</span>
           <ul>
-            <li><a href="/sistemi/gurps/">Panoramica</a></li>
-            <li><a href="/sistemi/gurps/guida/">📖 Guida</a></li>
-            <li><a href="/sistemi/gurps/avventure/">⚔ Avventure</a></li>
-            <li><a href="/sistemi/gurps/archivio/personaggi/">👤 Personaggi</a></li>
-            <li><a href="/sistemi/gurps/archivio/luoghi/">📍 Luoghi</a></li>
-            <li><a href="/sistemi/gurps/archivio/regole/">📜 Regole</a></li>
-            <li><a href="/sistemi/gurps/archivio/oggetti/">💎 Oggetti</a></li>
+            <li><a href="{{ '/sistemi/gurps/' | url }}">Panoramica</a></li>
+            <li><a href="{{ '/sistemi/gurps/guida/' | url }}">📖 Guida</a></li>
+            <li><a href="{{ '/sistemi/gurps/avventure/' | url }}">⚔ Avventure</a></li>
+            <li><a href="{{ '/sistemi/gurps/archivio/personaggi/' | url }}">👤 Personaggi</a></li>
+            <li><a href="{{ '/sistemi/gurps/archivio/luoghi/' | url }}">📍 Luoghi</a></li>
+            <li><a href="{{ '/sistemi/gurps/archivio/regole/' | url }}">📜 Regole</a></li>
+            <li><a href="{{ '/sistemi/gurps/archivio/oggetti/' | url }}">💎 Oggetti</a></li>
           </ul>
         </div>
       </nav>
 
-      <!-- Ambientazioni -->
       <nav class="nav-section">
         <span class="nav-section-label">Ambientazioni</span>
         <ul>
-          <li><a href="/ambientazioni/">Tutte le ambientazioni</a></li>
-          <li><a href="/ambientazioni/forgotten-realms/">🌍 Forgotten Realms</a></li>
-          <li><a href="/ambientazioni/khaesil/">🌍 Khaesil</a></li>
+          <li><a href="{{ '/ambientazioni/' | url }}">Tutte le ambientazioni</a></li>
+          <li><a href="{{ '/ambientazioni/forgotten-realms/' | url }}">🌍 Forgotten Realms</a></li>
+          <li><a href="{{ '/ambientazioni/khaesil/' | url }}">🌍 Khaesil</a></li>
         </ul>
       </nav>
 
-      <!-- Comunicazioni -->
       <nav class="nav-section">
         <span class="nav-section-label">Comunicazioni</span>
         <ul>
-          <li><a href="/comunicazioni/blog/">📝 Blog</a></li>
-          <li><a href="/comunicazioni/newsletter/">📨 Newsletter</a></li>
-          <li><a href="/comunicazioni/downloads/">📥 Download</a></li>
+          <li><a href="{{ '/comunicazioni/blog/' | url }}">📝 Blog</a></li>
+          <li><a href="{{ '/comunicazioni/newsletter/' | url }}">📨 Newsletter</a></li>
+          <li><a href="{{ '/comunicazioni/downloads/' | url }}">📥 Download</a></li>
         </ul>
       </nav>
 
-      <!-- Jolly -->
       <nav class="nav-section">
         <ul>
-          <li><a href="/jolly/">🃏 Jolly</a></li>
+          <li><a href="{{ '/jolly/' | url }}">🃏 Jolly</a></li>
         </ul>
       </nav>
 
@@ -659,13 +552,12 @@ body {
 
     </aside>
 
-    <!-- ── CONTENUTO ───────────────────────────────────────── -->
     <main class="main-content">
       <div class="page-inner">
 
         {% if breadcrumb %}
           <div class="breadcrumb">
-            <a href="/">Home</a>
+            <a href="{{ '/' | url }}">Home</a>
             {% if breadcrumb2 %} › <a href="{{ breadcrumb2url }}">{{ breadcrumb2 }}</a>{% endif %}
             › {{ breadcrumb }}
           </div>
@@ -676,7 +568,7 @@ body {
       </div>
     </main>
 
-  </div><!-- /site-wrapper -->
+  </div>
 
   <!-- ── PASSWORD OVERLAY ───────────────────────────────────── -->
   <div id="pw-overlay" style="
@@ -701,17 +593,6 @@ body {
     <p id="pw-error" style="color:#8b1a1a; font-family:'Share Tech Mono',monospace;
        font-size:0.75rem; min-height:1em;"></p>
   </div>
-
-// ── TAB ──────────────────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const group = btn.closest('.tab-group') || btn.parentElement.parentElement;
-    group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    group.querySelector('#' + btn.dataset.tab).classList.add('active');
-  });
-});
 
   <script>
     // ── PASSWORD ──────────────────────────────────────────────
@@ -752,17 +633,27 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     hamburger.addEventListener("click", () => toggleSidebar(!sidebar.classList.contains("open")));
     overlay.addEventListener("click", () => toggleSidebar(false));
 
-    // Chiudi sidebar su navigazione (mobile)
     sidebar.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         if (window.innerWidth <= 768) toggleSidebar(false);
       });
     });
 
-    // Evidenzia link attivo
+    // ── LINK ATTIVO ───────────────────────────────────────────
     const current = window.location.pathname;
     document.querySelectorAll(".sidebar a").forEach(a => {
       if (a.getAttribute("href") === current) a.classList.add("active");
+    });
+
+    // ── TAB ───────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.tab-group') || btn.parentElement.parentElement;
+        group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        group.querySelector('#' + btn.dataset.tab).classList.add('active');
+      });
     });
   </script>
 
