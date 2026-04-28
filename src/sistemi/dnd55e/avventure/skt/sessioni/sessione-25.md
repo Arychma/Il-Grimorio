@@ -6,11 +6,16 @@ eleventyNavigation:
   parent: "skt-sessioni"
 date: "2026-04-01"
 description: "Incontro con Darathra, passano da Campolieto e arrivano alle porte delle Fauci Nere."
+status: "Viaggio"
+adventure: "Storm King's Thunder"
 tags: ["sessione", "dnd55e"]
 ---
 <h1>{{ title }}</h1>
 <p class="entry-meta">{{ date | readableDate }}</p>
 <p><em>{{ description }}</em></p>
+<span class="tag faded">{{ status }}</span>
+<span class="tag faded">{{ adventure }}</span>
+
 
 <h2>Cosa è successo</h2>
 <p>
