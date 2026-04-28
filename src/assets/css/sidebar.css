@@ -1,9 +1,8 @@
-/* ─── SIDEBAR STRUCTURE ─── */
+/* ─── 1. STRUTTURA SIDEBAR (DESKTOP) ─── */
 .sidebar {
   width: var(--sidebar-w);
   min-height: 100vh;
-  /* Ora usa lo sfondo dinamico: chiaro in Light, scuro in Dark Mode */
-  background: var(--bg-sidebar); 
+  background: var(--bg-body); 
   border-right: 1px solid var(--border-sep);
   display: flex;
   flex-direction: column;
@@ -15,41 +14,10 @@
   transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-gold) transparent;
+  z-index: 100;
 }
 
-/* ─── THEME SWITCHER ─── */
-.theme-switch-container {
-  padding: 1rem 1rem 0;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#theme-toggle {
-  background: none;
-  border: 1px solid var(--accent-gold);
-  color: var(--accent-gold);
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-#theme-toggle:hover {
-  background: rgba(200, 146, 42, 0.1);
-  box-shadow: 0 0 8px var(--accent-gold);
-}
-
-/* Gestione icone nel pulsante */
-html.dark-mode .icon-sun { display: block; }
-html.dark-mode .icon-moon { display: none; }
-html:not(.dark-mode) .icon-sun { display: none; }
-html:not(.dark-mode) .icon-moon { display: block; }
-
-/* ─── SIDEBAR HEADER ─── */
+/* ─── 2. HEADER E TITOLI ─── */
 .sidebar-title {
   padding: 1.5rem 1rem 1rem;
   border-bottom: 1px solid var(--border-sep);
@@ -66,13 +34,13 @@ html:not(.dark-mode) .icon-moon { display: block; }
 }
 
 .sidebar-title .name {
-  font-family: var(--font-title); /* Carattere Epic/Fantasy */
+  font-family: var(--font-title);
   color: var(--accent-gold);
   font-size: 1.2rem;
   text-transform: uppercase;
 }
 
-/* ─── NAVIGATION ─── */
+/* ─── 3. NAVIGAZIONE E LINK (ROSSO FANTASY) ─── */
 .nav-section {
   padding: 0.75rem 0;
 }
@@ -88,7 +56,6 @@ html:not(.dark-mode) .icon-moon { display: block; }
   opacity: 0.8;
 }
 
-/* Classi generate da eleventyNavigationToHtml */
 .nav-list {
   list-style: none;
   padding: 0;
@@ -98,135 +65,57 @@ html:not(.dark-mode) .icon-moon { display: block; }
 .nav-link {
   display: block;
   padding: 0.45rem 1rem 0.45rem 1.2rem;
-  font-family: var(--font-body); /* Carattere Pergamena */
-  color: var(--color-parchment-dark); /* sempre chiaro sulla sidebar scura */
+  font-family: var(--font-body);
+  /* Forza il Rosso Fantasy come colore base per tutti i link */
+  color: var(--accent-red) !important; 
   text-decoration: none;
-  font-size: 1.05rem; /* Un po' più grande per leggibilità */
+  font-size: 1.05rem;
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--accent-red); /* Ripristinato il Rosso Fantasy */
+  color: var(--accent-gold) !important; /* Diventa Oro su hover/active */
   border-left-color: var(--accent-gold);
   background: rgba(200, 146, 42, 0.05);
   font-weight: bold;
 }
 
-/* ─── FOOTER & STAMP ─── */
-.sidebar-stamp {
-  margin-top: auto;
-  padding: 1.5rem 1rem;
-  font-family: var(--font-mono);
-  color: var(--text-faded);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-align: center;
-  border-top: 1px solid var(--border-sep);
+/* ─── 4. THEME SWITCHER ─── */
+.theme-switch-container {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
-/* ─── MOBILE RESPONSIVE ─── */
+#theme-toggle {
+  background: none;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#theme-toggle:hover {
+  background: rgba(200, 146, 42, 0.1);
+  box-shadow: 0 0 8px var(--accent-gold);
+}
+
+/* ─── 5. MOBILE HEADER (BARRA IN ALTO) ─── */
 .mobile-header {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--header-h);
   background: var(--bg-body);
-  border-bottom: 1px solid var(--border-sep);
-  z-index: 200;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-}
-
-@media (max-width: 768px) {
-  .mobile-header { display: flex; }
-
-  .sidebar {
-    position: fixed;
-    top: var(--header-h);
-    left: 0;
-    height: calc(100vh - var(--header-h));
-    z-index: 160;
-    transform: translateX(-100%);
-    width: min(var(--sidebar-w), 85vw);
-  }
-
-  .sidebar.open { transform: translateX(0); }
-}
-
-.search-box {
-  padding: 0.5rem 0.75rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.search-box .pagefind-ui {
-  width: 100% !important;
-}
-
-.search-box .pagefind-ui__form {
-  width: 100% !important;
-}
-
-.search-box input[type="text"].pagefind-ui__search-input {
-  width: calc(100% - 1.5rem) !important;
-  max-width: 100% !important;
-  padding: 0.3rem 0.5rem 0.3rem 2rem !important;
-  font-size: 0.75rem !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-}
-
-.hamburger {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 4px;
-}
-
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--accent-gold);
-  transition: all 0.3s ease;
-}
-
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 150;
-}
-
-.sidebar-overlay.active { display: block; }
-
-.mobile-header-title {
-  font-family: var(--font-title);
-  color: var(--accent-gold);
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-}
-
-/* ... (qui finisce il codice della sidebar desktop e dei link) ... */
-
-/* ─── 4. MOBILE HEADER ─── */
-.mobile-header {
-  display: none; /* Nascosto su desktop */
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: var(--header-h);
-  background: var(--bg-body); 
   border-bottom: 1px solid var(--accent-gold);
   z-index: 200;
   align-items: center;
@@ -240,16 +129,17 @@ html.dark-mode .mobile-header {
 
 .mobile-header-title {
   font-family: var(--font-title);
-  color: var(--accent-red) !important; 
+  color: var(--accent-red) !important;
   font-size: 1.1rem;
   text-decoration: none;
+  letter-spacing: 0.1em;
 }
 
 html.dark-mode .mobile-header-title {
   color: var(--accent-gold) !important;
 }
 
-/* L'icona dell'hamburger */
+/* Icona Hamburger */
 .hamburger {
   background: none;
   border: none;
@@ -268,31 +158,16 @@ html.dark-mode .mobile-header-title {
   transition: all 0.3s ease;
 }
 
-/* ─── 5. MEDIA QUERIES (Sempre per ultime) ─── */
+/* Animazione Hamburger */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── 6. RESPONSIVE (SIDEBAR A DESTRA) ─── */
 @media (max-width: 768px) {
-  .mobile-header {
-    display: flex;
-    flex-direction: row-reverse; /* SPOSTA L'HAMBURGER A DESTRA nella barra */
+  .mobile-header { 
+    display: flex; 
   }
 
   .sidebar {
-    position: fixed;
-    top: var(--header-h);
-    left: auto;       /* Rimuove il posizionamento a sinistra */
-    right: 0;         /* Ancora la sidebar a destra */
-    height: calc(100vh - var(--header-h));
-    z-index: 1000;
-    width: 280px;
-    
-    /* CAMBIO DIREZIONE: ora parte da fuori schermo a destra (+100%) */
-    transform: translateX(100%); 
-    transition: transform 0.3s ease-in-out;
-    
-    border-right: none;
-    border-left: 1px solid var(--accent-gold); /* Bordo spostato a sinistra della sidebar */
-  }
-
-  .sidebar.open {
-    transform: translateX(0); /* Entra verso sinistra */
-  }
-}
+    position
