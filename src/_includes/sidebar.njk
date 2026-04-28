@@ -1,4 +1,5 @@
 <aside class="sidebar" id="sidebar">
+
   <div class="sidebar-header">
     <div class="theme-switch-container">
       <button id="theme-toggle" aria-label="Cambia Tema">
@@ -9,41 +10,93 @@
   </div>
 
   <div class="sidebar-title">
-    <span class="label">ARCHIVIO</span>
+    <span class="label">✦ IL GRIMORIO ✦</span>
     <span class="name">{{ metadata.title }}</span>
   </div>
 
+  <div class="search-box">
+    <div id="search"></div>
+  </div>
+
   <nav class="sidebar-nav">
-  
-  <div class="nav-section">
-    <span class="nav-section-label">Personaggi</span>
-    <ul class="nav-list">
-      {% for p in collections.personaggi %}
+
+    <div class="nav-section">
+      <ul class="nav-list">
         <li class="nav-item">
-          <a href="{{ p.url }}" class="nav-link {% if p.url == page.url %}active{% endif %}">
-            {{ p.data.title }}
+          <a href="{{ '/' | url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">
+            🏠 Home
           </a>
         </li>
-      {% endfor %}
-    </ul>
-  </div>
+      </ul>
+    </div>
 
-  <div class="nav-section">
-    <span class="nav-section-label">Luoghi</span>
-    <ul class="nav-list">
-      {% for l in collections.luoghi %}
+    <div class="nav-section">
+      <span class="nav-section-label">D&D 5.5e</span>
+      <ul class="nav-list">
         <li class="nav-item">
-          <a href="{{ l.url }}" class="nav-link {% if l.url == page.url %}active{% endif %}">
-            {{ l.data.title }}
+          <a href="{{ '/sistemi/dnd55e/' | url }}" class="nav-link {% if '/sistemi/dnd55e/' in page.url %}active{% endif %}">
+            Panoramica
           </a>
         </li>
-      {% endfor %}
-    </ul>
-  </div>
+        <li class="nav-item">
+          <a href="{{ '/sistemi/dnd55e/guida/' | url }}" class="nav-link {% if '/sistemi/dnd55e/guida/' in page.url %}active{% endif %}">
+            📖 Guida
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ '/sistemi/dnd55e/avventure/' | url }}" class="nav-link {% if '/sistemi/dnd55e/avventure/' in page.url %}active{% endif %}">
+            ⚔ Avventure
+          </a>
+        </li>
+      </ul>
+    </div>
 
-</nav>
+    <div class="nav-section">
+      <span class="nav-section-label">GURPS</span>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{{ '/sistemi/gurps/' | url }}" class="nav-link {% if '/sistemi/gurps/' in page.url %}active{% endif %}">
+            Panoramica
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ '/sistemi/gurps/guida/' | url }}" class="nav-link {% if '/sistemi/gurps/guida/' in page.url %}active{% endif %}">
+            📖 Guida
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ '/sistemi/gurps/avventure/' | url }}" class="nav-link {% if '/sistemi/gurps/avventure/' in page.url %}active{% endif %}">
+            ⚔ Avventure
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label">Comunicazioni</span>
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="{{ '/comunicazioni/blog/' | url }}" class="nav-link {% if '/comunicazioni/blog/' in page.url %}active{% endif %}">
+            📝 Blog
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ '/comunicazioni/newsletter/' | url }}" class="nav-link {% if '/comunicazioni/newsletter/' in page.url %}active{% endif %}">
+            📨 Newsletter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ '/comunicazioni/downloads/' | url }}" class="nav-link {% if '/comunicazioni/downloads/' in page.url %}active{% endif %}">
+            📥 Download
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
 
   <div class="sidebar-stamp">
-    2026 - Il Grimorio
+    2026 — Il Grimorio
   </div>
+
 </aside>
