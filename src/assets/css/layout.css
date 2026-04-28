@@ -22,7 +22,7 @@ body {
 .main-content {
   flex: 1;
   /* Usa la variabile semantica per lo sfondo principale */
-  background: var(--bg-body);
+  background: var(--bg-content);
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;

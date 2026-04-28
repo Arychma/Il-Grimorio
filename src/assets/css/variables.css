@@ -1,5 +1,6 @@
 :root {
   /* --- Palette Colori Base --- */
+  --bg-body: var(--color-obsidian);
   --color-parchment:      #f2e8d5;
   --color-parchment-dark: #e0d0b0;
   --color-ink:            #1a1209;
@@ -9,7 +10,8 @@
   --color-obsidian:       #12090a;
 
   /* --- Variabili Semantiche (TEMA CHIARO) --- */
-  --bg-body:       var(--color-parchment);
+  --bg-sidebar: var(--color-obsidian);
+  --bg-content: var(--color-parchment);
   --text-main:     var(--color-ink);
   --text-faded:    var(--color-ink-faded);
   --border-sep:    var(--color-parchment-dark);
@@ -27,6 +29,8 @@
 /* 2. Sovrascrittura per il Tema Scuro */
 html.dark-mode {
   --bg-body:     var(--color-obsidian);
+  --bg-sidebar: #1a0a0b;
+  --bg-content: var(--color-obsidian);
   --text-main:   #e0d6bc;
   --text-faded:  #a0a0a0;
   --border-sep:  #3a2a2a;

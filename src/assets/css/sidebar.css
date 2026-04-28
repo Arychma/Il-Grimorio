@@ -3,7 +3,7 @@
   width: var(--sidebar-w);
   min-height: 100vh;
   /* Ora usa lo sfondo dinamico: chiaro in Light, scuro in Dark Mode */
-  background: var(--bg-body); 
+  background: var(--bg-sidebar); 
   border-right: 1px solid var(--border-sep);
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ html:not(.dark-mode) .icon-moon { display: block; }
   display: block;
   padding: 0.45rem 1rem 0.45rem 1.2rem;
   font-family: var(--font-body); /* Carattere Pergamena */
-  color: var(--text-main);
+  color: var(--color-parchment-dark); /* sempre chiaro sulla sidebar scura */
   text-decoration: none;
   font-size: 1.05rem; /* Un po' più grande per leggibilità */
   transition: all 0.2s ease;
