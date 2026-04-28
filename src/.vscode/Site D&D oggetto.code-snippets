@@ -1,0 +1,37 @@
+{
+  "Oggetto D&D": {
+    "prefix": "dndobject",
+    "scope": "markdown,njk",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"${1:Nome Oggetto}\"",
+      "eleventyNavigation:",
+      "  key: \"dnd-${1:/downcase}/\"",
+      "  parent: \"dnd-oggetti\"",
+      "type: \"${2:Tipo e rarità}\"",
+      "status: \"${3:Possesso/Stato}\"",
+      "adventure: \"${4:Nome Avventura}\"",
+      "tags: [\"item\", \"dnd55e\"]",
+      "draft: false",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "",
+      "<p class=\"entry-meta\">{{ type }}</p>",
+      "<div class=\"card-meta\">",
+      "  <span class=\"tag\">{{ type }}</span>",
+      "  <span class=\"tag faded\">{{ status }}</span>",
+      "  <span class=\"tag faded\">{{ adventure }}</span>",
+      "</div>",
+      "",
+      "<h2>Descrizione</h2>",
+      "",
+      "${5:Inserisci qui la descrizione...}",
+      "",
+      "<h2>Proprietà</h2>",
+      "$0"
+    ],
+    "description": "Crea la struttura di un oggetto per il Grimorio"
+  }
+}
