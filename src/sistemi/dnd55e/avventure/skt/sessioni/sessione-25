@@ -7,7 +7,6 @@ eleventyNavigation:
 date: 2026-04-01
 description: "Riassunto breve"
 tags: ["sessione", "dnd55e"]
-draft: false
 ---
 
 <h1>{{ Sessione 25 }}</h1>
@@ -15,4 +14,7 @@ draft: false
 <p class="entry-meta">{{ date | readableDate }}</p>
 
 <h2>Cosa è successo</h2>
-
+I pg incontrano [[Darathra Shendrel]] e le raccontano quanto visto durante la loro ricognizione e partono poi con un gruppo di soldati guidati da un arpista per andare al villaggetto di [[Campolieto]], attaccato da poco da degli Hobgoblin.
+Sistemata la situazione di crisi, parlano con l'Arpista [[Urtal Merkhti]], che attiva la loro arpa. 
+Celebrato infine il funerale per le vittime il giorno dopo, ripartono da [[Campolieto]] in direzione della foresta di Tsorvudd. 
+La sessione termina con l'ingresso dei pg nelle Fauci Nere. 

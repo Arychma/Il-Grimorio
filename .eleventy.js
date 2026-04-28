@@ -88,6 +88,42 @@ module.exports = function(eleventyConfig) {
     );
   });
 
+  // ─── TRASFORMAZIONE AUTOMATICA WIKILINKS ─────────────────────────────────
+  eleventyConfig.addTransform("wikiLinks", function(content) {
+    // Applichiamo la trasformazione solo ai file HTML generati
+    if (this.outputPath && this.outputPath.endsWith(".html")) {
+      
+      // Accediamo a tutte le collezioni del sito
+      const collections = this.ctx.collections;
+
+      // Regex: trova [[key]] oppure [[key|etichetta]]
+      return content.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (match, key, label) => {
+        const cleanKey = key.trim();
+        const displayLabel = label ? label.trim() : null;
+
+        // Cerchiamo la pagina corrispondente (stessa logica del tuo navLink)
+        const targetPage = collections.all.find(item => {
+          return (
+            (item.data.eleventyNavigation && item.data.eleventyNavigation.key === cleanKey) ||
+            (item.data.title === cleanKey) ||
+            (item.fileSlug === cleanKey)
+          );
+        });
+
+        if (targetPage) {
+          // Se troviamo la pagina, creiamo il link
+          const text = displayLabel || targetPage.data.eleventyNavigation?.title || targetPage.data.title || cleanKey;
+          return `<a href="${targetPage.url}" class="wikilink">${text}</a>`;
+        }
+
+        // Se la pagina non esiste, mostriamo il segnale di errore (come il tuo shortcode)
+        return `<span style="color:orange; font-weight:bold;" title="Pagina non trovata">[Link non trovato: ${cleanKey}]</span>`;
+      });
+    }
+    return content;
+  });
+
+
   // ─── OUTPUT ──────────────────────────────────────────────────────────────
   return {
     dir: {

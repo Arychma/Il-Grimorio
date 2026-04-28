@@ -118,6 +118,26 @@
 .entry-list a:hover { color: var(--gold); }
 .entry-meta { font-family: var(--font-mono); font-size: 0.65rem; color: var(--ink-faded); margin-top: 0.2rem; }
 
+/* ── WIKILINKS ── */
+.wikilink {
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--gold);
+  transition: all 0.2s ease-in-out;
+}
+
+.wikilink:hover {
+  color: var(--gold);
+  border-bottom-style: solid;
+  background-color: rgba(200, 146, 42, 0.1); /* Un leggero tocco color oro */
+}
+
+/* Opzionale: stile per i link non trovati (se hai usato lo span arancione nella trasformazione) */
+span[title="Pagina non trovata"] {
+  cursor: help;
+  border-bottom: 1px dotted orange;
+}
+
 /* ── DOWNLOAD BOX ── */
 .download-box {
   display: flex;
