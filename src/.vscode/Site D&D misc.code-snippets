@@ -1,0 +1,32 @@
+{
+  "Miscellanea D&D": {
+    "prefix": "dndmisc",
+    "scope": "markdown,njk,plaintext,html",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"${1:Nome}\"",
+      "eleventyNavigation:",
+      "  key: \"dnd-${2:nomevoce}\"",
+      "  parent: \"dnd-miscellanea\"",
+      "type: \"${3|Fazione,Ideale,Organizzazione,Evento,Altro|}\"",
+      "status: \"${4:Stato}\"",
+      "setting: \"${5|Forgotten Realms,Khaesil,Homebrew|}\"",
+      "adventure: \"${6:Nome Avventura}\"",
+      "tags: [\"${7:tag}\"]",
+      "draft: true",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "<span class=\"tag faded\">{{ type }}</span>",
+      "<span class=\"tag faded\">{{ setting }}</span>",
+      "<span class=\"tag faded\">{{ adventure }}</span>",
+      "",
+      "<h3>Descrizione</h3>",
+      "<p>${8:Descrizione.}</p>",
+      "",
+      "$0"
+    ],
+    "description": "Crea la struttura di una voce miscellanea per il Grimorio"
+  }
+}

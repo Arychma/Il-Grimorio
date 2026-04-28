@@ -1,7 +1,7 @@
 {
   "Sessione D&D": {
     "prefix": "dndsession",
-    "scope": "markdown,njk",
+    "scope": "markdown,njk,plaintext,html",
     "body": [
       "---",
       "layout: base.njk",

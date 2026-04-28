@@ -1,0 +1,35 @@
+{
+  "Personaggio D&D": {
+    "prefix": "dndnpc",
+    "scope": "markdown,njk,plaintext,html",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"${1:Nome Personaggio}\"",
+      "eleventyNavigation:",
+      "  key: \"dnd-${2:nomepersonaggio}\"",
+      "  parent: \"dnd-personaggi\"",
+      "role: \"${3:Ruolo, Professione}\"",
+      "status: \"${4|Alleato,Nemico,Neutrale,Deceduto|}\"",
+      "adventure: \"${5:Nome Avventura}\"",
+      "draft: true",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "<span class=\"tag\">{{ status }}</span>",
+      "<p><em>{{ role }}</em></p>",
+      "",
+      "<h2>Descrizione</h2>",
+      "<p>${6:Aspetto fisico, personalità, prime impressioni.}</p>",
+      "",
+      "<h2>Storia</h2>",
+      "<p>${7:Background e storia del personaggio.}</p>",
+      "",
+      "<h2>Relazioni</h2>",
+      "<p>${8:Come si relaziona con i PG e altri PNG.}</p>",
+      "",
+      "$0"
+    ],
+    "description": "Crea la struttura di un personaggio per il Grimorio"
+  }
+}

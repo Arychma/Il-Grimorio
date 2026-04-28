@@ -1,0 +1,34 @@
+{
+  "Luogo D&D": {
+    "prefix": "dndplace",
+    "scope": "markdown,njk,plaintext,html",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"${1:Nome Luogo}\"",
+      "eleventyNavigation:",
+      "  key: \"dnd-${2:nomeluogo}\"",
+      "  parent: \"dnd-luoghi\"",
+      "type: \"${3:Città, porto commerciale}\"",
+      "setting: \"${4|Forgotten Realms,Khaesil,Homebrew|}\"",
+      "originalname: \"${5:Original Name}\"",
+      "adventure: \"${6:Nome Avventura}\"",
+      "draft: true",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "<p><em>{{ originalname }}</em></p>",
+      "<span class=\"tag faded\">{{ setting }}</span>",
+      "<p><em>{{ type }}</em></p>",
+      "",
+      "<h3>Descrizione</h3>",
+      "<p>${7:Descrizione del luogo.}</p>",
+      "",
+      "<h3>Informazioni conosciute</h3>",
+      "<p>${8:Cosa sa il gruppo di questo luogo.}</p>",
+      "",
+      "$0"
+    ],
+    "description": "Crea la struttura di un luogo per il Grimorio"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "Oggetto D&D": {
     "prefix": "dndobject",
-    "scope": "markdown,njk",
+    "scope": "markdown,njk,plaintext,html",
     "body": [
       "---",
       "layout: base.njk",

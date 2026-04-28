@@ -1,0 +1,29 @@
+{
+  "Regola D&D": {
+    "prefix": "dndrule",
+    "scope": "markdown,njk,plaintext,html",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"${1:Nome Regola}\"",
+      "eleventyNavigation:",
+      "  key: \"dnd-${2:nomeregola}\"",
+      "  parent: \"dnd-regole\"",
+      "type: \"${3|House rule,Regola Ufficiale,Variante|}\"",
+      "draft: true",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "<span class=\"tag\">{{ type }}</span>",
+      "",
+      "<h2>Descrizione</h2>",
+      "<p>${4:Come funziona questa regola.}</p>",
+      "",
+      "<h2>Esempi</h2>",
+      "<p>${5:Esempi pratici di applicazione.}</p>",
+      "",
+      "$0"
+    ],
+    "description": "Crea la struttura di una regola per il Grimorio"
+  }
+}
