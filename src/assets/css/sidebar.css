@@ -173,7 +173,7 @@ html:not(.dark-mode) .icon-moon { display: block; }
 .search-box input[type="text"].pagefind-ui__search-input {
   width: calc(100% - 1.5rem) !important;
   max-width: 100% !important;
-  padding: 0.3rem 0.5rem !important;
+  padding: 0.3rem 0.5rem 0.3rem 2rem !important;
   font-size: 0.75rem !important;
   box-sizing: border-box !important;
   margin: 0 !important;
