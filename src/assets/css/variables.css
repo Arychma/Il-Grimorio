@@ -1,19 +1,48 @@
 :root {
-  --parchment:      #f2e8d5;
-  --parchment-dark: #e0d0b0;
-  --ink:            #1a1209;
-  --ink-faded:      #4a3728;
-  --red:            #8b1a1a;
-  --gold:           #c8922a;
-  --gold-light:     #e8b84b;
-  --dark-bg:        #12090a;
-  --sidebar-w:      260px;
-  --header-h:       56px;
+  /* --- Palette Colori Base (I nomi reali dei colori) --- */
+  --color-parchment:      #f2e8d5;
+  --color-parchment-dark: #e0d0b0;
+  --color-ink:            #1a1209;
+  --color-ink-faded:      #4a3728;
+  --color-blood-red:      #8b1a1a;
+  --color-gold:           #c8922a;
+  --color-obsidian:       #12090a;
 
+  /* --- Variabili Semantiche (Quelle che userai negli altri file CSS) --- */
+  /* Di default sono impostate sul tema CHIARO */
+  --bg-body:       var(--color-parchment);
+  --text-main:     var(--color-ink);
+  --text-faded:    var(--color-ink-faded);
+  --border-sep:    var(--color-parchment-dark);
+  --accent-red:    var(--color-blood-red);
+  --accent-gold:   var(--color-gold);
+
+  /* --- Dimensioni e Font (Non cambiano tra i temi) --- */
+  --sidebar-w:  260px;
+  --header-h:   56px;
   --font-title: 'Cinzel', serif;
   --font-body:  'IM Fell English', serif;
   --font-mono:  'Share Tech Mono', monospace;
 }
 
+/* 2. Sovrascrittura per il Tema Scuro */
+body.dark-mode {
+  /* Qui cambiamo solo il VALORE delle variabili semantiche */
+  --bg-body:       var(--color-obsidian);
+  --text-main:     #e0d6bc;
+  --text-faded:    #a0a0a0;
+  --border-sep:    #3a2a2a;
+  --accent-red:    #ff4d4d;
+  --accent-gold:   #ffcc66;
+}
+
+/* 3. Reset e Base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 19px; height: 100%; }
+
+body {
+  background-color: var(--bg-body); /* Ora questo cambierà colore da solo! */
+  color: var(--text-main);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

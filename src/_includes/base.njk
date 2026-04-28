@@ -3,211 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ title }} | Il Grimorio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-
+  <title>{{ title }} | {{ metadata.title }}</title>
+  
   <link rel="stylesheet" href="/assets/css/variables.css">
   <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
   <link rel="stylesheet" href="/assets/css/sidebar.css">
   <link rel="stylesheet" href="/assets/css/typography.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
 </head>
 <body>
 
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <header class="mobile-header">
-    <span class="mobile-header-title">✦ Il Grimorio ✦</span>
-    <button class="hamburger" id="hamburger" aria-label="Apri menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
   <div class="site-wrapper">
-
-    <aside class="sidebar" id="sidebar">
-
-      <div class="sidebar-title">
-        <span class="label">✦ IL GRIMORIO ✦</span>
-        <span class="name">{{ siteName or "Il Grimorio" }}</span>
-      </div>
-
-      <div class="search-box">
-        <div id="search"></div>
-      </div>
-
-      <nav class="nav-section">
-        <ul>
-          <li><a href="{{ '/' | url }}">🏠 Home</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav-section">
-        <span class="nav-section-label">Sistemi di Gioco</span>
-
-        <div class="nav-subsection">
-          <span class="nav-subsection-label">D&D 5.5e</span>
-          <ul>
-            <li><a href="{{ '/sistemi/dnd55e/' | url }}">Panoramica</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/guida/' | url }}">📖 Guida</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/avventure/' | url }}">⚔ Avventure</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/archivio/personaggi/' | url }}">👤 Personaggi</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/archivio/luoghi/' | url }}">📍 Luoghi</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/archivio/regole/' | url }}">📜 Regole</a></li>
-            <li><a href="{{ '/sistemi/dnd55e/archivio/oggetti/' | url }}">💎 Oggetti</a></li>
-          </ul>
-        </div>
-
-        <div class="nav-subsection">
-          <span class="nav-subsection-label">GURPS</span>
-          <ul>
-            <li><a href="{{ '/sistemi/gurps/' | url }}">Panoramica</a></li>
-            <li><a href="{{ '/sistemi/gurps/guida/' | url }}">📖 Guida</a></li>
-            <li><a href="{{ '/sistemi/gurps/avventure/' | url }}">⚔ Avventure</a></li>
-            <li><a href="{{ '/sistemi/gurps/archivio/personaggi/' | url }}">👤 Personaggi</a></li>
-            <li><a href="{{ '/sistemi/gurps/archivio/luoghi/' | url }}">📍 Luoghi</a></li>
-            <li><a href="{{ '/sistemi/gurps/archivio/regole/' | url }}">📜 Regole</a></li>
-            <li><a href="{{ '/sistemi/gurps/archivio/oggetti/' | url }}">💎 Oggetti</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      <nav class="nav-section">
-        <span class="nav-section-label">Ambientazioni</span>
-        <ul>
-          <li><a href="{{ '/ambientazioni/' | url }}">Tutte le ambientazioni</a></li>
-          <li><a href="{{ '/ambientazioni/forgotten-realms/' | url }}">🌍 Forgotten Realms</a></li>
-          <li><a href="{{ '/ambientazioni/khaesil/' | url }}">🌍 Khaesil</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav-section">
-        <span class="nav-section-label">Comunicazioni</span>
-        <ul>
-          <li><a href="{{ '/comunicazioni/blog/' | url }}">📝 Blog</a></li>
-          <li><a href="{{ '/comunicazioni/newsletter/' | url }}">📨 Newsletter</a></li>
-          <li><a href="{{ '/comunicazioni/downloads/' | url }}">📥 Download</a></li>
-        </ul>
-      </nav>
-
-      <nav class="nav-section">
-        <ul>
-          <li><a href="{{ '/jolly/' | url }}">🃏 Jolly</a></li>
-        </ul>
-      </nav>
-
-      <div class="sidebar-stamp">
-        {% if page.date %}
-          ✦ Aggiornato: {{ page.date | readableDate }} ✦
-        {% else %}
-          ✦ Il Grimorio ✦
-        {% endif %}
-      </div>
-
-    </aside>
+    {% include "sidebar.njk" %}
 
     <main class="main-content">
       <div class="page-inner">
-      {#
-        {% if eleventyNavigation and eleventyNavigation.key %}
-          {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
-          <div class="breadcrumb">
-            <a href="{{ '/' | url }}">Home</a>
-            {% for crumb in navPages %}
-              › <a href="{{ crumb.url | url }}">{{ crumb.title }}</a>
-            {% endfor %}
-            › {{ title }}
-          </div>
-        {% else %}
-          <div class="breadcrumb">
-            <a href="{{ '/' | url }}">Home</a> › {{ title }}
-          </div>
-        {% endif %}
-      #}
-
         {{ content | safe }}
-
       </div>
     </main>
-
   </div>
 
-  <div id="pw-overlay">
-    <h2>⚔ Il Grimorio ⚔</h2>
-    <p>Pronuncia la parola, avventuriero.</p>
-    <input id="pw-input" type="password" placeholder="Password"
-      onkeydown="if(event.key==='Enter') checkPw()">
-    <button onclick="checkPw()">ENTRA</button>
-    <p id="pw-error"></p>
-  </div>
-
-  <script src="/pagefind/pagefind-ui.js"></script>
-  <script>
-    const SITE_PASSWORD = "Mellon";
-    const STORAGE_KEY   = "grimorio_auth";
-
-    function checkPw() {
-      const val = document.getElementById("pw-input").value;
-      if (val === SITE_PASSWORD) {
-        sessionStorage.setItem(STORAGE_KEY, "1");
-        document.getElementById("pw-overlay").style.display = "none";
-      } else {
-        document.getElementById("pw-error").textContent = "Password errata. Riprova.";
-        document.getElementById("pw-input").value = "";
-      }
-    }
-
-    (function() {
-      if (!sessionStorage.getItem(STORAGE_KEY)) {
-        const ov = document.getElementById("pw-overlay");
-        ov.style.display = "flex";
-        setTimeout(() => document.getElementById("pw-input").focus(), 100);
-      }
-    })();
-
-    const hamburger = document.getElementById("hamburger");
-    const sidebar   = document.getElementById("sidebar");
-    const overlay   = document.getElementById("sidebarOverlay");
-
-    function toggleSidebar(open) {
-      sidebar.classList.toggle("open", open);
-      hamburger.classList.toggle("open", open);
-      overlay.classList.toggle("active", open);
-      document.body.style.overflow = open ? "hidden" : "";
-    }
-
-    hamburger.addEventListener("click", () => toggleSidebar(!sidebar.classList.contains("open")));
-    overlay.addEventListener("click", () => toggleSidebar(false));
-
-    sidebar.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        if (window.innerWidth <= 768) toggleSidebar(false);
-      });
-    });
-
-    const current = window.location.pathname;
-    document.querySelectorAll(".sidebar a").forEach(a => {
-      if (a.getAttribute("href") === current) a.classList.add("active");
-    });
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const group = btn.closest('.tab-group') || btn.parentElement.parentElement;
-        group.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        group.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        group.querySelector('#' + btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      new PagefindUI({ element: "#search", showImages: false });
-    });
-  </script>
-
+  <script src="/assets/js/theme.js"></script>
 </body>
 </html>

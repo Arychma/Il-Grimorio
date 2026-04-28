@@ -1,0 +1,29 @@
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="theme-switch-container">
+      <button id="theme-toggle" aria-label="Cambia Tema" title="Cambia tra Chiaro e Scuro">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+      </button>
+    </div>
+    
+    <a href="/" class="site-title">
+      <span class="title-main">{{ metadata.title }}</span>
+      <span class="title-sub">Il Grimorio</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav">
+    {# Renderizza i link della collezione eleventyNavigation #}
+    {{ collections.all | eleventyNavigation | eleventyNavigationToHtml({
+        listClass: "nav-list",
+        listItemClass: "nav-item",
+        activeListItemClass: "is-active",
+        anchorClass: "nav-link"
+    }) | safe }}
+  </nav>
+
+  <footer class="sidebar-footer">
+    <p>&copy; 2026 - Archivio SKT</p>
+  </footer>
+</aside>

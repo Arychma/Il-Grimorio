@@ -1,25 +1,35 @@
 body {
   font-family: var(--font-body);
-  background-color: var(--dark-bg);
-  color: var(--ink);
+  /* Usa la variabile semantica per lo sfondo esterno */
+  background-color: var(--bg-body);
+  /* Usa la variabile semantica per il testo */
+  color: var(--text-main);
   min-height: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
+  /* Transizione fluida per il cambio tema */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.site-wrapper { display: flex; flex: 1; }
+.site-wrapper { 
+  display: flex; 
+  flex: 1; 
+}
 
 .main-content {
   flex: 1;
-  background: var(--parchment);
+  /* Usa la variabile semantica per lo sfondo principale */
+  background: var(--bg-body);
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* Transizione fluida anche per il contenitore principale */
+  transition: background-color 0.3s ease;
 }
 
 .page-inner {
