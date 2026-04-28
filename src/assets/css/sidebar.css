@@ -66,10 +66,10 @@ html:not(.dark-mode) .icon-moon { display: block; }
 }
 
 .sidebar-title .name {
-  font-family: var(--font-title);
+  font-family: var(--font-title); /* Carattere Epic/Fantasy */
   color: var(--accent-gold);
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
 /* ─── NAVIGATION ─── */
@@ -98,19 +98,20 @@ html:not(.dark-mode) .icon-moon { display: block; }
 .nav-link {
   display: block;
   padding: 0.45rem 1rem 0.45rem 1.2rem;
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Carattere Pergamena */
   color: var(--text-main);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: 1.05rem; /* Un po' più grande per leggibilità */
   transition: all 0.2s ease;
   border-left: 3px solid transparent;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--accent-gold);
+  color: var(--accent-red); /* Ripristinato il Rosso Fantasy */
   border-left-color: var(--accent-gold);
-  background: rgba(200, 146, 42, 0.08);
+  background: rgba(200, 146, 42, 0.05);
+  font-weight: bold;
 }
 
 /* ─── FOOTER & STAMP ─── */
