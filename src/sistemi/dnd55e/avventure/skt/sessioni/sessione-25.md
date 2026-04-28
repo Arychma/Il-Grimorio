@@ -11,7 +11,7 @@ tags: ["sessione", "dnd55e"]
 ---
 <h1>{{ title }}</h1>
 <p class="entry-meta">{{ date | readableDate }}</p>
-<span class="tag">{{ adventure }}</span>
+
 
 <p><em>{{ description }}</em></p>
 

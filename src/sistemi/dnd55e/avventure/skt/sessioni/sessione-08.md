@@ -14,7 +14,6 @@ draft: false
 <h1>{{ Sessione 01 }}</h1>
 
 <p class="entry-meta">{{ date | readableDate }}</p>
-<span class="tag faded">{{ adventure }}</span>
 
 <p><em>{{ description }}</em></p>
 
