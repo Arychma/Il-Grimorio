@@ -177,24 +177,38 @@ html.dark-mode .mobile-header-title {
 
 /* ─── 6. RESPONSIVE ─── */
 @media (max-width: 768px) {
-  .mobile-header { display: flex; }
+  .mobile-header { 
+    display: flex; 
+  }
 
-  .site-wrapper { padding-top: var(--header-h); }
+  /* Spazio per la testata mobile */
+  .site-wrapper { 
+    padding-top: var(--header-h); 
+  }
 
   .sidebar {
+    /* Trasforma la sidebar in un pannello sovrapposto (non occupa spazio nel flusso) */
     position: fixed !important;
     top: var(--header-h) !important;
     bottom: 0 !important;
-    left: auto !important;
-    right: 0 !important;
+    left: 0 !important;   /* Ancorata a sinistra */
+    right: auto !important;
+    
     width: 280px !important;
     height: calc(100vh - var(--header-h)) !important;
-    transform: translateX(100%) !important;
-    display: flex !important;
     z-index: 9999 !important;
+    
+    /* NASCONDE la sidebar spostandola a sinistra (-100%) */
+    transform: translateX(-100%) !important;
     transition: transform 0.3s ease-in-out !important;
+    
+    /* Estetica mobile */
+    border-right: 1px solid var(--accent-gold) !important;
+    border-left: none !important;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.3);
   }
 
+  /* Quando il JS aggiunge la classe .open, la sidebar torna a posizione 0 (visibile) */
   .sidebar.open {
     transform: translateX(0) !important;
   }
