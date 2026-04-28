@@ -6,7 +6,6 @@ eleventyNavigation:
   parent: "skt-sessioni"
 date: "2024-11-02"
 description: "Verdinverno, catacombe di Vecna."
-status: "Verdinverno"
 adventure: "Storm King's Thunder"
 tags: ["sessione", "dnd55e"]
 draft: false
@@ -15,7 +14,6 @@ draft: false
 <h1>{{ Sessione 01 }}</h1>
 
 <p class="entry-meta">{{ date | readableDate }}</p>
-<span class="tag faded">{{ status }}</span>
 <span class="tag faded">{{ adventure }}</span>
 
 <p><em>{{ description }}</em></p>
