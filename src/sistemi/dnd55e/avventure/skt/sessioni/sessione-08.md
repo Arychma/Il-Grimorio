@@ -18,9 +18,10 @@ draft: false
 <span class="tag faded">{{ status }}</span>
 <span class="tag faded">{{ adventure }}</span>
 
+<p><em>{{ description }}</em></p>
+
+
 <h2>Cosa è successo</h2>
-
-
 
 Riassunto della sessione:
 A Verdinverno, i personaggi si trovano coinvolti nello smantellamento di una setta dedicata a Vecna. Dopo averne espugnato il rifugio, sito nelle catacombe della città, e sconfitto il capo, vengono travolti da un incantesimo di Vecna che dona loro alcuni poteri.

@@ -12,9 +12,10 @@ tags: ["sessione", "dnd55e"]
 ---
 <h1>{{ title }}</h1>
 <p class="entry-meta">{{ date | readableDate }}</p>
-<p><em>{{ description }}</em></p>
 <span class="tag faded">{{ status }}</span>
 <span class="tag faded">{{ adventure }}</span>
+
+<p><em>{{ description }}</em></p>
 
 
 <h2>Cosa è successo</h2>
