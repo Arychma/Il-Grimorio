@@ -5,7 +5,7 @@ eleventyNavigation:
   key: "skt-01"
   parent: "skt-sessioni"
 date: "2024-10-08"
-description: "I giocatori viaggiano con Eelin fino a Eterbosco per 6 giorni. Durante il viaggio incontrano un Gigante di Fuoco che li attacca, ma riescono a fuggire in tempo."
+description: "Viaggio verso Eterbosco, primo scontro con un gigante che termina in fuga."
 tags: ["sessione", "dnd55e"]
 ---
 
@@ -14,7 +14,7 @@ tags: ["sessione", "dnd55e"]
 ## Sessione 06
 
 Riassunto della sessione:
-I giocatori viaggiano con Eelin fino a Eterbosco per 6 giorni. Durante il viaggio incontrano un Gigante di Fuoco che li attacca, ma riescono a fuggire in tempo.
+I giocatori viaggiano con Eelin fino a {% navLink collections, "eterbosco" %} per 6 giorni. Durante il viaggio incontrano un Gigante di Fuoco che li attacca, ma riescono a fuggire in tempo.
 
 Viaggiano con {% navLink collections, "eelin-zoar" %}. 
 
