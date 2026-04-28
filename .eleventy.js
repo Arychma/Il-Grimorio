@@ -18,7 +18,7 @@ module.exports = function(eleventyConfig) {
       const text = targetPage.data.eleventyNavigation?.title || targetPage.data.title || key;
       return `<a href="${targetPage.url}">${text}</a>`;
     }
-    return `<span style="color:orange; font-weight:bold;">[Link non trovato: ${key}]</span>`;
+    return `<span class="link-missing">${key}</span>`;
   });
 
   // ─── STATIC ASSETS ───────────────────────────────────────────────────────
@@ -87,51 +87,6 @@ module.exports = function(eleventyConfig) {
         .filter(page => !page.data.draft)
     );
   });
-
-  // ─── TRASFORMAZIONE AUTOMATICA WIKILINKS ─────────────────────────────────
-  // Nota: usiamo una funzione normale (non arrow function) per mantenere il contesto 'this'
-  eleventyConfig.addTransform("wikiLinks", function(content) {
-    // Applichiamo la trasformazione solo ai file HTML
-    if (this.outputPath && this.outputPath.endsWith(".html")) {
-      
-      // In Eleventy 2.x, le collezioni si recuperano così all'interno delle trasformazioni
-      // Se this.ctx non è disponibile, usiamo le collezioni globali di eleventyConfig
-      // ma il modo più sicuro è cercarle nell'istanza corrente.
-      const collections = this.page ? this.page.collections : null;
-
-      // Se per qualche motivo le collezioni sono ancora irraggiungibili, 
-      // usiamo un metodo alternativo sicuro per non bloccare la build
-      if (!content.includes("[[")) return content;
-
-      return content.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (match, key, label) => {
-        const cleanKey = key.trim();
-        const displayLabel = label ? label.trim() : null;
-
-        // Cerca nelle collezioni globali (all)
-        // Usiamo un filtro di fallback se collections è undefined
-        const allPages = eleventyConfig.collections ? eleventyConfig.collections.all : [];
-        
-        // Se non riusciamo a mappare 'all' qui, dobbiamo usare un approccio diverso:
-        // Ma proviamo prima la via standard di Eleventy 2:
-        const targetPage = (collections?.all || []).find(item => {
-          return (
-            (item.data.eleventyNavigation && item.data.eleventyNavigation.key === cleanKey) ||
-            (item.data.title === cleanKey) ||
-            (item.fileSlug === cleanKey)
-          );
-        });
-
-        if (targetPage) {
-          const text = displayLabel || targetPage.data.eleventyNavigation?.title || targetPage.data.title || cleanKey;
-          return `<a href="${targetPage.url}" class="wikilink">${text}</a>`;
-        }
-
-        return `<span style="color:orange; font-weight:bold;" title="Pagina non trovata">[Link non trovato: ${cleanKey}]</span>`;
-      });
-    }
-    return content;
-  });
-
 
   // ─── OUTPUT ──────────────────────────────────────────────────────────────
   return {

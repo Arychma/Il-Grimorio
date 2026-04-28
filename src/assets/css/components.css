@@ -132,10 +132,13 @@
   background-color: rgba(200, 146, 42, 0.1); /* Un leggero tocco color oro */
 }
 
-/* Opzionale: stile per i link non trovati (se hai usato lo span arancione nella trasformazione) */
-span[title="Pagina non trovata"] {
-  cursor: help;
-  border-bottom: 1px dotted orange;
+/* ── MISSING LINKS ── */
+.link-missing {
+  color: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  cursor: text;
 }
 
 /* ── DOWNLOAD BOX ── */
