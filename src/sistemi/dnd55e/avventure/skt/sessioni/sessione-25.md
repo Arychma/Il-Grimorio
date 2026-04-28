@@ -5,7 +5,7 @@ eleventyNavigation:
   key: "skt-25"
   parent: "skt-sessioni"
 date: "2026-04-01"
-description: "Incontro con Darathra, "
+description: "Incontro con Darathra, passano da Campolieto e arrivano alle porte delle Fauci Nere."
 tags: ["sessione", "dnd55e"]
 ---
 
