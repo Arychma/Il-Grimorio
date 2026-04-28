@@ -164,26 +164,37 @@ html.dark-mode .mobile-header-title {
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ─── 6. RESPONSIVE (SIDEBAR A DESTRA) ─── */
+/* ─── OVERLAY ─── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 150;
+}
+
+.sidebar-overlay.active { display: block; }
+
+/* ─── 6. RESPONSIVE ─── */
 @media (max-width: 768px) {
-  /* Nascondiamo la sidebar desktop standard */
+  .mobile-header { display: flex; }
+
+  .site-wrapper { padding-top: var(--header-h); }
+
   .sidebar {
     position: fixed !important;
     top: var(--header-h) !important;
     bottom: 0 !important;
-    left: auto !important; /* Annulla la sinistra */
-    right: 0 !important;    /* Forza a destra */
-    
+    left: auto !important;
+    right: 0 !important;
     width: 280px !important;
     height: calc(100vh - var(--header-h)) !important;
-    
-    /* La facciamo sparire a DESTRA dello schermo */
     transform: translateX(100%) !important;
-    display: flex !important; /* Assicurati che sia flex per il contenuto */
+    display: flex !important;
     z-index: 9999 !important;
     transition: transform 0.3s ease-in-out !important;
   }
 
-  /* Quando il JS aggiunge la classe .open, la sidebar entra */
   .sidebar.open {
     transform: translateX(0) !important;
   }

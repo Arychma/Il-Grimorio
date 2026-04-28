@@ -27,64 +27,49 @@
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-<header class="mobile-header">
-  <a href="/" class="mobile-header-title">✦ Il Grimorio ✦</a>
-  
-  <button class="hamburger" id="hamburger" aria-label="Apri menu">
-    <span></span><span></span><span></span>
-  </button>
-</header>
+  <header class="mobile-header">
+    <a href="/" class="mobile-header-title">✦ Il Grimorio ✦</a>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-<div class="site-wrapper">
-  {% include "sidebar.njk" %}
-  <main class="main-content">
-    <div class="page-inner">
-      {{ content | safe }}
-    </div>
-  </main>
-</div>
+  <div class="site-wrapper">
+    {% include "sidebar.njk" %}
+    <main class="main-content">
+      <div class="page-inner">
+        {{ content | safe }}
+      </div>
+    </main>
+  </div>
 
-<script src="/assets/js/theme.js"></script>
-<script src="/pagefind/pagefind-ui.js"></script>
-
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    // Inizializza Pagefind se presente l'elemento
-    if (document.querySelector("#search")) {
+  <script src="/assets/js/theme.js"></script>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
       new PagefindUI({ element: "#search", showImages: false });
-    }
+    });
 
     const hamburger = document.getElementById("hamburger");
-    const sidebar   = document.getElementById("sidebar"); // Assicurati che in sidebar.njk l'id sia "sidebar"
+    const sidebar   = document.getElementById("sidebar");
     const overlay   = document.getElementById("sidebarOverlay");
 
     function toggleSidebar(open) {
-      if (!sidebar || !hamburger || !overlay) return;
-      
       sidebar.classList.toggle("open", open);
       hamburger.classList.toggle("open", open);
       overlay.classList.toggle("active", open);
-      
-      // Impedisce lo scroll della pagina quando il menu è aperto
       document.body.style.overflow = open ? "hidden" : "";
     }
 
-    hamburger.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpening = !sidebar.classList.contains("open");
-      toggleSidebar(isOpening);
-    });
-
+    hamburger.addEventListener("click", () => toggleSidebar(!sidebar.classList.contains("open")));
     overlay.addEventListener("click", () => toggleSidebar(false));
 
-    // Chiude se si clicca su un link (utile per le "Single Page" o cambi lenti)
     sidebar.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         if (window.innerWidth <= 768) toggleSidebar(false);
       });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
