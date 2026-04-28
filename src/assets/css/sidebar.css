@@ -165,9 +165,26 @@ html.dark-mode .mobile-header-title {
 
 /* ─── 6. RESPONSIVE (SIDEBAR A DESTRA) ─── */
 @media (max-width: 768px) {
-  .mobile-header { 
-    display: flex; 
+  /* Nascondiamo la sidebar desktop standard */
+  .sidebar {
+    position: fixed !important;
+    top: var(--header-h) !important;
+    bottom: 0 !important;
+    left: auto !important; /* Annulla la sinistra */
+    right: 0 !important;    /* Forza a destra */
+    
+    width: 280px !important;
+    height: calc(100vh - var(--header-h)) !important;
+    
+    /* La facciamo sparire a DESTRA dello schermo */
+    transform: translateX(100%) !important;
+    display: flex !important; /* Assicurati che sia flex per il contenuto */
+    z-index: 9999 !important;
+    transition: transform 0.3s ease-in-out !important;
   }
 
-  .sidebar {
-    position
+  /* Quando il JS aggiunge la classe .open, la sidebar entra */
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+}
