@@ -1,29 +1,30 @@
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="theme-switch-container">
-      <button id="theme-toggle" aria-label="Cambia Tema" title="Cambia tra Chiaro e Scuro">
+      <button id="theme-toggle" aria-label="Cambia Tema">
         <span class="icon-sun">☀️</span>
         <span class="icon-moon">🌙</span>
       </button>
     </div>
-    
-    <a href="/" class="site-title">
-      <span class="title-main">{{ metadata.title }}</span>
-      <span class="title-sub">Il Grimorio</span>
-    </a>
   </div>
 
-  <nav class="sidebar-nav">
-    {# Renderizza i link della collezione eleventyNavigation #}
+  <div class="sidebar-title">
+    <span class="label">ARCHIVIO</span>
+    <span class="name">{{ metadata.title }}</span>
+  </div>
+
+  <nav class="nav-section">
+    <span class="nav-section-label">NAVIGAZIONE</span>
+    {# Genera la lista con le classi che il tuo CSS aspetta #}
     {{ collections.all | eleventyNavigation | eleventyNavigationToHtml({
         listClass: "nav-list",
         listItemClass: "nav-item",
-        activeListItemClass: "is-active",
+        activeListItemClass: "active",
         anchorClass: "nav-link"
     }) | safe }}
   </nav>
 
-  <footer class="sidebar-footer">
-    <p>&copy; 2026 - Archivio SKT</p>
-  </footer>
+  <div class="sidebar-stamp">
+    2026 - Il Grimorio
+  </div>
 </aside>

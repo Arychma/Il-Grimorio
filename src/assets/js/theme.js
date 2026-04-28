@@ -1,21 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
+(function() {
+  // Funzione che inizializza tutto
+  const initTheme = () => {
     const themeToggle = document.querySelector('#theme-toggle');
-    const htmlElement = document.documentElement; // Usiamo html per coerenza con lo script nel head
+    const html = document.documentElement;
 
-    // Funzione per aggiornare il tema
-    const setTheme = (theme) => {
-        if (theme === 'dark') {
-            htmlElement.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            htmlElement.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
-        }
-    };
+    if (!themeToggle) {
+      console.warn("Pulsante theme-toggle non trovato!");
+      return;
+    }
 
-    // Gestione al click
     themeToggle.addEventListener('click', () => {
-        const isDark = htmlElement.classList.contains('dark-mode');
-        setTheme(isDark ? 'light' : 'dark');
+      // Toggle della classe
+      html.classList.toggle('dark-mode');
+      
+      // Salvataggio preferenza
+      const isDark = html.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      
+      console.log("Tema attuale:", isDark ? "Dark" : "Light");
     });
-});
+  };
+
+  // Eseguiamo se il DOM è pronto, altrimenti aspettiamo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    initTheme();
+  }
+})();

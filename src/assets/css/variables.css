@@ -26,14 +26,13 @@
 }
 
 /* 2. Sovrascrittura per il Tema Scuro */
-body.dark-mode {
-  /* Qui cambiamo solo il VALORE delle variabili semantiche */
-  --bg-body:       var(--color-obsidian);
-  --text-main:     #e0d6bc;
-  --text-faded:    #a0a0a0;
-  --border-sep:    #3a2a2a;
-  --accent-red:    #ff4d4d;
-  --accent-gold:   #ffcc66;
+html.dark-mode {
+  --bg-body:     var(--color-obsidian);
+  --text-main:   #e0d6bc;
+  --text-faded:  #a0a0a0;
+  --border-sep:  #3a2a2a;
+  --accent-red:  #ff4d4d;
+  --accent-gold: #ffcc66;
 }
 
 /* 3. Reset e Base */
