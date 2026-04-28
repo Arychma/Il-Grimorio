@@ -217,3 +217,75 @@ html:not(.dark-mode) .icon-moon { display: block; }
   font-size: 1rem;
   letter-spacing: 0.1em;
 }
+
+/* ... (qui finisce il codice della sidebar desktop e dei link) ... */
+
+/* ─── 4. MOBILE HEADER ─── */
+.mobile-header {
+  display: none; /* Nascosto su desktop */
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--bg-body); 
+  border-bottom: 1px solid var(--accent-gold);
+  z-index: 200;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+html.dark-mode .mobile-header {
+  background: var(--color-obsidian);
+}
+
+.mobile-header-title {
+  font-family: var(--font-title);
+  color: var(--accent-red) !important; 
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+html.dark-mode .mobile-header-title {
+  color: var(--accent-gold) !important;
+}
+
+/* L'icona dell'hamburger */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: var(--accent-gold) !important;
+  transition: all 0.3s ease;
+}
+
+/* ─── 5. MEDIA QUERIES (Sempre per ultime) ─── */
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex; /* Diventa visibile solo qui */
+  }
+
+  .sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    height: calc(100vh - var(--header-h));
+    z-index: 1000;
+    transform: translateX(-100%);
+    width: 280px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
