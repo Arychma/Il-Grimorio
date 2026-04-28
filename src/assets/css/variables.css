@@ -1,5 +1,5 @@
 :root {
-  /* --- Palette Colori Base (I nomi reali dei colori) --- */
+  /* --- Palette Colori Base --- */
   --color-parchment:      #f2e8d5;
   --color-parchment-dark: #e0d0b0;
   --color-ink:            #1a1209;
@@ -8,8 +8,7 @@
   --color-gold:           #c8922a;
   --color-obsidian:       #12090a;
 
-  /* --- Variabili Semantiche (Quelle che userai negli altri file CSS) --- */
-  /* Di default sono impostate sul tema CHIARO */
+  /* --- Variabili Semantiche (TEMA CHIARO) --- */
   --bg-body:       var(--color-parchment);
   --text-main:     var(--color-ink);
   --text-faded:    var(--color-ink-faded);
@@ -17,7 +16,7 @@
   --accent-red:    var(--color-blood-red);
   --accent-gold:   var(--color-gold);
 
-  /* --- Dimensioni e Font (Non cambiano tra i temi) --- */
+  /* --- Dimensioni e Font --- */
   --sidebar-w:  260px;
   --header-h:   56px;
   --font-title: 'Cinzel', serif;
@@ -31,17 +30,40 @@ html.dark-mode {
   --text-main:   #e0d6bc;
   --text-faded:  #a0a0a0;
   --border-sep:  #3a2a2a;
-  --accent-red:  #ff4d4d;
+  --accent-red:  #ff4d4d; /* Rosso più acceso per risaltare sul fondo scuro */
   --accent-gold: #ffcc66;
 }
 
 /* 3. Reset e Base */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 19px; height: 100%; }
+
+html { 
+  font-size: 19px; 
+  height: 100%; 
+}
 
 body {
-  background-color: var(--bg-body); /* Ora questo cambierà colore da solo! */
+  background-color: var(--bg-body);
   color: var(--text-main);
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* Applica il font "fantasy" a tutto il testo */
+  line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 4. Logica Globale dei Link */
+a {
+  color: var(--accent-red); /* Tutti i link del sito ora nascono ROSSI */
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+a:hover {
+  color: var(--accent-gold); /* Diventano ORO al passaggio del mouse */
+  text-decoration: underline;
+}
+
+/* Eccezione per la sidebar: niente sottolineatura */
+.sidebar a {
+  text-decoration: none;
 }
