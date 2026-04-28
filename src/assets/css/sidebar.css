@@ -271,21 +271,28 @@ html.dark-mode .mobile-header-title {
 /* ─── 5. MEDIA QUERIES (Sempre per ultime) ─── */
 @media (max-width: 768px) {
   .mobile-header {
-    display: flex; /* Diventa visibile solo qui */
+    display: flex;
+    flex-direction: row-reverse; /* SPOSTA L'HAMBURGER A DESTRA nella barra */
   }
 
   .sidebar {
     position: fixed;
     top: var(--header-h);
-    left: 0;
+    left: auto;       /* Rimuove il posizionamento a sinistra */
+    right: 0;         /* Ancora la sidebar a destra */
     height: calc(100vh - var(--header-h));
     z-index: 1000;
-    transform: translateX(-100%);
     width: 280px;
+    
+    /* CAMBIO DIREZIONE: ora parte da fuori schermo a destra (+100%) */
+    transform: translateX(100%); 
     transition: transform 0.3s ease-in-out;
+    
+    border-right: none;
+    border-left: 1px solid var(--accent-gold); /* Bordo spostato a sinistra della sidebar */
   }
 
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(0); /* Entra verso sinistra */
   }
 }
