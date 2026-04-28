@@ -266,6 +266,16 @@ summary::before { content: '▶'; font-size: 0.6rem; color: var(--accent-gold); 
   color: var(--text-faded) !important;
 }
 
+.pagefind-ui__form {
+  padding: 0 0.75rem;
+}
+
+.pagefind-ui__search-input {
+  width: 100% !important;
+  padding: 0.3rem 0.5rem !important;
+  font-size: 0.75rem !important;
+}
+
 /* ── PASSWORD OVERLAY ── */
 #pw-overlay {
   background: var(--bg-body);
