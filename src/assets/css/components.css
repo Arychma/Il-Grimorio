@@ -233,14 +233,33 @@ summary::before { content: '▶'; font-size: 0.6rem; color: var(--accent-gold); 
 
 /* ── SEARCH (Pagefind) ── */
 .pagefind-ui__search-input {
-  background: var(--bg-body) !important;
+  background: var(--bg-content) !important;
   border: 1px solid var(--accent-gold) !important;
+  color: var(--text-main) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.8rem !important;
+  border-radius: 2px !important;
+}
+
+.pagefind-ui__search-clear {
+  color: var(--text-faded) !important;
+}
+
+.pagefind-ui__results-area {
+  background: var(--bg-content) !important;
   color: var(--text-main) !important;
 }
 
-.pagefind-ui__results {
-  background: var(--bg-body);
-  color: var(--text-main);
+.pagefind-ui__result-link {
+  color: var(--accent-red) !important;
+}
+
+.pagefind-ui__result-link:hover {
+  color: var(--accent-gold) !important;
+}
+
+.pagefind-ui__result-excerpt {
+  color: var(--text-faded) !important;
 }
 
 /* ── PASSWORD OVERLAY ── */
