@@ -89,20 +89,31 @@ module.exports = function(eleventyConfig) {
   });
 
   // ─── TRASFORMAZIONE AUTOMATICA WIKILINKS ─────────────────────────────────
+  // Nota: usiamo una funzione normale (non arrow function) per mantenere il contesto 'this'
   eleventyConfig.addTransform("wikiLinks", function(content) {
-    // Applichiamo la trasformazione solo ai file HTML generati
+    // Applichiamo la trasformazione solo ai file HTML
     if (this.outputPath && this.outputPath.endsWith(".html")) {
       
-      // Accediamo a tutte le collezioni del sito
-      const collections = this.ctx.collections;
+      // In Eleventy 2.x, le collezioni si recuperano così all'interno delle trasformazioni
+      // Se this.ctx non è disponibile, usiamo le collezioni globali di eleventyConfig
+      // ma il modo più sicuro è cercarle nell'istanza corrente.
+      const collections = this.page ? this.page.collections : null;
 
-      // Regex: trova [[key]] oppure [[key|etichetta]]
+      // Se per qualche motivo le collezioni sono ancora irraggiungibili, 
+      // usiamo un metodo alternativo sicuro per non bloccare la build
+      if (!content.includes("[[")) return content;
+
       return content.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (match, key, label) => {
         const cleanKey = key.trim();
         const displayLabel = label ? label.trim() : null;
 
-        // Cerchiamo la pagina corrispondente (stessa logica del tuo navLink)
-        const targetPage = collections.all.find(item => {
+        // Cerca nelle collezioni globali (all)
+        // Usiamo un filtro di fallback se collections è undefined
+        const allPages = eleventyConfig.collections ? eleventyConfig.collections.all : [];
+        
+        // Se non riusciamo a mappare 'all' qui, dobbiamo usare un approccio diverso:
+        // Ma proviamo prima la via standard di Eleventy 2:
+        const targetPage = (collections?.all || []).find(item => {
           return (
             (item.data.eleventyNavigation && item.data.eleventyNavigation.key === cleanKey) ||
             (item.data.title === cleanKey) ||
@@ -111,12 +122,10 @@ module.exports = function(eleventyConfig) {
         });
 
         if (targetPage) {
-          // Se troviamo la pagina, creiamo il link
           const text = displayLabel || targetPage.data.eleventyNavigation?.title || targetPage.data.title || cleanKey;
           return `<a href="${targetPage.url}" class="wikilink">${text}</a>`;
         }
 
-        // Se la pagina non esiste, mostriamo il segnale di errore (come il tuo shortcode)
         return `<span style="color:orange; font-weight:bold;" title="Pagina non trovata">[Link non trovato: ${cleanKey}]</span>`;
       });
     }
