@@ -1,0 +1,18 @@
+---
+layout: base.njk
+title: "Sessione 25: Titolo"
+eleventyNavigation:
+  key: "skt-25"
+  parent: "skt-sessioni"
+date: 2026-04-01
+description: "Riassunto breve"
+tags: ["sessione", "dnd55e"]
+draft: false
+---
+
+<h1>{{ Sessione 25 }}</h1>
+
+<p class="entry-meta">{{ date | readableDate }}</p>
+
+<h2>Cosa è successo</h2>
+

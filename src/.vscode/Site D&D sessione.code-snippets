@@ -1,0 +1,28 @@
+{
+  "Sessione D&D": {
+    "prefix": "dndsession",
+    "scope": "markdown,njk",
+    "body": [
+      "---",
+      "layout: base.njk",
+      "title: \"Sessione ${1:01}: ${2:Titolo}\"",
+      "eleventyNavigation:",
+      "  key: \"${3:prefisso}-${1:01}\"",
+      "  parent: \"${3:prefisso}-sessioni\"",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "description: \"${4:Riassunto breve}\"",
+      "tags: [\"sessione\", \"dnd55e\"]",
+      "draft: false",
+      "---",
+      "",
+      "<h1>{{ title }}</h1>",
+      "",
+      "<p class=\"entry-meta\">{{ date | readableDate }}</p>",
+      "",
+      "<h2>Cosa è successo</h2>",
+      "",
+      "$0"
+    ],
+    "description": "Crea la struttura di una sessione per il Grimorio"
+  }
+}

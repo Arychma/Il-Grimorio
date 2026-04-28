@@ -25,3 +25,5 @@ draft: "true"
 <h2>Prossimi obiettivi</h2>
 
 <p>Cosa i personaggi vogliono fare nella prossima sessione.</p>
+
+
