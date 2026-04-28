@@ -24,6 +24,16 @@
   </script>
 </head>
 <body>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <header class="mobile-header">
+    <span class="mobile-header-title">✦ Il Grimorio ✦</span>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
   <div class="site-wrapper">
     {% include "sidebar.njk" %}
     <main class="main-content">
@@ -32,12 +42,34 @@
       </div>
     </main>
   </div>
+
   <script src="/assets/js/theme.js"></script>
   <script src="/pagefind/pagefind-ui.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       new PagefindUI({ element: "#search", showImages: false });
     });
+
+    const hamburger = document.getElementById("hamburger");
+    const sidebar   = document.getElementById("sidebar");
+    const overlay   = document.getElementById("sidebarOverlay");
+
+    function toggleSidebar(open) {
+      sidebar.classList.toggle("open", open);
+      hamburger.classList.toggle("open", open);
+      overlay.classList.toggle("active", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+    hamburger.addEventListener("click", () => toggleSidebar(!sidebar.classList.contains("open")));
+    overlay.addEventListener("click", () => toggleSidebar(false));
+
+    sidebar.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 768) toggleSidebar(false);
+      });
+    });
   </script>
+
 </body>
 </html>
